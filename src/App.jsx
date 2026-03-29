@@ -319,14 +319,14 @@ const globalStyles = `
     100% { transform: scale(1); opacity: 0.8; }
   }
   
-  /* === АНИМАЦИИ ТРЕНЕРА (Пульсация прогресс-баров) === */
+  /* === АНИМАЦИИ ТРЕНЕРА (Спокойная пульсация прогресс-баров) === */
   @keyframes fitness-bar-1 {
-    0%, 100% { width: 80%; }
-    50% { width: 100%; }
+    0%, 100% { width: 85%; }
+    50% { width: 95%; }
   }
   @keyframes fitness-bar-2 {
-    0%, 100% { width: 65%; }
-    50% { width: 100%; }
+    0%, 100% { width: 75%; }
+    50% { width: 90%; }
   }
   
   /* === АНИМАЦИИ ДЛЯ МАНИКЮРА (Жемчужный перелив и Блик) === */
@@ -932,14 +932,14 @@ const FitnessCard = () => (
         {/* Ссылки-прогрессбары */}
         <div className="flex-1 flex flex-col justify-center gap-3">
            <a href={CONTENT.fitness.link1Url} className="relative w-full h-[3.25rem] bg-zinc-900 border border-zinc-800 transform -skew-x-6 overflow-hidden group shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
-             <div className="absolute top-0 left-0 h-full bg-red-600 transition-all duration-500 ease-out" style={{ animation: 'fitness-bar-1 3s ease-in-out infinite' }}></div>
+             <div className="absolute top-0 left-0 h-full bg-red-600 transition-all duration-500 ease-out" style={{ animation: 'fitness-bar-1 6s ease-in-out infinite' }}></div>
              <div className="absolute inset-0 flex items-center justify-between px-5 transform skew-x-6">
                 <span className="font-black italic uppercase text-xs tracking-widest text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)]">{CONTENT.fitness.link1Text}</span>
                 <Activity className="w-5 h-5 text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform animate-pulse" />
              </div>
            </a>
            <a href={CONTENT.fitness.link2Url} className="relative w-full h-[3.25rem] bg-zinc-900 border border-zinc-800 transform -skew-x-6 overflow-hidden group shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
-             <div className="absolute top-0 left-0 h-full bg-orange-600 transition-all duration-500 ease-out" style={{ animation: 'fitness-bar-2 3.5s ease-in-out infinite 1s' }}></div>
+             <div className="absolute top-0 left-0 h-full bg-orange-600 transition-all duration-500 ease-out" style={{ animation: 'fitness-bar-2 7s ease-in-out infinite 1s' }}></div>
              <div className="absolute inset-0 flex items-center justify-between px-5 transform skew-x-6">
                 <span className="font-black italic uppercase text-xs tracking-widest text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)]">{CONTENT.fitness.link2Text}</span>
                 <Flame className="w-5 h-5 text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform animate-pulse" />
@@ -1274,8 +1274,8 @@ const NailArtistCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(244,114,182,0.3)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,114,182,0.5)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-rose-900 via-pink-800 to-amber-700/50 opacity-80 mix-blend-screen"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-70 mix-blend-luminosity sepia-[.2]" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Ускоренная отрисовка через grayscale) */}
+      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-70 grayscale sepia-[.2]" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1362,8 +1362,8 @@ const AlfaCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(220,38,38,0.4)] overflow-hidden bg-[#0a0a0a] text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(239,68,68,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-red-900 via-black to-zinc-900 opacity-90 mix-blend-multiply"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60 mix-blend-luminosity contrast-125" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Ускоренная отрисовка через grayscale) */}
+      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60 grayscale contrast-125" />
       
       {/* Абстрактные красные лучи */}
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-600/30 blur-[80px] rounded-full pointer-events-none"></div>
@@ -1772,11 +1772,11 @@ const App = () => {
         </div>
       </div>
 
-      {/* КОНТЕЙНЕР ВИЗИТКИ (3D Сцена) */}
+      {/* КОНТЕЙНЕР ВИЗИТКИ (3D Сцена с ограничением высоты для мобилок) */}
       <div 
         ref={cardRef}
-        className="relative z-10 w-full max-w-[22rem] aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float touch-none"
-        style={{ perspective: '1500px' }}
+        className="relative z-10 w-full aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float touch-none"
+        style={{ perspective: '1500px', maxWidth: 'min(22rem, 50vh)' }}
         onClick={handleFlip}
         onMouseMove={handlePointerMove}
         onMouseLeave={handlePointerLeave}
