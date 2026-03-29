@@ -341,42 +341,57 @@ const EsotericCard = () => (
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Bento Grid Style) */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white" style={{ transform: 'rotateY(180deg)' }}>
-      <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle_at_100%_0%,_rgba(147,51,234,0.3),_transparent_60%)]"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[radial-gradient(circle_at_0%_100%,_rgba(245,158,11,0.15),_transparent_60%)]"></div>
+    {/* ОБРАТНАЯ СТОРОНА (Mandala / Aura Style) */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-[#050505] flex flex-col items-center p-6 text-white border border-purple-900/30" style={{ transform: 'rotateY(180deg)' }}>
       
-      <div className="relative z-10 flex flex-col h-full gap-3">
-        <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex items-center gap-4 shadow-lg">
-          <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-purple-500 to-amber-500 p-0.5 shrink-0">
-            <img src={CONTENT.esoteric.avatar} alt={CONTENT.esoteric.name1} className="w-full h-full object-cover rounded-full border border-zinc-950" />
-          </div>
-          <div>
-            <h3 className="text-lg font-serif font-bold text-amber-100">{CONTENT.esoteric.username}</h3>
-            <p className="text-purple-400 text-[10px] mt-0.5 uppercase tracking-widest">{CONTENT.esoteric.subUsername}</p>
-          </div>
-        </div>
+      {/* ФОН МАНДАЛЫ (Орбиты и Аура) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square rounded-full border-[0.5px] border-purple-500/10 border-dashed animate-[spin_60s_linear_infinite]"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] aspect-square rounded-full border-[0.5px] border-amber-500/10 animate-[spin_40s_linear_infinite_reverse]"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] aspect-square rounded-full border-[0.5px] border-purple-500/20"></div>
+      
+      {/* Пульсирующая аура */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square rounded-full bg-purple-900/20 blur-[50px] pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] aspect-square rounded-full bg-amber-600/10 blur-[40px] animate-pulse pointer-events-none"></div>
+
+      <div className="relative z-10 flex flex-col items-center h-full w-full">
         
-        <div className="grid grid-cols-2 gap-3">
-          <a href={CONTENT.esoteric.tgLink} className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex flex-col items-center justify-center gap-2 hover:border-amber-500/50 hover:bg-purple-900/20 transition-all group shadow-lg">
-            <MessageCircle className="w-6 h-6 text-purple-400 group-hover:text-amber-300 transition-colors" />
-            <span className="font-medium text-[11px] uppercase tracking-wider text-purple-200">Telegram</span>
-          </a>
-          <a href={CONTENT.esoteric.instLink} className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex flex-col items-center justify-center gap-2 hover:border-amber-500/50 hover:bg-purple-900/20 transition-all group shadow-lg">
-            <InstagramIcon className="w-6 h-6 text-purple-400 group-hover:text-amber-300 transition-colors" />
-            <span className="font-medium text-[11px] uppercase tracking-wider text-purple-200">Instagram</span>
-          </a>
+        {/* Аватар в светящемся кольце */}
+        <div className="relative mt-4 mb-3">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-500 to-amber-500 animate-[spin_4s_linear_infinite] blur-[6px] opacity-60"></div>
+          <div className="relative w-20 h-20 rounded-full p-[2px] bg-gradient-to-b from-purple-400 to-amber-400">
+            <img src={CONTENT.esoteric.avatar} alt={CONTENT.esoteric.name1} className="w-full h-full object-cover rounded-full border-2 border-[#050505]" />
+          </div>
         </div>
 
-        <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-5 border border-purple-500/20 flex-1 relative overflow-hidden flex flex-col justify-center items-center shadow-lg group">
-          <Moon className="absolute -right-4 -bottom-4 w-24 h-24 text-amber-500/10 group-hover:rotate-12 transition-transform duration-700" />
-          <p className="font-serif italic text-amber-100/90 text-[13px] text-center leading-relaxed">
-            "{CONTENT.esoteric.quote1}<br/>{CONTENT.esoteric.quote2}"
+        {/* Имя и подзаголовок */}
+        <div className="text-center mb-6">
+          <h3 className="text-2xl font-serif font-bold text-amber-100 italic tracking-wide">{CONTENT.esoteric.username}</h3>
+          <p className="text-purple-400 text-[9px] mt-1.5 uppercase tracking-[0.3em] font-medium">{CONTENT.esoteric.subUsername}</p>
+        </div>
+
+        {/* Цитата (Мягкая и плавная) */}
+        <div className="flex-1 flex items-center justify-center w-full relative">
+          <Moon className="absolute top-0 right-4 w-16 h-16 text-amber-500/5 rotate-12" />
+          <p className="font-serif italic text-amber-100/80 text-sm text-center leading-loose relative z-10 px-4">
+            <span className="text-2xl absolute -top-3 -left-1 text-purple-500/40">"</span>
+            {CONTENT.esoteric.quote1}<br/>{CONTENT.esoteric.quote2}
+            <span className="text-2xl absolute -bottom-4 -right-1 text-purple-500/40">"</span>
           </p>
         </div>
 
-        <a href={CONTENT.esoteric.actionLink} className="mt-auto w-full bg-gradient-to-r from-purple-900 to-indigo-900 text-amber-100 font-bold py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:from-purple-800 hover:to-indigo-800 transition-all shadow-[0_0_20px_rgba(147,51,234,0.3)] border border-purple-500/30">
-          <Sparkles className="w-5 h-5" />
+        {/* Круглые социальные кнопки */}
+        <div className="flex gap-6 mt-6 mb-8">
+          <a href={CONTENT.esoteric.tgLink} className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-purple-500/30 flex items-center justify-center text-purple-400 hover:text-amber-300 hover:border-amber-400/50 transition-all shadow-[0_0_15px_rgba(147,51,234,0.15)] group">
+            <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
+          </a>
+          <a href={CONTENT.esoteric.instLink} className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-purple-500/30 flex items-center justify-center text-purple-400 hover:text-amber-300 hover:border-amber-400/50 transition-all shadow-[0_0_15px_rgba(147,51,234,0.15)] group">
+            <InstagramIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+          </a>
+        </div>
+
+        {/* Элегантная кнопка действия */}
+        <a href={CONTENT.esoteric.actionLink} className="w-full bg-gradient-to-r from-purple-900/80 to-[#1a1025] backdrop-blur-md text-amber-100 font-serif italic text-base py-4 rounded-full flex items-center justify-center gap-3 hover:from-purple-800 hover:to-[#2a1a3a] transition-all shadow-[0_0_30px_rgba(147,51,234,0.3)] border border-purple-500/30 group">
+          <Sparkles className="w-4 h-4 text-amber-400 group-hover:animate-pulse" />
           {CONTENT.esoteric.actionText}
         </a>
       </div>
@@ -427,45 +442,52 @@ const PsychologistCard = () => (
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white" style={{ transform: 'rotateY(180deg)' }}>
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-900/30 via-zinc-950 to-emerald-900/30"></div>
+    {/* ОБРАТНАЯ СТОРОНА (Zen & Harmony Style) */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-[#020806] flex flex-col p-6 text-white" style={{ transform: 'rotateY(180deg)' }}>
       
-      <div className="relative z-10 flex flex-col h-full gap-3">
-        <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-teal-500/20 flex items-center gap-4 shadow-lg">
-          <div className="w-14 h-14 rounded-full border-2 border-teal-500/50 p-0.5 shrink-0 overflow-hidden">
-            <img src={CONTENT.psychologist.avatar} alt={CONTENT.psychologist.name1} className="w-full h-full object-cover rounded-full" />
-          </div>
-          <div>
-            <h3 className="text-lg font-serif font-bold text-teal-100">{CONTENT.psychologist.username}</h3>
-            <p className="text-teal-400 text-[10px] mt-0.5 uppercase tracking-widest font-medium">{CONTENT.psychologist.subUsername}</p>
-          </div>
-        </div>
+      {/* Мягкие перекрывающие формы (Blur эффекты) */}
+      <div className="absolute -top-10 -left-20 w-72 h-72 bg-teal-600/20 blur-[90px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute top-1/2 -right-20 w-80 h-80 bg-emerald-700/15 blur-[100px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute -bottom-20 left-10 w-64 h-64 bg-cyan-900/30 blur-[80px] rounded-full pointer-events-none mix-blend-screen"></div>
+
+      <div className="relative z-10 flex flex-col h-full w-full">
         
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-teal-500/20 text-center shadow-lg">
-            <Award className="w-6 h-6 mx-auto mb-2 text-emerald-400" />
-            <p className="text-[10px] text-teal-500 uppercase font-bold tracking-wider">{CONTENT.psychologist.stat1Title}</p>
-            <p className="font-serif font-bold text-lg mt-0.5 text-teal-100">{CONTENT.psychologist.stat1Value}</p>
+        {/* Главный акцент - Цитата */}
+        <div className="flex-1 flex flex-col justify-center items-center text-center mt-2">
+          <Brain className="w-8 h-8 text-teal-400/30 mb-5" />
+          <p className="font-serif text-teal-50 text-[1.15rem] leading-relaxed relative z-10 px-2 tracking-wide">
+             <span className="text-4xl absolute -top-4 -left-2 text-teal-500/20 font-serif">"</span>
+             {CONTENT.psychologist.quote1}<br/>{CONTENT.psychologist.quote2}
+             <span className="text-4xl absolute -bottom-5 -right-2 text-teal-500/20 font-serif">"</span>
+          </p>
+        </div>
+
+        {/* Инфо о психологе (мягкий блок без границ) */}
+        <div className="flex flex-col items-center mt-4 mb-5">
+          <div className="w-16 h-16 rounded-full p-[2px] bg-gradient-to-b from-teal-400/40 to-emerald-600/10 mb-3 shadow-[0_0_25px_rgba(20,184,166,0.15)]">
+            <img src={CONTENT.psychologist.avatar} alt={CONTENT.psychologist.name1} className="w-full h-full object-cover rounded-full border-2 border-[#020806]" />
           </div>
-          <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-teal-500/20 text-center shadow-lg">
-            <MapPin className="w-6 h-6 mx-auto mb-2 text-teal-400" />
-            <p className="text-[10px] text-teal-500 uppercase font-bold tracking-wider">{CONTENT.psychologist.stat2Title}</p>
-            <p className="font-serif font-bold text-sm mt-1.5 text-teal-100">{CONTENT.psychologist.stat2Value}</p>
+          <h3 className="text-lg font-serif font-bold text-teal-50 tracking-wide">{CONTENT.psychologist.username}</h3>
+          <p className="text-teal-500/80 text-[9px] mt-1.5 uppercase tracking-[0.25em] font-medium">{CONTENT.psychologist.subUsername}</p>
+        </div>
+
+        {/* Статистика (нежные текстовые блоки) */}
+        <div className="flex justify-center items-center gap-6 mb-8">
+          <div className="flex flex-col items-center">
+            <p className="text-[9px] text-teal-500/60 uppercase font-bold tracking-widest mb-1">{CONTENT.psychologist.stat1Title}</p>
+            <p className="font-serif font-bold text-base text-teal-100">{CONTENT.psychologist.stat1Value}</p>
+          </div>
+          <div className="w-px h-8 bg-teal-500/20 rounded-full"></div>
+          <div className="flex flex-col items-center">
+             <p className="text-[9px] text-teal-500/60 uppercase font-bold tracking-widest mb-1">{CONTENT.psychologist.stat2Title}</p>
+            <p className="font-serif font-bold text-base text-teal-100">{CONTENT.psychologist.stat2Value}</p>
           </div>
         </div>
 
-        <div className="flex-1 flex items-center justify-center px-4">
-           <p className="text-center font-serif text-teal-100/80 text-sm leading-relaxed relative">
-             <span className="text-4xl absolute -top-4 -left-2 text-teal-500/30 font-serif">"</span>
-             {CONTENT.psychologist.quote1} {CONTENT.psychologist.quote2}
-             <span className="text-4xl absolute -bottom-6 -right-2 text-teal-500/30 font-serif">"</span>
-           </p>
-        </div>
-
-        <a href={CONTENT.psychologist.actionLink} className="mt-auto w-full bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:from-teal-500 hover:to-emerald-500 transition-all shadow-[0_0_20px_rgba(13,148,136,0.3)] border border-teal-500/30">
-          <Phone className="w-5 h-5" />
-          {CONTENT.psychologist.actionText}
+        {/* Контакты аккуратно внизу */}
+        <a href={CONTENT.psychologist.actionLink} className="w-full bg-teal-900/30 backdrop-blur-md text-teal-50 font-serif py-4 rounded-full flex items-center justify-center gap-3 hover:bg-teal-800/40 transition-all shadow-[0_4px_20px_rgba(20,184,166,0.1)] border border-teal-500/20 group">
+          <Heart className="w-4 h-4 text-rose-400/80 group-hover:scale-110 transition-transform" />
+          <span className="tracking-wide">{CONTENT.psychologist.actionText}</span>
         </a>
       </div>
     </div>
