@@ -1127,7 +1127,8 @@ const App = () => {
 
     // Вибрация (Haptic feedback) при поддержке устройством для премиум-ощущений
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
-      navigator.vibrate(50);
+      // Двойной мягкий импульс при перевороте карточки
+      navigator.vibrate([30, 30, 40]); 
     }
     setIsFlipped(!isFlipped);
   };
@@ -1202,7 +1203,13 @@ const App = () => {
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                // Легкий одинарный импульс при переключении вкладок
+                if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                  navigator.vibrate(15);
+                }
+                setActiveTab(tab.id);
+              }}
               className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full text-[11px] sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'bg-white text-black shadow-md scale-[1.02]'
