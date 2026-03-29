@@ -231,23 +231,23 @@ const globalStyles = `
   
   /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА СГОРАЮЩЕЙ БУМАГИ === */
   .clip-burn-start {
-    clip-path: circle(0% at 0% 0%);
+    clip-path: circle(0% at 100% 0%); /* Старт из правого верхнего угла */
     opacity: 1;
   }
   .clip-burn-end {
-    clip-path: circle(150% at 0% 0%);
+    clip-path: circle(150% at 100% 0%);
     opacity: 1;
   }
   .clip-burn-glow {
-    clip-path: circle(155% at 0% 0%);
+    clip-path: circle(155% at 100% 0%);
     opacity: 0;
   }
   .burn-img-transition {
-    transition: clip-path 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1); /* Замедлили до 3.5 сек */
   }
   .burn-glow-transition {
-    /* Огненный край расширяется вместе с фото, но в конце плавно затухает */
-    transition: clip-path 2.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-out 1.7s;
+    /* Огненный край расширяется вместе с фото, плавно затухая в конце */
+    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease-out 2.7s;
   }
 `;
 
@@ -269,7 +269,8 @@ const BurnRevealImage = ({ src, className, style }) => {
   }, [src]);
 
   return (
-    <div className={`absolute inset-0 pointer-events-none ${className}`} style={style}>
+    // Добавили жесткую обрезку углов (overflow-hidden rounded-[2.5rem]), чтобы огонь не вылезал за края карточки
+    <div className={`absolute inset-0 pointer-events-none overflow-hidden rounded-[2.5rem] ${className}`} style={style}>
       {/* 1. Слой огненного края (с SVG-искажением для рваности) */}
       <div className="absolute inset-0" style={{ filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)' }}>
         <div 
