@@ -53,6 +53,27 @@ const globalStyles = `
   .animate-scroll {
     animation: scroll-left 15s linear infinite;
   }
+  @keyframes spark-explode {
+    0% { transform: translate(0, 0) scale(0.1); opacity: 0.5; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0.25; }
+  }
+  @keyframes spark-wander {
+    0% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0.25; }
+    33% { transform: translate(calc(var(--tx) * 1.5 + var(--wx1)), calc(var(--ty) * 1.5 + var(--wy1))) scale(1.2); opacity: 0.15; }
+    66% { transform: translate(calc(var(--tx) * 2.5 + var(--wx2)), calc(var(--ty) * 2.5 + var(--wy2))) scale(0.8); opacity: 0.1; }
+    100% { transform: translate(calc(var(--tx) * 4 + var(--wx3)), calc(var(--ty) * 4 + var(--wy3))) scale(0.5); opacity: 0; }
+  }
+  .spark-particle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+    /* Сначала мягкий взрыв (0.8s), затем ооочень медленный улет за экран (20-40s) */
+    animation: 
+      spark-explode 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards,
+      spark-wander var(--wt) linear 0.8s forwards;
+  }
 `;
 
 // ==========================================
@@ -762,6 +783,7 @@ const App = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
+  const [sparks, setSparks] = useState([]);
   const cardRef = useRef(null);
 
   // Сброс переворота при смене вкладки
@@ -834,6 +856,32 @@ const App = () => {
   const handleFlip = () => {
     // Звук переворота (саунд-дизайн)
     playFlipSound();
+
+    if (!isFlipped) {
+      // Взрыв еле заметной белой пыльцы при перевороте НАЗАД
+      const newSparks = Array.from({ length: 35 }).map((_, i) => {
+        // Распределяем искры по кругу
+        const angle = (Math.PI * 2 * i) / 35 + (Math.random() * 0.5);
+        const distance = 80 + Math.random() * 100; // Мягкий стартовый разлет
+        return {
+          id: Date.now() + i,
+          tx: Math.cos(angle) * distance + 'px',
+          ty: Math.sin(angle) * distance + 'px',
+          wx1: (Math.random() - 0.5) * 100 + 'px',
+          wy1: (Math.random() - 0.5) * 100 + 'px',
+          wx2: (Math.random() - 0.5) * 200 + 'px',
+          wy2: (Math.random() - 0.5) * 200 + 'px',
+          wx3: (Math.random() - 0.5) * 300 + 'px',
+          wy3: (Math.random() - 0.5) * 300 + 'px',
+          wt: (20 + Math.random() * 20) + 's', // Время полета от 20 до 40 секунд!
+          size: Math.random() * 1.5 + 0.5 + 'px', // Ультра-мелкие (0.5px - 2px)
+        };
+      });
+      setSparks(newSparks);
+    } else {
+      // Очищаем искры при возврате на лицевую сторону
+      setSparks([]);
+    }
 
     // Вибрация (Haptic feedback) при поддержке устройством для премиум-ощущений
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
@@ -908,9 +956,34 @@ const App = () => {
         onTouchMove={handlePointerMove}
         onTouchEnd={handlePointerLeave}
       >
+        {/* Искры (Magic Dust) */}
+        {sparks.map(spark => (
+          <div
+            key={spark.id}
+            className="spark-particle z-0"
+            style={{
+              '--tx': spark.tx,
+              '--ty': spark.ty,
+              '--wx1': spark.wx1,
+              '--wy1': spark.wy1,
+              '--wx2': spark.wx2,
+              '--wy2': spark.wy2,
+              '--wx3': spark.wx3,
+              '--wy3': spark.wy3,
+              '--wt': spark.wt,
+              width: spark.size,
+              height: spark.size,
+              left: '50%',
+              top: '50%',
+              marginTop: '-' + (parseFloat(spark.size) / 2) + 'px',
+              marginLeft: '-' + (parseFloat(spark.size) / 2) + 'px'
+            }}
+          />
+        ))}
+
         {/* Обертка для магнитного 3D наклона (следит за мышью/пальцем) */}
         <div
-          className="w-full h-full card-preserve-3d transition-transform duration-100 ease-out"
+          className="w-full h-full card-preserve-3d transition-transform duration-100 ease-out z-10 relative"
           style={{ transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)` }}
         >
           {/* Сама визитка с анимацией вращения (переворот на 180) */}
