@@ -262,9 +262,9 @@ const BurnRevealImage = ({ src, className, style }) => {
     const img = new Image();
     img.src = src;
     if (img.complete) {
-      setTimeout(() => setLoaded(true), 150);
+      setLoaded(true); // Убрали задержку
     } else {
-      img.onload = () => setTimeout(() => setLoaded(true), 150);
+      img.onload = () => setLoaded(true); // Убрали задержку
     }
   }, [src]);
 
@@ -378,12 +378,12 @@ const PsychologistCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(20,184,166,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-tr from-teal-800 via-cyan-900 to-emerald-950 opacity-60 mix-blend-overlay"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 via-cyan-500 to-emerald-400 opacity-70 mix-blend-screen"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
       <BurnRevealImage src={CONTENT.psychologist.bgImage} className="opacity-50" />
       
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/60 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/50 to-transparent"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -639,12 +639,12 @@ const FitnessCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-tr from-red-800 via-rose-900 to-orange-900 opacity-60 mix-blend-overlay"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-red-600 via-rose-500 to-orange-500 opacity-70 mix-blend-screen"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
       <BurnRevealImage src={CONTENT.fitness.bgImage} className="opacity-50" />
       
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/60 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/50 to-transparent"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1217,7 +1217,7 @@ const App = () => {
               }`}
             >
               {tab.icon}
-              <span className="hidden sm:inline">{tab.name}</span>
+              <span>{tab.name}</span>
             </button>
           ))}
         </div>
