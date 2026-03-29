@@ -862,72 +862,78 @@ const FitnessCard = () => (
 const RealEstateCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(29,78,216,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(37,99,235,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-bl from-blue-700 via-slate-800 to-amber-600 opacity-80 mix-blend-screen"></div>
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(217,119,6,0.3)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(217,119,6,0.5)] transition-shadow duration-700">
+      <div className="absolute inset-0 bg-gradient-to-bl from-zinc-800 via-black to-amber-900/50 opacity-80 mix-blend-screen"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
       <BurnRevealImage src={CONTENT.broker.bgImage} className="opacity-50 mix-blend-luminosity" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
-          <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-blue-500/30 flex items-center gap-2">
+          <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-amber-600/30 flex items-center gap-2">
             <Key className="w-4 h-4 text-amber-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-blue-100">{CONTENT.broker.badge}</span>
+            <span className="text-xs font-serif tracking-widest uppercase text-amber-100/80">{CONTENT.broker.badge}</span>
           </div>
-          <Building2 className="w-8 h-8 text-blue-200/80 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]" />
+          <Building2 className="w-8 h-8 text-amber-200/50 drop-shadow-[0_0_10px_rgba(217,119,6,0.2)]" />
         </div>
 
-        <div>
-          <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+        <div className="text-center">
+          <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-light mb-1 uppercase tracking-widest text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
             {CONTENT.broker.name1}
             <br />
             {CONTENT.broker.name2}
           </h2>
-          <p className="text-amber-300 font-bold text-xs uppercase tracking-[0.2em] mt-2 border-l-2 border-blue-500 pl-3">
+          <p className="text-amber-500/80 font-serif font-light text-[10px] uppercase tracking-[0.3em] mt-3">
             {CONTENT.broker.role}
           </p>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(29,78,216,0.4)] overflow-hidden bg-[#0a0f1c] flex flex-col p-5 text-white" style={{ transform: 'rotateY(180deg)' }}>
-      <div className="absolute inset-0 opacity-[0.05] mix-blend-screen bg-cover bg-center" style={{ backgroundImage: `url(${CONTENT.broker.bgBack})` }}></div>
-      <div className="absolute top-0 right-0 w-64 h-64 bg-blue-900/20 blur-[80px] rounded-full pointer-events-none"></div>
-      
-      <div className="absolute inset-3 border border-amber-600/20 rounded-[2rem] pointer-events-none"></div>
+    {/* ОБРАТНАЯ СТОРОНА (Quiet Luxury) */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden bg-[#050505] flex flex-col p-6 text-white" style={{ transform: 'rotateY(180deg)' }}>
+      {/* Minimalist borders */}
+      <div className="absolute inset-4 border-[0.5px] border-amber-600/30 rounded-[2rem] pointer-events-none"></div>
+      <div className="absolute inset-5 border-[0.5px] border-amber-600/10 rounded-[1.75rem] pointer-events-none"></div>
 
-      <div className="relative z-10 flex flex-col h-full gap-3">
-        <div className="bg-[#121a2f]/80 backdrop-blur-md p-4 rounded-[2rem] border border-blue-900/50 flex items-center justify-between">
-          <div>
-            <h3 className="text-lg font-serif font-bold text-amber-50">{CONTENT.broker.username}</h3>
-            <p className="text-amber-500/80 text-[9px] mt-1 uppercase tracking-widest font-bold">{CONTENT.broker.subUsername}</p>
-          </div>
-          <div className="w-12 h-12 rounded-full border border-amber-500/50 p-[1px]">
-             <img src={CONTENT.broker.avatar} alt={CONTENT.broker.name1} className="w-full h-full object-cover rounded-full" />
-          </div>
-        </div>
+      <div className="relative z-10 flex flex-col items-center justify-center h-full gap-5 text-center px-2">
         
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-[#121a2f]/80 backdrop-blur-md p-4 rounded-[2rem] border border-blue-900/50 text-center">
-            <p className="font-serif font-bold text-xl text-blue-200">{CONTENT.broker.stat1Value}</p>
-            <p className="text-[9px] text-blue-400/60 uppercase font-bold tracking-widest mt-1">{CONTENT.broker.stat1Title}</p>
+        {/* Avatar */}
+        <div className="w-16 h-16 rounded-full p-[1px] bg-gradient-to-b from-amber-500/50 to-transparent mt-2">
+          <img src={CONTENT.broker.avatar} alt={CONTENT.broker.name1} className="w-full h-full object-cover rounded-full grayscale opacity-90" />
+        </div>
+
+        {/* Name */}
+        <div>
+          <h3 className="text-[1.15rem] font-serif font-light tracking-[0.25em] text-amber-50/90 uppercase">{CONTENT.broker.username}</h3>
+          <p className="text-amber-600/60 text-[8px] mt-1.5 uppercase tracking-[0.3em] font-light">{CONTENT.broker.subUsername}</p>
+        </div>
+
+        {/* Thin elegant divider */}
+        <div className="w-8 h-[0.5px] bg-amber-600/40 my-1"></div>
+
+        {/* Stats */}
+        <div className="flex w-full justify-center gap-12">
+          <div className="flex flex-col items-center">
+            <p className="font-serif font-light text-2xl text-white/90">{CONTENT.broker.stat1Value}</p>
+            <p className="text-[7px] text-amber-600/50 uppercase tracking-[0.3em] mt-1">{CONTENT.broker.stat1Title}</p>
           </div>
-          <div className="bg-[#121a2f]/80 backdrop-blur-md p-4 rounded-[2rem] border border-blue-900/50 text-center">
-            <p className="font-serif font-bold text-xl text-amber-400">{CONTENT.broker.stat2Value}</p>
-            <p className="text-[9px] text-amber-500/60 uppercase font-bold tracking-widest mt-1">{CONTENT.broker.stat2Title}</p>
+          <div className="flex flex-col items-center">
+            <p className="font-serif font-light text-2xl text-amber-500/90">{CONTENT.broker.stat2Value}</p>
+            <p className="text-[7px] text-amber-600/50 uppercase tracking-[0.3em] mt-1">{CONTENT.broker.stat2Title}</p>
           </div>
         </div>
 
-        <div className="flex-1 flex flex-col gap-2 justify-center">
-          <div className="bg-[#121a2f]/80 backdrop-blur-md p-4 rounded-[2rem] border border-blue-900/50 text-center flex flex-col items-center justify-center h-full">
-            <Key className="w-6 h-6 text-amber-500/50 mb-2" />
-            <p className="font-serif text-sm text-blue-100/80">{CONTENT.broker.quote}</p>
-          </div>
+        {/* Quote */}
+        <div className="flex-1 flex items-center justify-center w-full">
+          <p className="font-serif font-light text-[11px] text-zinc-400/80 tracking-widest leading-relaxed italic px-2">
+            {CONTENT.broker.quote}
+          </p>
         </div>
 
-        <a href={CONTENT.broker.actionLink} className="w-full bg-gradient-to-r from-amber-600 to-amber-500 text-[#0a0f1c] font-bold py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
-          <MessageCircle className="w-5 h-5" />
+        {/* Button */}
+        <a href={CONTENT.broker.actionLink} className="w-full bg-transparent border-[0.5px] border-amber-600/40 text-amber-500/90 font-serif font-light text-[10px] uppercase tracking-[0.25em] py-4 rounded-full flex items-center justify-center gap-3 hover:bg-amber-900/20 transition-colors mt-auto group">
+          <MessageCircle className="w-4 h-4 font-light opacity-70 group-hover:opacity-100 transition-opacity" />
           {CONTENT.broker.actionText}
         </a>
       </div>
@@ -940,88 +946,116 @@ const MoneyCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(16,185,129,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(5,150,105,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-tr from-emerald-700 via-zinc-900 to-amber-500 opacity-80 mix-blend-screen"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-emerald-900 via-zinc-950 to-green-900 opacity-90 mix-blend-screen"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
       <BurnRevealImage src={CONTENT.money.bgImage} className="opacity-40 mix-blend-luminosity" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
-          <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-emerald-500/30 flex items-center gap-2">
+          <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-none border-l-2 border-emerald-500 flex items-center gap-2 font-mono">
             <TrendingUp className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-emerald-100">{CONTENT.money.badge}</span>
+            <span className="text-[10px] font-bold tracking-widest uppercase text-emerald-400">{CONTENT.money.badge}</span>
           </div>
-          <Diamond className="w-8 h-8 text-amber-200/80 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
+          <Diamond className="w-8 h-8 text-emerald-500/50 drop-shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
         </div>
 
         <div>
-          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+          <h2 className="text-3xl sm:text-4xl leading-tight font-mono font-black mb-1 uppercase tracking-widest text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
             {CONTENT.money.name1}
             <br />
             {CONTENT.money.name2}
           </h2>
-          <div className="flex flex-wrap items-center gap-3 mt-2">
-            <p className="text-amber-400 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-emerald-500 pl-3">
+          <div className="flex flex-wrap items-center gap-3 mt-3">
+            <p className="text-emerald-400 font-mono font-bold text-[10px] uppercase tracking-[0.2em] bg-emerald-950/80 px-2 py-1 border border-emerald-500/30">
               {CONTENT.money.role}
             </p>
-            <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-emerald-500/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
-              <span className="text-[8px] font-bold uppercase tracking-wider text-emerald-100">{CONTENT.money.status}</span>
+            <div className="flex items-center gap-1.5 font-mono">
+              <span className="w-2 h-2 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></span>
+              <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-100">{CONTENT.money.status}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(16,185,129,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border border-emerald-900/30" style={{ transform: 'rotateY(180deg)' }}>
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.05)_1px,transparent_1px)]" style={{ backgroundSize: '20px 20px' }}></div>
-      <div className="absolute top-0 w-full h-full bg-gradient-to-b from-emerald-900/10 to-transparent"></div>
+    {/* ОБРАТНАЯ СТОРОНА (Fintech / Cyberpunk Terminal) */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(16,185,129,0.4)] overflow-hidden bg-[#030805] flex flex-col p-6 text-emerald-400 font-mono border border-emerald-900/80" style={{ transform: 'rotateY(180deg)' }}>
       
-      <div className="relative z-10 flex flex-col h-full gap-3 font-mono">
-        <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex items-center gap-4">
-          <div className="relative">
-            <div className="w-14 h-14 rounded-xl overflow-hidden border border-emerald-500/50">
-               <img src={CONTENT.money.avatar} alt={CONTENT.money.name1} className="w-full h-full object-cover grayscale opacity-80" />
-            </div>
-            <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-zinc-900"></div>
-          </div>
-          <div>
-            <h3 className="text-lg font-bold text-emerald-50 tracking-wider">{CONTENT.money.username}</h3>
-            <p className="text-emerald-500 text-[9px] mt-1 uppercase tracking-widest bg-emerald-950/50 px-2 py-0.5 rounded w-fit">{CONTENT.money.subUsername}</p>
-          </div>
-        </div>
+      {/* Terminal Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.07)_1px,transparent_1px)]" style={{ backgroundSize: '15px 15px' }}></div>
+
+      {/* Glowing Trend Line SVG */}
+      <svg className="absolute bottom-1/4 left-0 w-full h-32 opacity-30 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
+         <path d="M0,80 L20,60 L40,70 L60,30 L80,40 L100,10" fill="none" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+         <path d="M0,80 L20,60 L40,70 L60,30 L80,40 L100,10 L100,100 L0,100 Z" fill="url(#grad-trend)" stroke="none" />
+         <defs>
+           <linearGradient id="grad-trend" x1="0" y1="0" x2="0" y2="1">
+             <stop offset="0%" stopColor="#34d399" stopOpacity="0.3" />
+             <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
+           </linearGradient>
+         </defs>
+      </svg>
+
+      {/* Random blinking cursor / terminal dot */}
+      <div className="absolute top-7 right-7 w-2.5 h-4 bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
+
+      <div className="relative z-10 flex flex-col h-full gap-5">
         
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex flex-col justify-center">
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">{CONTENT.money.stat1Title}</p>
-            <p className="font-bold text-xl text-emerald-400">{CONTENT.money.stat1Value}</p>
-          </div>
-          <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex flex-col justify-center">
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">{CONTENT.money.stat2Title}</p>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-              <p className="font-bold text-xl text-white">{CONTENT.money.stat2Value}</p>
+        {/* Header: [USER_DATA] */}
+        <div className="flex flex-col gap-1 border-b border-emerald-900/60 pb-3 mt-1">
+          <span className="text-[8px] uppercase tracking-widest text-emerald-600 font-bold">&gt; SYS.USER_IDENT</span>
+          <div className="flex items-center gap-4 mt-2">
+            <div className="relative w-12 h-12 bg-black border border-emerald-500/50 p-[2px] overflow-hidden">
+               <div className="absolute inset-0 bg-emerald-500/10 mix-blend-overlay z-10 pointer-events-none"></div>
+               <img src={CONTENT.money.avatar} alt={CONTENT.money.name1} className="w-full h-full object-cover grayscale contrast-125 opacity-80" />
+               <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(16,185,129,0.1)_2px,rgba(16,185,129,0.1)_4px)] pointer-events-none"></div>
+            </div>
+            <div className="flex flex-col">
+              <h3 className="text-sm font-bold tracking-widest text-emerald-50 uppercase">{CONTENT.money.username}</h3>
+              <p className="text-[9px] mt-1 text-emerald-500 bg-emerald-950/50 px-1.5 py-0.5 w-fit uppercase tracking-widest">{CONTENT.money.subUsername}</p>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex flex-col justify-center">
-           <div className="flex items-center justify-between mb-2">
-             <span className="text-xs text-zinc-400">{CONTENT.money.infoTitle}</span>
-             <span className="text-[10px] text-emerald-400 bg-emerald-900/30 px-2 py-1 rounded">{CONTENT.money.infoSub}</span>
+        {/* Stats: [METRICS] */}
+        <div className="flex flex-col gap-1 border-b border-emerald-900/60 pb-4">
+          <span className="text-[8px] uppercase tracking-widest text-emerald-600 font-bold">&gt; SYS.METRICS</span>
+          <div className="grid grid-cols-2 gap-4 mt-2">
+            <div className="flex flex-col">
+              <span className="text-[8px] text-emerald-600 uppercase tracking-widest mb-0.5">{CONTENT.money.stat1Title}</span>
+              <span className="text-xl font-black text-emerald-400 drop-shadow-[0_0_8px_rgba(52,211,153,0.4)] tracking-wider">{CONTENT.money.stat1Value}</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[8px] text-emerald-600 uppercase tracking-widest mb-0.5">{CONTENT.money.stat2Title}</span>
+              <span className="text-xl font-black text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] tracking-wider">{CONTENT.money.stat2Value}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Progress / Status */}
+        <div className="flex flex-col gap-1 border-b border-emerald-900/60 pb-4 flex-1 justify-center">
+           <span className="text-[8px] uppercase tracking-widest text-emerald-600 font-bold">&gt; NODE.STATUS</span>
+           <div className="flex justify-between items-end text-[9px] text-emerald-500 mb-1.5 mt-2 uppercase tracking-widest">
+             <span>{CONTENT.money.infoTitle}</span>
+             <span className="text-emerald-300">{CONTENT.money.infoSub}</span>
            </div>
-           <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-             <div className="bg-gradient-to-r from-emerald-600 to-amber-400 h-full w-[85%] rounded-full relative">
-               <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+           <div className="w-full bg-[#020503] h-2.5 border border-emerald-900/50 relative overflow-hidden">
+             {/* Striped progress bar effect */}
+             <div className="absolute top-0 left-0 h-full bg-emerald-600 w-[85%] shadow-[0_0_15px_rgba(52,211,153,0.8)] overflow-hidden">
+               <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'repeating-linear-gradient(-45deg, transparent, transparent 4px, #000 4px, #000 8px)' }}></div>
              </div>
            </div>
-           <p className="text-[9px] text-right mt-1 text-zinc-500">{CONTENT.money.placesLeft}</p>
+           <div className="flex justify-between mt-2 uppercase">
+             <span className="text-[8px] text-emerald-600 font-bold tracking-widest">CAPACITY: 85%</span>
+             <span className="text-[8px] text-amber-400 font-bold tracking-widest animate-pulse">{CONTENT.money.placesLeft}</span>
+           </div>
         </div>
 
-        <a href={CONTENT.money.actionLink} className="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black uppercase tracking-widest py-4 rounded-3xl flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] border border-emerald-400">
-          <Wallet className="w-5 h-5" />
-          {CONTENT.money.actionText}
+        {/* Terminal Button */}
+        <a href={CONTENT.money.actionLink} className="w-full bg-transparent border border-emerald-500/50 hover:bg-emerald-500 hover:text-black transition-all py-3.5 flex items-center justify-center gap-2 group shadow-[inset_0_0_15px_rgba(16,185,129,0.1)] hover:shadow-[0_0_20px_rgba(52,211,153,0.4)] mt-1">
+          <Wallet className="w-4 h-4 text-emerald-400 group-hover:text-black transition-colors" />
+          <span className="text-[11px] tracking-[0.2em] font-bold uppercase transition-colors">[{CONTENT.money.actionText}]</span>
         </a>
       </div>
     </div>
