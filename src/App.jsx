@@ -159,12 +159,16 @@ const CONTENT = {
     backTitle: 'Что ты получаешь?',
     benefit1Title: 'WOW-Эффект',
     benefit1Text: 'Запоминаешься сразу',
-    benefit2Title: 'Удобство',
-    benefit2Text: 'Контакты в 1 клик',
-    benefit3Title: 'Статус',
-    benefit3Text: 'Премиальный имидж',
-    benefit4Title: 'Конверсия',
-    benefit4Text: 'Дизайн продает сам',
+    benefit2Title: 'Разовая оплата',
+    benefit2Text: 'Без абонентской платы',
+    benefit3Title: 'Личный домен',
+    benefit3Text: 'имя.домен.ru',
+    benefit4Title: 'Без VPN',
+    benefit4Text: 'Работает всегда',
+    benefit5Title: 'Удобство',
+    benefit5Text: 'Контакты в 1 клик',
+    benefit6Title: 'Статус',
+    benefit6Text: 'Премиальный имидж',
     actionText: 'Заказать визитку',
     actionLink: 'https://t.me/elenlime?text=Привет!%20Хочу%20такую%20же%20визитку!'
   }
@@ -263,6 +267,21 @@ const globalStyles = `
     transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease-out 2.7s;
     /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
   }
+  
+  /* === АНИМАЦИИ ЭЗОТЕРИКА (Медленное, однонаправленное движение) === */
+  @keyframes esoteric-slow-drift-1 {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes esoteric-slow-drift-2 {
+    0%   { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+  }
+  @keyframes esoteric-slow-expand {
+    0%   { transform: scale(1); opacity: 0.8; }
+    50%  { transform: scale(2.2); opacity: 0; }
+    100% { transform: scale(1); opacity: 0.8; }
+  }
 `;
 
 // ==========================================
@@ -352,10 +371,10 @@ const EsotericCard = () => (
     {/* ОБРАТНАЯ СТОРОНА (Mandala / Aura Style) */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-[#050505] flex flex-col items-center p-6 text-white border border-purple-900/30" style={{ transform: 'rotateY(180deg)' }}>
       
-      {/* ФОН МАНДАЛЫ (Орбиты и Аура) - Сместили центры, чтобы они красиво расходились и пересекались! */}
-      <div className="absolute top-[45%] left-[48%] -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square rounded-full border border-purple-500/30 border-dashed animate-[spin_60s_linear_infinite]"></div>
-      <div className="absolute top-[55%] left-[52%] -translate-x-1/2 -translate-y-1/2 w-[110%] aspect-square rounded-full border-[1.5px] border-amber-500/30 animate-[spin_40s_linear_infinite_reverse]"></div>
-      <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[75%] aspect-square rounded-full border-2 border-purple-500/40"></div>
+      {/* ФОН МАНДАЛЫ (Медленные орбиты и Аура) */}
+      <div className="absolute -top-[20%] -left-[20%] w-[160%] aspect-square rounded-full border border-purple-500/30 border-dashed" style={{ animation: 'esoteric-slow-drift-1 90s linear infinite', transformOrigin: '45% 55%' }}></div>
+      <div className="absolute -bottom-[30%] -right-[30%] w-[140%] aspect-square rounded-full border-[1.5px] border-amber-500/30" style={{ animation: 'esoteric-slow-drift-2 100s linear infinite', transformOrigin: '55% 45%' }}></div>
+      <div className="absolute top-[20%] left-[10%] w-[80%] aspect-square rounded-full border-2 border-purple-500/40" style={{ animation: 'esoteric-slow-expand 30s ease-in-out infinite' }}></div>
       
       {/* Пульсирующая аура - усилили свечение */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square rounded-full bg-purple-900/40 blur-[50px] pointer-events-none"></div>
@@ -1129,26 +1148,42 @@ const StarterCard = () => (
           <div className="w-16 h-0.5 bg-yellow-500/50 mx-auto mt-2 rounded-full"></div>
         </div>
         
-        <div className="grid grid-cols-2 gap-3 flex-1 content-center">
-          <div className="bg-zinc-900/60 backdrop-blur-xl p-4 rounded-3xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
-            <Crown className="w-6 h-6 mb-2 text-yellow-400" />
-            <p className="font-bold text-sm text-yellow-100">{CONTENT.starter.benefit1Title}</p>
-            <p className="text-[9px] text-zinc-400 uppercase tracking-widest mt-1">{CONTENT.starter.benefit1Text}</p>
+        <div className="grid grid-cols-2 gap-2.5 flex-1 content-center">
+          {/* Блок 1 */}
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-3 rounded-2xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <Crown className="w-5 h-5 mb-1.5 text-yellow-400" />
+            <p className="font-bold text-[11px] text-yellow-100">{CONTENT.starter.benefit1Title}</p>
+            <p className="text-[8px] text-zinc-400 uppercase tracking-widest mt-0.5">{CONTENT.starter.benefit1Text}</p>
           </div>
-          <div className="bg-zinc-900/60 backdrop-blur-xl p-4 rounded-3xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
-            <Sparkles className="w-6 h-6 mb-2 text-yellow-400" />
-            <p className="font-bold text-sm text-yellow-100">{CONTENT.starter.benefit2Title}</p>
-            <p className="text-[9px] text-zinc-400 uppercase tracking-widest mt-1">{CONTENT.starter.benefit2Text}</p>
+          {/* Блок 2 */}
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-3 rounded-2xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <Wallet className="w-5 h-5 mb-1.5 text-yellow-400" />
+            <p className="font-bold text-[11px] text-yellow-100">{CONTENT.starter.benefit2Title}</p>
+            <p className="text-[8px] text-zinc-400 uppercase tracking-widest mt-0.5">{CONTENT.starter.benefit2Text}</p>
           </div>
-          <div className="bg-zinc-900/60 backdrop-blur-xl p-4 rounded-3xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
-            <Diamond className="w-6 h-6 mb-2 text-yellow-400" />
-            <p className="font-bold text-sm text-yellow-100">{CONTENT.starter.benefit3Title}</p>
-            <p className="text-[9px] text-zinc-400 uppercase tracking-widest mt-1">{CONTENT.starter.benefit3Text}</p>
+          {/* Блок 3 */}
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-3 rounded-2xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <Globe className="w-5 h-5 mb-1.5 text-yellow-400" />
+            <p className="font-bold text-[11px] text-yellow-100">{CONTENT.starter.benefit3Title}</p>
+            <p className="text-[8px] text-zinc-400 uppercase tracking-widest mt-0.5">{CONTENT.starter.benefit3Text}</p>
           </div>
-          <div className="bg-zinc-900/60 backdrop-blur-xl p-4 rounded-3xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
-            <TrendingUp className="w-6 h-6 mb-2 text-yellow-400" />
-            <p className="font-bold text-sm text-yellow-100">{CONTENT.starter.benefit4Title}</p>
-            <p className="text-[9px] text-zinc-400 uppercase tracking-widest mt-1">{CONTENT.starter.benefit4Text}</p>
+          {/* Блок 4 */}
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-3 rounded-2xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <Key className="w-5 h-5 mb-1.5 text-yellow-400" />
+            <p className="font-bold text-[11px] text-yellow-100">{CONTENT.starter.benefit4Title}</p>
+            <p className="text-[8px] text-zinc-400 uppercase tracking-widest mt-0.5">{CONTENT.starter.benefit4Text}</p>
+          </div>
+          {/* Блок 5 */}
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-3 rounded-2xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <Sparkles className="w-5 h-5 mb-1.5 text-yellow-400" />
+            <p className="font-bold text-[11px] text-yellow-100">{CONTENT.starter.benefit5Title}</p>
+            <p className="text-[8px] text-zinc-400 uppercase tracking-widest mt-0.5">{CONTENT.starter.benefit5Text}</p>
+          </div>
+          {/* Блок 6 */}
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-3 rounded-2xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <Diamond className="w-5 h-5 mb-1.5 text-yellow-400" />
+            <p className="font-bold text-[11px] text-yellow-100">{CONTENT.starter.benefit6Title}</p>
+            <p className="text-[8px] text-zinc-400 uppercase tracking-widest mt-0.5">{CONTENT.starter.benefit6Text}</p>
           </div>
         </div>
 
