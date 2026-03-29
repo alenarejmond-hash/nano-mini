@@ -87,7 +87,7 @@ const EsotericCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(168,85,247,0.6)] transition-shadow duration-700">
       {/* Мистический градиент и фон */}
       <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-purple-600 to-amber-500 opacity-70 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-[url('/bg-esoteric.jpg')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -99,14 +99,14 @@ const EsotericCard = () => (
         </div>
 
         <div>
-          <h2 className="text-5xl font-serif font-black mb-1 uppercase tracking-tighter mix-blend-overlay text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">
+          <h2 className="text-5xl font-serif font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
             ЕЛЕНА
             <br />
             МИФ
           </h2>
           <div className="flex flex-wrap items-center gap-3 mt-2">
             <p className="text-amber-300 font-bold text-sm uppercase tracking-[0.3em] border-l-2 border-purple-500 pl-3">
-              Elite Astrologer
+              Элитный Астролог
             </p>
             <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-purple-500/30">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
@@ -131,7 +131,7 @@ const EsotericCard = () => (
           </div>
           <div>
             <h3 className="text-lg font-serif font-bold text-amber-100">@elena_myth</h3>
-            <p className="text-purple-400 text-[10px] mt-0.5 uppercase tracking-widest">Premium Access</p>
+            <p className="text-purple-400 text-[10px] mt-0.5 uppercase tracking-widest">Премиум Доступ</p>
           </div>
         </div>
         
@@ -171,7 +171,7 @@ const PsychologistCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(20,184,166,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-bl from-teal-500 via-emerald-700 to-slate-900 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-[url('/bg-psychologist.jpg')] bg-cover bg-center opacity-50 mix-blend-luminosity"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -183,14 +183,14 @@ const PsychologistCard = () => (
         </div>
 
         <div>
-          <h2 className="text-5xl font-serif font-medium mb-1 uppercase tracking-tighter mix-blend-overlay text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]">
+          <h2 className="text-5xl font-serif font-medium mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
             АННА
             <br />
             СВЕТЛАЯ
           </h2>
           <div className="flex flex-wrap items-center gap-3 mt-2">
             <p className="text-teal-300 font-bold text-sm uppercase tracking-[0.3em] border-l-2 border-emerald-500 pl-3">
-              Clinical Psychologist
+              Клинический Психолог
             </p>
             <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-teal-500/30">
               <span className="relative flex h-1.5 w-1.5">
@@ -259,7 +259,7 @@ const TravelCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-orange-500 via-rose-600 to-indigo-900 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-[url('/bg-travel.jpg')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -271,13 +271,13 @@ const TravelCard = () => (
         </div>
 
         <div className="pb-6">
-          <h2 className="text-5xl font-black mb-1 uppercase tracking-tighter mix-blend-overlay text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.7)]">
+          <h2 className="text-5xl font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
             МАКСИМ
             <br />
             ВОЯЖ
           </h2>
           <p className="text-orange-300 font-bold text-sm uppercase tracking-[0.3em] mt-2 border-l-2 border-rose-500 pl-3">
-            Premium Travel
+            Премиум Отдых
           </p>
         </div>
       </div>
@@ -302,13 +302,13 @@ const TravelCard = () => (
     {/* ОБРАТНАЯ СТОРОНА (Black Card / Boarding Pass Hybrid) */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] overflow-hidden bg-zinc-900 border border-zinc-700 flex flex-col text-white" style={{ transform: 'rotateY(180deg)' }}>
       {/* Текстура карты мира */}
-      <div className="absolute inset-0 opacity-5 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg')] bg-cover bg-center"></div>
+      <div className="absolute inset-0 opacity-5 bg-[url('/bg-travel.jpg')] bg-cover bg-center"></div>
       
       {/* Шапка First Class */}
       <div className="bg-gradient-to-r from-orange-600 to-rose-600 p-5 relative z-10 flex justify-between items-end shadow-md">
         <div>
-          <h3 className="text-[10px] text-rose-200 uppercase tracking-widest font-bold mb-1">Status</h3>
-          <p className="text-xl font-black tracking-widest uppercase drop-shadow-md">First Class</p>
+          <h3 className="text-[10px] text-rose-200 uppercase tracking-widest font-bold mb-1">Статус</h3>
+          <p className="text-xl font-black tracking-widest uppercase drop-shadow-md">Первый Класс</p>
         </div>
         <PlaneTakeoff className="w-8 h-8 text-white/50" />
       </div>
@@ -322,12 +322,12 @@ const TravelCard = () => (
           </div>
           <div className="grid grid-cols-2 w-full gap-2">
             <div>
-              <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-wider">Agent</p>
+              <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-wider">Агент</p>
               <p className="font-bold text-sm text-zinc-100">Max Voyage</p>
             </div>
             <div>
-              <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-wider">Dest</p>
-              <p className="font-bold text-sm text-orange-400">Anywhere</p>
+              <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-wider">Куда</p>
+              <p className="font-bold text-sm text-orange-400">Весь Мир</p>
             </div>
           </div>
         </div>
@@ -360,13 +360,13 @@ const BloggerCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(236,72,153,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(6,182,212,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 via-purple-500 to-pink-500 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-[url('/bg-blogger.jpg')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-            <span className="text-xs font-bold tracking-wider uppercase">Live</span>
+            <span className="text-xs font-bold tracking-wider uppercase">В эфире</span>
           </div>
           <Camera className="w-8 h-8 text-white/80" />
         </div>
@@ -378,7 +378,7 @@ const BloggerCard = () => (
             NEO
           </h2>
           <p className="text-cyan-300 font-bold text-sm uppercase tracking-[0.3em] mt-2 border-l-2 border-pink-500 pl-3">
-            Lifestyle Creator
+            Лайфстайл Креатор
           </p>
         </div>
       </div>
@@ -395,7 +395,7 @@ const BloggerCard = () => (
         <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex items-center justify-between">
           <div>
             <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-pink-500 text-transparent bg-clip-text">@alexneo_real</h3>
-            <p className="text-zinc-500 text-[10px] mt-1 uppercase tracking-widest font-bold">Content Creator</p>
+            <p className="text-zinc-500 text-[10px] mt-1 uppercase tracking-widest font-bold">Контент Креатор</p>
           </div>
           <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-pink-500 to-cyan-500 p-[2px] shadow-[0_0_15px_rgba(236,72,153,0.3)]">
             <img src="/avatar.jpg" alt="Alex Neo" className="w-full h-full object-cover rounded-full border border-zinc-950" />
@@ -420,13 +420,13 @@ const BloggerCard = () => (
 
         <div className="flex-1 bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex items-center justify-center">
            <p className="text-zinc-400 text-xs text-center font-mono uppercase tracking-widest leading-loose">
-             Open for<br/> <span className="text-white font-bold bg-white/10 px-2 py-1 rounded">Collaborations</span><br/> & Media
+             Открыт для<br/> <span className="text-white font-bold bg-white/10 px-2 py-1 rounded">сотрудничества</span><br/> и медиа
            </p>
         </div>
 
         <a href="#" className="w-full bg-white text-black font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300">
           <Mail className="w-5 h-5" />
-          Send Pitch
+          Написать
         </a>
       </div>
     </div>
@@ -439,7 +439,7 @@ const FitnessCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-rose-700 via-red-600 to-orange-500 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-[url('/bg-fitness.jpg')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -451,13 +451,13 @@ const FitnessCard = () => (
         </div>
 
         <div>
-          <h2 className="text-5xl font-black mb-1 uppercase tracking-tighter mix-blend-overlay text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+          <h2 className="text-5xl font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
             ИВАН
             <br />
             СИЛА
           </h2>
           <p className="text-rose-300 font-bold text-sm uppercase tracking-[0.3em] mt-2 border-l-2 border-orange-500 pl-3">
-            Elite Coach
+            Элитный Тренер
           </p>
         </div>
       </div>
@@ -474,7 +474,7 @@ const FitnessCard = () => (
           <img src="/avatar.jpg" alt="Иван Сила" className="w-14 h-14 object-cover rounded-xl grayscale hover:grayscale-0 transition-all border border-zinc-700" />
           <div>
             <h3 className="text-xl font-black uppercase italic tracking-wider text-zinc-100">@ivan_sila</h3>
-            <p className="text-red-500 text-[10px] uppercase tracking-[0.2em] font-bold">No Excuses</p>
+            <p className="text-red-500 text-[10px] uppercase tracking-[0.2em] font-bold">Без Отговорок</p>
           </div>
         </div>
         
@@ -518,25 +518,25 @@ const RealEstateCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(29,78,216,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(37,99,235,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-bl from-blue-700 via-slate-800 to-amber-600 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-[url('/bg-broker.jpg')] bg-cover bg-center opacity-50 mix-blend-luminosity"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-blue-500/30 flex items-center gap-2">
             <Key className="w-4 h-4 text-amber-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-blue-100">Private keys</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-blue-100">Приватные ключи</span>
           </div>
           <Building2 className="w-8 h-8 text-blue-200/80 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-serif font-black mb-1 uppercase tracking-tighter mix-blend-overlay text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+          <h2 className="text-5xl font-serif font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
             АРТУР
             <br />
             ГРАНД
           </h2>
           <p className="text-amber-300 font-bold text-sm uppercase tracking-[0.3em] mt-2 border-l-2 border-blue-500 pl-3">
-            Luxury Real Estate
+            Элитная Недвижимость
           </p>
         </div>
       </div>
@@ -545,7 +545,7 @@ const RealEstateCard = () => (
     {/* ОБРАТНАЯ СТОРОНА (Navy & Gold Luxury) */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(29,78,216,0.4)] overflow-hidden bg-[#0a0f1c] flex flex-col p-5 text-white" style={{ transform: 'rotateY(180deg)' }}>
       {/* Мраморная/золотая пыль на фоне */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600163990861-1c5c0c978b7b?q=80&w=2000&auto=format&fit=crop')] opacity-[0.05] mix-blend-screen"></div>
+      <div className="absolute inset-0 bg-[url('/bg-broker.jpg')] opacity-[0.05] mix-blend-screen"></div>
       <div className="absolute top-0 right-0 w-64 h-64 bg-blue-900/20 blur-[80px] rounded-full pointer-events-none"></div>
       
       {/* Тонкая золотая рамка */}
@@ -556,7 +556,7 @@ const RealEstateCard = () => (
         <div className="bg-[#121a2f]/80 backdrop-blur-md p-4 rounded-[2rem] border border-blue-900/50 flex items-center justify-between">
           <div>
             <h3 className="text-lg font-serif font-bold text-amber-50">@artur_grand</h3>
-            <p className="text-amber-500/80 text-[9px] mt-1 uppercase tracking-widest font-bold">Premium Broker</p>
+            <p className="text-amber-500/80 text-[9px] mt-1 uppercase tracking-widest font-bold">Премиум Брокер</p>
           </div>
           <div className="w-12 h-12 rounded-full border border-amber-500/50 p-[1px]">
              <img src="/avatar.jpg" alt="Артур Гранд" className="w-full h-full object-cover rounded-full" />
@@ -596,26 +596,26 @@ const MoneyCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(16,185,129,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(5,150,105,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-emerald-700 via-zinc-900 to-amber-500 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-[url('/bg-money.jpg')] bg-cover bg-center opacity-40 mix-blend-luminosity"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-emerald-500/30 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-emerald-100">Smart Money</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-emerald-100">Умные Деньги</span>
           </div>
           <Diamond className="w-8 h-8 text-amber-200/80 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-black mb-1 uppercase tracking-tighter mix-blend-overlay text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+          <h2 className="text-5xl font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
             МАКС
             <br />
             ПРОФИТ
           </h2>
           <div className="flex flex-wrap items-center gap-3 mt-2">
             <p className="text-amber-400 font-bold text-sm uppercase tracking-[0.3em] border-l-2 border-emerald-500 pl-3">
-              Digital Wealth
+              Цифровой Капитал
             </p>
             <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-emerald-500/30">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
@@ -643,18 +643,18 @@ const MoneyCard = () => (
           </div>
           <div>
             <h3 className="text-lg font-bold text-emerald-50 tracking-wider">@max_profit</h3>
-            <p className="text-emerald-500 text-[9px] mt-1 uppercase tracking-widest bg-emerald-950/50 px-2 py-0.5 rounded w-fit">&lt; Verified /&gt;</p>
+            <p className="text-emerald-500 text-[9px] mt-1 uppercase tracking-widest bg-emerald-950/50 px-2 py-0.5 rounded w-fit">&lt; Проверен /&gt;</p>
           </div>
         </div>
         
         {/* Дашборд доходов */}
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex flex-col justify-center">
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">Total Volume</p>
+            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">Общий Объем</p>
             <p className="font-bold text-xl text-emerald-400">$1.2M+</p>
           </div>
           <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex flex-col justify-center">
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">Members</p>
+            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">Участники</p>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
               <p className="font-bold text-xl text-white">204</p>
@@ -692,30 +692,30 @@ const CreatorCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(255,255,255,0.2)] overflow-hidden bg-zinc-950 text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(255,255,255,0.4)] transition-shadow duration-700 border border-zinc-700/50">
       <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-950 opacity-90 mix-blend-screen"></div>
       {/* Голографический жидкий металл */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-70 mix-blend-screen filter contrast-125 grayscale-[30%]"></div>
+      <div className="absolute inset-0 bg-[url('/bg-creator.jpg')] bg-cover bg-center opacity-70 mix-blend-screen filter contrast-125 grayscale-[30%]"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 flex items-center gap-2 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
             <Crown className="w-4 h-4 text-white" />
-            <span className="text-xs font-bold tracking-wider uppercase text-zinc-100">Super Boss</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-zinc-100">Главный Босс</span>
           </div>
           <Sparkles className="w-8 h-8 text-white/90 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] animate-pulse" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-black mb-1 uppercase tracking-tighter mix-blend-overlay text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.8)]">
+          <h2 className="text-5xl font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
             ТВОЕ
             <br />
             ИМЯ
           </h2>
           <div className="flex flex-wrap items-center gap-3 mt-2">
             <p className="text-zinc-200 font-bold text-sm uppercase tracking-[0.3em] border-l-2 border-white pl-3">
-              Digital Architect
+              Цифровой Архитектор
             </p>
             <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-2 py-1 rounded-full border border-white/20">
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping shadow-[0_0_8px_rgba(255,255,255,1)]"></span>
-              <span className="text-[8px] font-bold uppercase tracking-wider text-white">Founder</span>
+              <span className="text-[8px] font-bold uppercase tracking-wider text-white">Основатель</span>
             </div>
           </div>
         </div>
@@ -726,14 +726,14 @@ const CreatorCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(255,255,255,0.1)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border border-zinc-800" style={{ transform: 'rotateY(180deg)' }}>
       {/* Элегантное белое свечение */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-white/10 blur-[80px] rounded-full pointer-events-none"></div>
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600163990861-1c5c0c978b7b?q=80&w=2000&auto=format&fit=crop')] opacity-[0.08] mix-blend-screen"></div>
+      <div className="absolute inset-0 bg-[url('/bg-creator-back.jpg')] opacity-[0.08] mix-blend-screen"></div>
       
       <div className="relative z-10 flex flex-col h-full gap-3">
         {/* Хедер профиля */}
         <div className="bg-zinc-900/40 backdrop-blur-xl p-4 rounded-[2rem] border border-white/10 flex items-center justify-between shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
           <div>
             <h3 className="text-xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-500 text-transparent bg-clip-text tracking-wide">@твоя_телега</h3>
-            <p className="text-zinc-400 text-[9px] mt-1 uppercase tracking-widest font-bold">Creator of Magic</p>
+            <p className="text-zinc-400 text-[9px] mt-1 uppercase tracking-widest font-bold">Создатель Магии</p>
           </div>
           <div className="relative">
             <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-zinc-300 to-zinc-700 p-[2px] shadow-[0_0_15px_rgba(255,255,255,0.2)]">
