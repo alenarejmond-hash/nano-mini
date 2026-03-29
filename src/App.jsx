@@ -1374,47 +1374,13 @@ const App = () => {
             <h3 className="text-xl font-bold text-white mb-2 tracking-wide">Поделиться визиткой</h3>
             <p className="text-sm text-neutral-400 text-center mb-6 leading-relaxed">Дайте отсканировать QR-код или отправьте ссылку напрямую.</p>
             
-            {/* Реалистичный паттерн QR кода для красоты */}
-            <div className="bg-white p-4 rounded-3xl mb-6 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-              <svg width="180" height="180" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-                <rect width="100" height="100" fill="white" rx="5"/>
-                {/* Маркеры */}
-                <path d="M10,10 h20 v20 h-20 z M12.5,12.5 h15 v15 h-15 z M15,15 h10 v10 h-10 z" fill="black"/>
-                <path d="M70,10 h20 v20 h-20 z M72.5,12.5 h15 v15 h-15 z M75,15 h10 v10 h-10 z" fill="black"/>
-                <path d="M10,70 h20 v20 h-20 z M12.5,72.5 h15 v15 h-15 z M15,75 h10 v10 h-10 z" fill="black"/>
-                {/* Пиксели данных */}
-                <rect x="35" y="10" width="5" height="5" fill="black"/>
-                <rect x="45" y="10" width="10" height="5" fill="black"/>
-                <rect x="60" y="10" width="5" height="10" fill="black"/>
-                <rect x="35" y="20" width="20" height="5" fill="black"/>
-                <rect x="40" y="25" width="5" height="10" fill="black"/>
-                <rect x="50" y="20" width="15" height="5" fill="black"/>
-                <rect x="10" y="35" width="15" height="5" fill="black"/>
-                <rect x="30" y="35" width="10" height="10" fill="black"/>
-                <rect x="45" y="35" width="25" height="5" fill="black"/>
-                <rect x="75" y="35" width="15" height="5" fill="black"/>
-                <rect x="10" y="45" width="5" height="15" fill="black"/>
-                <rect x="20" y="45" width="20" height="5" fill="black"/>
-                <rect x="45" y="45" width="5" height="10" fill="black"/>
-                <rect x="55" y="45" width="15" height="5" fill="black"/>
-                <rect x="75" y="45" width="15" height="10" fill="black"/>
-                <rect x="15" y="55" width="10" height="5" fill="black"/>
-                <rect x="30" y="50" width="10" height="15" fill="black"/>
-                <rect x="45" y="60" width="15" height="5" fill="black"/>
-                <rect x="65" y="55" width="5" height="20" fill="black"/>
-                <rect x="75" y="60" width="15" height="5" fill="black"/>
-                <rect x="35" y="70" width="25" height="5" fill="black"/>
-                <rect x="65" y="80" width="10" height="10" fill="black"/>
-                <rect x="80" y="70" width="10" height="5" fill="black"/>
-                <rect x="75" y="80" width="5" height="10" fill="black"/>
-                <rect x="85" y="80" width="5" height="10" fill="black"/>
-                <rect x="35" y="80" width="10" height="10" fill="black"/>
-                <rect x="50" y="80" width="10" height="5" fill="black"/>
-                <rect x="55" y="85" width="5" height="5" fill="black"/>
-                <rect x="25" y="65" width="5" height="5" fill="black"/>
-                <rect x="45" y="70" width="5" height="5" fill="black"/>
-                <rect x="50" y="65" width="5" height="5" fill="black"/>
-              </svg>
+            {/* Динамический QR код (Генерируется автоматически под текущий домен) */}
+            <div className="bg-white p-4 rounded-3xl mb-6 shadow-[0_0_30px_rgba(255,255,255,0.1)] flex items-center justify-center">
+              <img 
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://nice-app.ru')}`} 
+                alt="QR Code" 
+                className="w-[180px] h-[180px] object-contain rounded-lg"
+              />
             </div>
 
             <div className="flex gap-3 w-full">
