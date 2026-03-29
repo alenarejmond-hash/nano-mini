@@ -494,11 +494,11 @@ const TravelCard = () => (
       {/* Бегущая строка */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden bg-black/40 backdrop-blur-md border-t border-rose-500/30 py-1.5 z-20">
         <div className="flex w-[200%] animate-scroll text-[9px] font-bold uppercase tracking-[0.2em] text-rose-100">
-          <span className="w-1/2 flex justify-around">
-            {CONTENT.travel.marquee.map((item, i) => <span key={i}>{item}</span>)}
+          <span className="w-1/2 flex justify-around items-center whitespace-nowrap px-4">
+            {CONTENT.travel.marquee.map((item, i) => <span key={i} className="whitespace-nowrap">{item}</span>)}
           </span>
-          <span className="w-1/2 flex justify-around">
-            {CONTENT.travel.marquee.map((item, i) => <span key={`clone-${i}`}>{item}</span>)}
+          <span className="w-1/2 flex justify-around items-center whitespace-nowrap px-4">
+            {CONTENT.travel.marquee.map((item, i) => <span key={`clone-${i}`} className="whitespace-nowrap">{item}</span>)}
           </span>
         </div>
       </div>
