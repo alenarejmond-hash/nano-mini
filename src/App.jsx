@@ -54,20 +54,20 @@ const globalStyles = `
     animation: scroll-left 15s linear infinite;
   }
   @keyframes spark-explode {
-    0% { transform: translate(0, 0) scale(0.1); opacity: 0.5; }
-    100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0.25; }
+    0% { transform: translate(0, 0) scale(0.5); opacity: 0.8; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0.6; }
   }
   @keyframes spark-wander {
-    0% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0.25; }
-    33% { transform: translate(calc(var(--tx) * 1.5 + var(--wx1)), calc(var(--ty) * 1.5 + var(--wy1))) scale(1.2); opacity: 0.15; }
-    66% { transform: translate(calc(var(--tx) * 2.5 + var(--wx2)), calc(var(--ty) * 2.5 + var(--wy2))) scale(0.8); opacity: 0.1; }
-    100% { transform: translate(calc(var(--tx) * 4 + var(--wx3)), calc(var(--ty) * 4 + var(--wy3))) scale(0.5); opacity: 0; }
+    0% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0.6; }
+    33% { transform: translate(calc(var(--tx) * 1.5 + var(--wx1)), calc(var(--ty) * 1.5 + var(--wy1))) scale(1.5); opacity: 0.8; }
+    66% { transform: translate(calc(var(--tx) * 2.5 + var(--wx2)), calc(var(--ty) * 2.5 + var(--wy2))) scale(1.2); opacity: 0.5; }
+    100% { transform: translate(calc(var(--tx) * 4 + var(--wx3)), calc(var(--ty) * 4 + var(--wy3))) scale(0.8); opacity: 0; }
   }
   .spark-particle {
     position: absolute;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8), 0 0 12px rgba(255, 255, 255, 0.4);
     pointer-events: none;
     /* Сначала мягкий взрыв (0.8s), затем ооочень медленный улет за экран (20-40s) */
     animation: 
@@ -786,6 +786,8 @@ const App = () => {
   const [sparks, setSparks] = useState([]);
   const [bgOffset, setBgOffset] = useState({ x: 0, y: 0 });
   const cardRef = useRef(null);
+  const audioCtxRef = useRef(null); // Реф для аудио контекста (чтобы звук не пропадал)
+  const isFlippingRef = useRef(false); // Реф для блокировки наклона во время переворота
 
   // Глобальный параллакс фона (Живые сферы)
   useEffect(() => {
@@ -819,7 +821,9 @@ const App = () => {
 
   // Магнитный 3D наклон за курсором/пальцем
   const handlePointerMove = (e) => {
-    if (!cardRef.current) return;
+    // Блокируем наклон, если карточка прямо сейчас переворачивается
+    if (isFlippingRef.current || !cardRef.current) return;
+    
     const rect = cardRef.current.getBoundingClientRect();
     
     // Поддержка как мыши, так и тач-событий
@@ -846,6 +850,7 @@ const App = () => {
 
   // Сброс наклона, когда курсор уходит
   const handlePointerLeave = () => {
+    if (isFlippingRef.current) return;
     setRotate({ x: 0, y: 0 });
     setGlare(prev => ({ ...prev, opacity: 0 }));
   };
@@ -854,7 +859,17 @@ const App = () => {
     try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       if (!AudioContext) return;
-      const ctx = new AudioContext();
+      
+      // Создаем контекст только один раз, чтобы браузер его не блокировал со временем
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new AudioContext();
+      }
+      
+      const ctx = audioCtxRef.current;
+      if (ctx.state === 'suspended') {
+        ctx.resume(); // Возобновляем, если браузер усыпил контекст
+      }
+
       const osc = ctx.createOscillator();
       const gainNode = ctx.createGain();
 
@@ -880,9 +895,17 @@ const App = () => {
   const handleFlip = () => {
     // Звук переворота (саунд-дизайн)
     playFlipSound();
+    
+    // Блокируем магнитный наклон и выравниваем карточку ровно при перевороте
+    isFlippingRef.current = true;
+    setRotate({ x: 0, y: 0 });
+    setGlare(prev => ({ ...prev, opacity: 0 }));
+    
+    // Разблокируем наклон после завершения анимации переворота
+    setTimeout(() => { isFlippingRef.current = false; }, 700);
 
     if (!isFlipped) {
-      // Взрыв еле заметной белой пыльцы при перевороте НАЗАД
+      // Взрыв более яркой и крупной белой пыльцы
       const newSparks = Array.from({ length: 35 }).map((_, i) => {
         // Распределяем искры по кругу
         const angle = (Math.PI * 2 * i) / 35 + (Math.random() * 0.5);
@@ -898,7 +921,7 @@ const App = () => {
           wx3: (Math.random() - 0.5) * 300 + 'px',
           wy3: (Math.random() - 0.5) * 300 + 'px',
           wt: (20 + Math.random() * 20) + 's', // Время полета от 20 до 40 секунд!
-          size: Math.random() * 1.5 + 0.5 + 'px', // Ультра-мелкие (0.5px - 2px)
+          size: Math.random() * 2.5 + 1.5 + 'px', // Сделали крупнее (от 1.5px до 4px)
         };
       });
       setSparks(newSparks);
@@ -914,15 +937,30 @@ const App = () => {
     setIsFlipped(!isFlipped);
   };
 
+  // Функция для получения цвета мобильного свечения в зависимости от шаблона
+  const getGlowColor = () => {
+    const colors = [
+      'rgba(147,51,234,0.6)', // Эзотерик
+      'rgba(13,148,136,0.5)', // Психолог
+      'rgba(249,115,22,0.6)', // Турагент
+      'rgba(236,72,153,0.6)', // Блогер
+      'rgba(225,29,72,0.6)',  // Тренер
+      'rgba(29,78,216,0.6)',  // Брокер
+      'rgba(16,185,129,0.6)', // Заработок
+      'rgba(255,255,255,0.4)' // Создатель
+    ];
+    return colors[activeTab] || colors[0];
+  };
+
   const tabs = [
-    { id: 0, name: 'Эзотерик', icon: <Moon className="w-4 h-4" /> },
-    { id: 1, name: 'Психолог', icon: <Brain className="w-4 h-4" /> },
-    { id: 2, name: 'Турагент', icon: <PlaneTakeoff className="w-4 h-4" /> },
-    { id: 3, name: 'Блогер', icon: <Camera className="w-4 h-4" /> },
-    { id: 4, name: 'Тренер', icon: <Activity className="w-4 h-4" /> },
-    { id: 5, name: 'Брокер', icon: <Building2 className="w-4 h-4" /> },
-    { id: 6, name: 'Заработок', icon: <TrendingUp className="w-4 h-4" /> },
-    { id: 7, name: 'Создатель', icon: <Crown className="w-4 h-4" /> },
+    { id: 0, name: 'Эзотерик', icon: <Moon className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 1, name: 'Психолог', icon: <Brain className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 2, name: 'Турагент', icon: <PlaneTakeoff className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 3, name: 'Блогер', icon: <Camera className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 4, name: 'Тренер', icon: <Activity className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 5, name: 'Брокер', icon: <Building2 className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 6, name: 'Заработок', icon: <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 7, name: 'Создатель', icon: <Crown className="w-3 h-3 sm:w-4 sm:h-4" /> },
   ];
 
   // Выбор активной карточки
@@ -956,13 +994,13 @@ const App = () => {
       ></div>
 
       {/* ПЕРЕКЛЮЧАТЕЛЬ ШАБЛОНОВ */}
-      <div className="relative z-20 mb-12 sm:mb-16 w-full max-w-md">
-        <div className="flex p-1.5 bg-neutral-900/80 backdrop-blur-xl rounded-full border border-neutral-800 shadow-2xl overflow-x-auto hide-scrollbar">
+      <div className="relative z-20 mb-6 sm:mb-10 w-full max-w-md">
+        <div className="flex p-1 bg-neutral-900/80 backdrop-blur-xl rounded-full border border-neutral-800 shadow-2xl overflow-x-auto hide-scrollbar">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full text-[11px] sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'bg-white text-black shadow-md scale-[1.02]'
                   : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
@@ -1021,6 +1059,16 @@ const App = () => {
             className="relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.4,0.2,0.2,1)] card-preserve-3d"
             style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
           >
+            {/* Дополнительное мощное свечение для мобилок */}
+            <div 
+              className="absolute inset-0 rounded-[2.5rem] pointer-events-none sm:hidden card-backface-hidden" 
+              style={{ boxShadow: `0 0 60px ${getGlowColor()}` }} 
+            />
+            <div 
+              className="absolute inset-0 rounded-[2.5rem] pointer-events-none sm:hidden card-backface-hidden" 
+              style={{ transform: 'rotateY(180deg)', boxShadow: `0 0 60px ${getGlowColor()}` }} 
+            />
+
             {renderActiveCard()}
 
             {/* Бегающий блик (Лицевая сторона) */}
