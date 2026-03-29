@@ -784,7 +784,31 @@ const App = () => {
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
   const [sparks, setSparks] = useState([]);
+  const [bgOffset, setBgOffset] = useState({ x: 0, y: 0 });
   const cardRef = useRef(null);
+
+  // Глобальный параллакс фона (Живые сферы)
+  useEffect(() => {
+    const handleGlobalMove = (e) => {
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      
+      // Вычисляем смещение от центра экрана (максимум 80px)
+      const x = (clientX / window.innerWidth - 0.5) * 80;
+      const y = (clientY / window.innerHeight - 0.5) * 80;
+      
+      // Инвертируем (-x, -y), чтобы фон плыл в противоположную от курсора сторону
+      setBgOffset({ x: -x, y: -y });
+    };
+
+    window.addEventListener('mousemove', handleGlobalMove);
+    window.addEventListener('touchmove', handleGlobalMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleGlobalMove);
+      window.removeEventListener('touchmove', handleGlobalMove);
+    };
+  }, []);
 
   // Сброс переворота при смене вкладки
   useEffect(() => {
@@ -921,9 +945,15 @@ const App = () => {
       {/* Вставляем глобальные стили */}
       <style>{globalStyles}</style>
 
-      {/* Фоновое свечение приложения */}
-      <div className="fixed top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="fixed bottom-1/4 right-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      {/* Фоновое свечение приложения (Живые сферы) */}
+      <div 
+        className="fixed top-1/4 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none transition-transform duration-1000 ease-out"
+        style={{ transform: `translate(${bgOffset.x}px, ${bgOffset.y}px)` }}
+      ></div>
+      <div 
+        className="fixed bottom-1/4 right-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-[120px] pointer-events-none transition-transform duration-1000 ease-out"
+        style={{ transform: `translate(${bgOffset.x * 1.5}px, ${bgOffset.y * 1.5}px)` }}
+      ></div>
 
       {/* ПЕРЕКЛЮЧАТЕЛЬ ШАБЛОНОВ */}
       <div className="relative z-20 mb-12 sm:mb-16 w-full max-w-md">
