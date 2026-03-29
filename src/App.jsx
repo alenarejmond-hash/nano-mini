@@ -281,6 +281,29 @@ const globalStyles = `
       spark-wander var(--wt) linear 0.8s forwards;
   }
   
+  /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА СГОРАЮЩЕЙ БУМАГИ === */
+  .clip-burn-start {
+    clip-path: circle(0% at 100% 0%); /* Старт из правого верхнего угла */
+    opacity: 1;
+  }
+  .clip-burn-end {
+    clip-path: circle(300% at 100% 0%); /* Увеличили со 250% до 300%, чтобы точно достало до левого нижнего угла! */
+    opacity: 1;
+  }
+  .clip-burn-glow {
+    clip-path: circle(305% at 100% 0%); /* Пропорционально увеличили свечение */
+    opacity: 0;
+  }
+  .burn-img-transition {
+    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1); /* Замедлили до 3.5 сек */
+    /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
+  }
+  .burn-glow-transition {
+    /* Огненный край расширяется вместе с фото, плавно затухая в конце */
+    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease-out 2.7s;
+    /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
+  }
+  
   /* === АНИМАЦИИ ЭЗОТЕРИКА (Медленное, однонаправленное движение) === */
   @keyframes esoteric-slow-drift-1 {
     0%   { transform: rotate(0deg); }
@@ -338,13 +361,13 @@ const globalStyles = `
 // ==========================================
 const BurnRevealImage = ({ src, className, style }) => {
   const [loaded, setLoaded] = useState(false);
-  const uid = useRef(Math.random().toString(36).substring(2, 9)).current;
   
   useEffect(() => {
     let isMounted = true;
     setLoaded(false);
     
     // Мгновенный запуск для супер-быстрой загрузки!
+    // Убрали img.onload, чтобы анимация не ждала скачивания тяжелых фото при плохом интернете.
     const timer = setTimeout(() => {
       if (isMounted) setLoaded(true);
     }, 50);
@@ -356,51 +379,20 @@ const BurnRevealImage = ({ src, className, style }) => {
   }, [src]);
 
   return (
-    // Полностью SVG-базированный эффект для обхода бага с прямыми линиями на iOS/Safari.
-    // Анимация идет внутри векторного движка: это дает идеальную плавность и гарантирует рваные тлеющие края огня!
-    <div className={`absolute inset-0 pointer-events-none ${className}`} style={{ ...style, borderRadius: '2.5rem', overflow: 'hidden' }}>
-      <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-        <defs>
-          {/* Огненный фильтр (Тлеющий край) */}
-          <filter id={`burn-glow-${uid}`} x="-30%" y="-30%" width="160%" height="160%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="40" xChannelSelector="R" yChannelSelector="G" />
-            {/* Яркая огненная покраска (ярко-красный + желтый) */}
-            <feColorMatrix type="matrix" values="
-              2 0 0 0 0.5
-              0 1 0 0 0.2
-              0 0 0 0 0
-              0 0 0 1 0" />
-          </filter>
-          
-          {/* Рваный край для самой картинки */}
-          <filter id={`burn-img-${uid}`} x="-30%" y="-30%" width="160%" height="160%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-          
-          <clipPath id={`glow-clip-${uid}`}>
-            <circle cx="100%" cy="0%" r={loaded ? "165%" : "0%"} style={{ transition: 'r 3.5s cubic-bezier(0.4, 0, 0.2, 1)' }} />
-          </clipPath>
-          <clipPath id={`img-clip-${uid}`}>
-            <circle cx="100%" cy="0%" r={loaded ? "150%" : "0%"} style={{ transition: 'r 3.5s cubic-bezier(0.4, 0, 0.2, 1)' }} />
-          </clipPath>
-        </defs>
-
-        {/* 1. Слой огненного края (СВЕТИТСЯ) */}
-        <g filter={`url(#burn-glow-${uid})`} style={{ opacity: loaded ? 0 : 1, transition: 'opacity 0.8s ease-out 2.7s' }}>
-          <g clipPath={`url(#glow-clip-${uid})`}>
-            <image href={src} xlinkHref={src} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
-          </g>
-        </g>
-
-        {/* 2. Слой основной картинки (РВАНАЯ) */}
-        <g filter={`url(#burn-img-${uid})`}>
-          <g clipPath={`url(#img-clip-${uid})`}>
-             <image href={src} xlinkHref={src} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
-          </g>
-        </g>
-      </svg>
+    // Возвращаем чистый эффект! Используем clipPath для обрезки острых углов, потому что WebkitMaskImage и overflow-hidden убивали огонь
+    <div className={`absolute inset-0 pointer-events-none ${className}`} style={{ ...style, clipPath: 'inset(0 round 2.5rem)', WebkitClipPath: 'inset(0 round 2.5rem)' }}>
+      {/* 1. Слой огненного края (с SVG-искажением для рваности) */}
+      <div className="absolute inset-0" style={{ filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)' }}>
+        <div 
+          className={`absolute inset-0 bg-cover bg-center burn-glow-transition ${loaded ? 'clip-burn-glow' : 'clip-burn-start'}`}
+          style={{ backgroundImage: `url(${src})` }}
+        />
+      </div>
+      {/* 2. Слой самого фото */}
+      <div 
+        className={`absolute inset-0 bg-cover bg-center burn-img-transition ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
+        style={{ backgroundImage: `url(${src})` }}
+      />
     </div>
   );
 };
@@ -1735,6 +1727,14 @@ const App = () => {
     <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-4 sm:p-8 font-sans overflow-hidden select-none">
       {/* Вставляем глобальные стили */}
       <style>{globalStyles}</style>
+
+      {/* SVG-Фильтр для эффекта рваной горящей бумаги */}
+      <svg width="0" height="0" className="absolute pointer-events-none">
+        <filter id="burn-edge-filter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
 
       {/* Фоновое свечение приложения (Живые сферы) */}
       <div 
