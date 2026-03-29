@@ -21,7 +21,7 @@ const InstagramIcon = ({ className }) => (
 const CONTENT = {
   esoteric: {
     bgImage: '/bg-esoteric.jpg', // Название файла в папке public
-    avatar: '/avatar.jpg',       // Название файла в папке public
+    avatar: '/avatar-esoteric.jpg', // Индивидуальное фото для эзотерика
     badge: 'Таро & Астрология',
     name1: 'Алена',              // Первая строка имени
     name2: 'Светлая',                // Вторая строка имени
@@ -38,7 +38,7 @@ const CONTENT = {
   },
   psychologist: {
     bgImage: '/bg-psychologist.jpg',
-    avatar: '/avatar.jpg',
+    avatar: '/avatar-psychologist.jpg', // Индивидуальное фото для психолога
     badge: 'Терапия',
     name1: 'Алена',
     name2: 'СВЕТЛАЯ',
@@ -57,7 +57,7 @@ const CONTENT = {
   },
   travel: {
     bgImage: '/bg-travel.jpg',
-    avatar: '/avatar.jpg',
+    avatar: '/avatar-travel.jpg', // Индивидуальное фото для турагента
     badge: 'VIP Tours',
     name1: 'МАКСИМ',
     name2: 'ВОЯЖ',
@@ -69,11 +69,11 @@ const CONTENT = {
     tgLink: 'https://t.me/твой_юзернейм',
     tourText: 'Подобрать тур',
     tourLink: 'https://t.me/твой_юзернейм',
-    marquee: ['✈️ СЕЙШЕЛЫ', '⭐ МАЛЬДИВЫ', '🌴 БАЛИ'] // Текст бегущей строки
+    marquee: ['✈️ СЕЙШЕЛЫ', '⭐ МАЛЬДИВЫ', '🌴 БАЛИ', '🍍 ТАЙЛАНД', '🧿 ТУРЦИЯ'] // Текст бегущей строки
   },
   blogger: {
     bgImage: '/bg-blogger.jpg',
-    avatar: '/avatar.jpg',
+    avatar: '/avatar-blogger.jpg', // Индивидуальное фото для блогера
     badge: 'В эфире',
     name1: 'ALEX',
     name2: 'NEO',
@@ -91,7 +91,7 @@ const CONTENT = {
   },
   fitness: {
     bgImage: '/bg-fitness.jpg',
-    avatar: '/avatar.jpg',
+    avatar: '/avatar-fitness.jpg', // Индивидуальное фото для тренера
     badge: 'Трансформация',
     name1: 'Алена',
     name2: 'Светлая',
@@ -112,7 +112,7 @@ const CONTENT = {
   broker: {
     bgImage: '/bg-broker.jpg',
     bgBack: '/bg-broker.jpg',
-    avatar: '/avatar.jpg',
+    avatar: '/avatar-broker.jpg', // Индивидуальное фото для брокера
     badge: 'Приватные ключи',
     name1: 'АРТУР',
     name2: 'ГРАНД',
@@ -129,7 +129,7 @@ const CONTENT = {
   },
   money: {
     bgImage: '/bg-money.jpg',
-    avatar: '/avatar.jpg',
+    avatar: '/avatar-money.jpg', // Индивидуальное фото для заработка
     badge: 'Умные Деньги',
     name1: 'МАКС',
     name2: 'ПРОФИТ',
@@ -150,7 +150,7 @@ const CONTENT = {
   creator: {
     bgImage: '/bg-creator.jpg',
     bgBack: '/bg-creator-back.jpg',
-    avatar: '/avatar.jpg',
+    avatar: '/avatar-creator.jpg', // Индивидуальное фото для создателя
     badge: 'Главный Босс',
     name1: 'Elena',
     name2: 'Sotnikova',
@@ -235,11 +235,11 @@ const globalStyles = `
     opacity: 1;
   }
   .clip-burn-end {
-    clip-path: circle(150% at 100% 0%);
+    clip-path: circle(250% at 100% 0%); /* Увеличили со 150% до 250%, чтобы точно достало до левого нижнего угла! */
     opacity: 1;
   }
   .clip-burn-glow {
-    clip-path: circle(155% at 100% 0%);
+    clip-path: circle(255% at 100% 0%); /* Пропорционально увеличили свечение */
     opacity: 0;
   }
   .burn-img-transition {
