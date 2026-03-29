@@ -4,7 +4,7 @@ import {
   Camera, Play, Phone, Mail, MessageCircle, 
   MapPin, Globe, Award, Star, Compass, UserCircle2,
   Flame, Activity, Building2, Key, TrendingUp, Diamond, Wallet, Crown,
-  QrCode, Share2, Copy, X, Check
+  QrCode, Share2, Copy, X, Check, MousePointerClick, RefreshCw
 } from 'lucide-react';
 
 // Кастомная иконка Instagram (т.к. из lucide-react бренды удалили)
@@ -148,23 +148,23 @@ const CONTENT = {
     actionText: 'Забрать доступ',
     actionLink: 'https://t.me/твой_юзернейм'
   },
-  creator: {
-    bgImage: '/bg-creator.jpg',
-    bgBack: '/bg-creator-back.jpg',
-    avatar: '/avatar-creator.jpg', // Индивидуальное фото для создателя
-    badge: 'Главный Босс',
-    name1: 'Elena',
-    name2: 'Sotnikova',
-    role: 'Цифровой Архитектор',
-    status: 'Основатель',
-    username: '@elenlime',
-    subUsername: 'Создатель Магии',
-    stat1Title: 'Вау-визиток',
-    stat1Value: '100+',
-    stat2Title: 'Отвал бошки',
-    stat2Value: '∞',
-    quote1: 'Делаю дизайн, который',
-    quote2: 'продает за тебя',
+  starter: {
+    bgImage: '/bg-starter.jpg', // Загрузи сюда текстуру черного шелка или абстрактного золота
+    badge: 'Digital Визитка',
+    title1: 'НОВЫЙ УРОВЕНЬ',
+    title2: 'НЕТВОРКИНГА',
+    role: 'WOW-эффект обеспечен',
+    instruction1: 'Выбери шаблон в меню выше',
+    instruction2: 'Нажми, чтобы перевернуть',
+    backTitle: 'Что ты получаешь?',
+    benefit1Title: 'WOW-Эффект',
+    benefit1Text: 'Запоминаешься сразу',
+    benefit2Title: 'Удобство',
+    benefit2Text: 'Контакты в 1 клик',
+    benefit3Title: 'Статус',
+    benefit3Text: 'Премиальный имидж',
+    benefit4Title: 'Конверсия',
+    benefit4Text: 'Дизайн продает сам',
     actionText: 'Заказать визитку',
     actionLink: 'https://t.me/elenlime?text=Привет!%20Хочу%20такую%20же%20визитку!'
   }
@@ -894,86 +894,88 @@ const MoneyCard = () => (
   </>
 );
 
-// 8. СОЗДАТЕЛЬ / CREATOR (Специально для тебя!)
-const CreatorCard = () => (
+// 8. СТАРТОВАЯ КАРТОЧКА (Черный шелк и золото)
+const StarterCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(255,255,255,0.2)] overflow-hidden bg-zinc-950 text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(255,255,255,0.4)] transition-shadow duration-700 border border-zinc-700/50">
-      <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-950 opacity-90 mix-blend-screen"></div>
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(234,179,8,0.2)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(234,179,8,0.4)] transition-shadow duration-700 border border-yellow-500/20">
+      <div className="absolute inset-0 bg-gradient-to-tr from-black via-zinc-900 to-yellow-900/30 opacity-90 mix-blend-screen"></div>
+      
+      {/* Имитация золотых нитей */}
+      <div className="absolute top-0 right-10 w-px h-full bg-gradient-to-b from-transparent via-yellow-500/50 to-transparent transform rotate-12"></div>
+      <div className="absolute top-0 left-20 w-px h-full bg-gradient-to-b from-transparent via-yellow-500/30 to-transparent transform -rotate-12"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.creator.bgImage} className="opacity-70 mix-blend-screen filter contrast-125 grayscale-[30%]" />
+      <BurnRevealImage src={CONTENT.starter.bgImage} className="opacity-60 mix-blend-luminosity sepia-[.5] hue-rotate-[-10deg]" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
-          <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 flex items-center gap-2 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-            <Crown className="w-4 h-4 text-white" />
-            <span className="text-xs font-bold tracking-wider uppercase text-zinc-100">{CONTENT.creator.badge}</span>
+          <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-yellow-500/30 flex items-center gap-2 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
+            <Crown className="w-4 h-4 text-yellow-400" />
+            <span className="text-xs font-bold tracking-wider uppercase text-yellow-100">{CONTENT.starter.badge}</span>
           </div>
-          <Sparkles className="w-8 h-8 text-white/90 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] animate-pulse" />
+          <Sparkles className="w-8 h-8 text-yellow-400 drop-shadow-[0_0_15px_rgba(234,179,8,0.8)] animate-pulse" />
         </div>
 
-        <div>
-          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            {CONTENT.creator.name1}
+        <div className="flex flex-col items-center justify-center text-center mt-4">
+          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-2 uppercase tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-yellow-100 to-yellow-500 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+            {CONTENT.starter.title1}
             <br />
-            {CONTENT.creator.name2}
+            {CONTENT.starter.title2}
           </h2>
-          <div className="flex flex-wrap items-center gap-3 mt-2">
-            <p className="text-zinc-200 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-white pl-3">
-              {CONTENT.creator.role}
-            </p>
-            <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-2 py-1 rounded-full border border-white/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping shadow-[0_0_8px_rgba(255,255,255,1)]"></span>
-              <span className="text-[8px] font-bold uppercase tracking-wider text-white">{CONTENT.creator.status}</span>
-            </div>
+          <p className="text-yellow-400 font-bold text-xs uppercase tracking-[0.2em] bg-black/50 px-3 py-1 rounded-full border border-yellow-500/30">
+            {CONTENT.starter.role}
+          </p>
+        </div>
+        
+        <div className="flex flex-col gap-3 mt-auto w-full">
+          <div className="bg-black/60 backdrop-blur-md p-3 rounded-2xl border border-yellow-500/30 flex items-center justify-center gap-3 shadow-[0_0_15px_rgba(234,179,8,0.2)] mb-1">
+             <MousePointerClick className="w-5 h-5 text-yellow-500 animate-pulse" />
+             <span className="text-[11px] font-bold uppercase tracking-wider text-yellow-100">{CONTENT.starter.instruction1}</span>
+          </div>
+          <div className="bg-black/60 backdrop-blur-md p-3 rounded-2xl border border-yellow-500/30 flex items-center justify-center gap-3 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
+             <span className="text-[11px] font-bold uppercase tracking-wider text-yellow-100">{CONTENT.starter.instruction2}</span>
+             <RefreshCw className="w-5 h-5 text-yellow-500 opacity-80" />
           </div>
         </div>
       </div>
     </div>
 
     {/* ОБРАТНАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(255,255,255,0.1)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border border-zinc-800" style={{ transform: 'rotateY(180deg)' }}>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-white/10 blur-[80px] rounded-full pointer-events-none"></div>
-      <div className="absolute inset-0 opacity-[0.08] mix-blend-screen bg-cover bg-center" style={{ backgroundImage: `url(${CONTENT.creator.bgBack})` }}></div>
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(234,179,8,0.2)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border border-yellow-500/20" style={{ transform: 'rotateY(180deg)' }}>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-yellow-500/10 blur-[80px] rounded-full pointer-events-none"></div>
       
-      <div className="relative z-10 flex flex-col h-full gap-3">
-        <div className="bg-zinc-900/40 backdrop-blur-xl p-4 rounded-[2rem] border border-white/10 flex items-center justify-between shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
-          <div>
-            <h3 className="text-xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-500 text-transparent bg-clip-text tracking-wide">{CONTENT.creator.username}</h3>
-            <p className="text-zinc-400 text-[9px] mt-1 uppercase tracking-widest font-bold">{CONTENT.creator.subUsername}</p>
-          </div>
-          <div className="relative">
-            <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-zinc-300 to-zinc-700 p-[2px] shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-              <img src={CONTENT.creator.avatar} alt={CONTENT.creator.name1} className="w-full h-full object-cover rounded-full border border-zinc-950" />
-            </div>
-            <Crown className="absolute -bottom-1 -right-1 w-5 h-5 text-zinc-100 bg-zinc-900 rounded-full p-0.5 border border-zinc-700" />
-          </div>
+      <div className="relative z-10 flex flex-col h-full gap-4">
+        <div className="text-center pt-2">
+          <h3 className="text-xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-500 text-transparent bg-clip-text tracking-wide uppercase">{CONTENT.starter.backTitle}</h3>
+          <div className="w-16 h-0.5 bg-yellow-500/50 mx-auto mt-2 rounded-full"></div>
         </div>
         
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-zinc-900/40 backdrop-blur-xl p-4 rounded-[2rem] border border-white/10 flex flex-col items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.5)] group hover:bg-white/5 transition-colors">
-            <Sparkles className="w-5 h-5 mb-2 text-zinc-300 group-hover:animate-spin" />
-            <p className="font-black text-xl tracking-tighter">{CONTENT.creator.stat1Value}</p>
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">{CONTENT.creator.stat1Title}</p>
+        <div className="grid grid-cols-2 gap-3 flex-1 content-center">
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-4 rounded-3xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <Crown className="w-6 h-6 mb-2 text-yellow-400" />
+            <p className="font-bold text-sm text-yellow-100">{CONTENT.starter.benefit1Title}</p>
+            <p className="text-[9px] text-zinc-400 uppercase tracking-widest mt-1">{CONTENT.starter.benefit1Text}</p>
           </div>
-          <div className="bg-zinc-900/40 backdrop-blur-xl p-4 rounded-[2rem] border border-white/10 flex flex-col items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.5)] group hover:bg-white/5 transition-colors">
-            <Diamond className="w-5 h-5 mb-2 text-zinc-300 group-hover:scale-110 transition-transform" />
-            <p className="font-black text-xl tracking-tighter">{CONTENT.creator.stat2Value}</p>
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">{CONTENT.creator.stat2Title}</p>
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-4 rounded-3xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <Sparkles className="w-6 h-6 mb-2 text-yellow-400" />
+            <p className="font-bold text-sm text-yellow-100">{CONTENT.starter.benefit2Title}</p>
+            <p className="text-[9px] text-zinc-400 uppercase tracking-widest mt-1">{CONTENT.starter.benefit2Text}</p>
+          </div>
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-4 rounded-3xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <Diamond className="w-6 h-6 mb-2 text-yellow-400" />
+            <p className="font-bold text-sm text-yellow-100">{CONTENT.starter.benefit3Title}</p>
+            <p className="text-[9px] text-zinc-400 uppercase tracking-widest mt-1">{CONTENT.starter.benefit3Text}</p>
+          </div>
+          <div className="bg-zinc-900/60 backdrop-blur-xl p-4 rounded-3xl border border-yellow-500/20 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <TrendingUp className="w-6 h-6 mb-2 text-yellow-400" />
+            <p className="font-bold text-sm text-yellow-100">{CONTENT.starter.benefit4Title}</p>
+            <p className="text-[9px] text-zinc-400 uppercase tracking-widest mt-1">{CONTENT.starter.benefit4Text}</p>
           </div>
         </div>
 
-        <div className="flex-1 bg-zinc-900/40 backdrop-blur-xl p-4 rounded-[2rem] border border-white/10 flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
-           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer_3s_infinite]"></div>
-           <p className="text-zinc-300 text-xs text-center uppercase tracking-widest leading-relaxed font-medium">
-             {CONTENT.creator.quote1} <br/> <span className="text-white font-bold border-b border-white/30">{CONTENT.creator.quote2}</span>
-           </p>
-        </div>
-
-        <a href={CONTENT.creator.actionLink} className="w-full bg-zinc-100 hover:bg-white text-zinc-950 font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-          <Crown className="w-5 h-5" />
-          {CONTENT.creator.actionText}
+        <a href={CONTENT.starter.actionLink} className="w-full bg-gradient-to-r from-yellow-600 to-yellow-400 hover:from-yellow-500 hover:to-yellow-300 text-zinc-950 font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+          {CONTENT.starter.actionText}
         </a>
       </div>
     </div>
@@ -1149,14 +1151,14 @@ const App = () => {
   // Функция для получения цвета мобильного свечения в зависимости от шаблона
   const getGlowColor = () => {
     const colors = [
-      'rgba(147,51,234,0.6)', // Эзотерик
-      'rgba(13,148,136,0.5)', // Психолог
-      'rgba(249,115,22,0.6)', // Турагент
-      'rgba(236,72,153,0.6)', // Блогер
-      'rgba(225,29,72,0.6)',  // Тренер
-      'rgba(29,78,216,0.6)',  // Брокер
-      'rgba(16,185,129,0.6)', // Заработок
-      'rgba(255,255,255,0.4)' // Создатель
+      'rgba(234,179,8,0.6)',  // 0: Старт (Золото)
+      'rgba(147,51,234,0.6)', // 1: Эзотерик
+      'rgba(13,148,136,0.5)', // 2: Психолог
+      'rgba(249,115,22,0.6)', // 3: Турагент
+      'rgba(236,72,153,0.6)', // 4: Блогер
+      'rgba(225,29,72,0.6)',  // 5: Тренер
+      'rgba(29,78,216,0.6)',  // 6: Брокер
+      'rgba(16,185,129,0.6)'  // 7: Заработок
     ];
     return colors[activeTab] || colors[0];
   };
@@ -1185,28 +1187,28 @@ const App = () => {
   };
 
   const tabs = [
-    { id: 0, name: 'Эзотерик', icon: <Moon className="w-3 h-3 sm:w-4 sm:h-4" /> },
-    { id: 1, name: 'Психолог', icon: <Brain className="w-3 h-3 sm:w-4 sm:h-4" /> },
-    { id: 2, name: 'Турагент', icon: <PlaneTakeoff className="w-3 h-3 sm:w-4 sm:h-4" /> },
-    { id: 3, name: 'Блогер', icon: <Camera className="w-3 h-3 sm:w-4 sm:h-4" /> },
-    { id: 4, name: 'Тренер', icon: <Activity className="w-3 h-3 sm:w-4 sm:h-4" /> },
-    { id: 5, name: 'Брокер', icon: <Building2 className="w-3 h-3 sm:w-4 sm:h-4" /> },
-    { id: 6, name: 'Заработок', icon: <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" /> },
-    { id: 7, name: 'Создатель', icon: <Crown className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 0, name: 'Старт', icon: <Crown className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 1, name: 'Эзотерик', icon: <Moon className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 2, name: 'Психолог', icon: <Brain className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 3, name: 'Турагент', icon: <PlaneTakeoff className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 4, name: 'Блогер', icon: <Camera className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 5, name: 'Тренер', icon: <Activity className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 6, name: 'Брокер', icon: <Building2 className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 7, name: 'Заработок', icon: <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" /> },
   ];
 
   // Выбор активной карточки
   const renderActiveCard = () => {
     switch (activeTab) {
-      case 0: return <EsotericCard />;
-      case 1: return <PsychologistCard />;
-      case 2: return <TravelCard />;
-      case 3: return <BloggerCard />;
-      case 4: return <FitnessCard />;
-      case 5: return <RealEstateCard />;
-      case 6: return <MoneyCard />;
-      case 7: return <CreatorCard />;
-      default: return <EsotericCard />;
+      case 0: return <StarterCard />;
+      case 1: return <EsotericCard />;
+      case 2: return <PsychologistCard />;
+      case 3: return <TravelCard />;
+      case 4: return <BloggerCard />;
+      case 5: return <FitnessCard />;
+      case 6: return <RealEstateCard />;
+      case 7: return <MoneyCard />;
+      default: return <StarterCard />;
     }
   };
 
