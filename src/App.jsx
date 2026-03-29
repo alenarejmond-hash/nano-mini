@@ -378,11 +378,12 @@ const PsychologistCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(20,184,166,0.6)] transition-shadow duration-700">
+      <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 via-cyan-600 to-emerald-700 opacity-80 mix-blend-screen"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.psychologist.bgImage} className="opacity-90" />
+      <BurnRevealImage src={CONTENT.psychologist.bgImage} className="opacity-60 mix-blend-luminosity" />
       
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/60 to-emerald-900/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/60 to-transparent"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -493,12 +494,12 @@ const TravelCard = () => (
       
       {/* Бегущая строка */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden bg-black/40 backdrop-blur-md border-t border-rose-500/30 py-1.5 z-20">
-        <div className="flex w-[200%] animate-scroll text-[9px] font-bold uppercase tracking-[0.2em] text-rose-100">
-          <span className="w-1/2 flex justify-around items-center whitespace-nowrap px-4">
-            {CONTENT.travel.marquee.map((item, i) => <span key={i} className="whitespace-nowrap">{item}</span>)}
+        <div className="flex w-max animate-scroll text-[9px] font-bold uppercase tracking-[0.2em] text-rose-100">
+          <span className="flex gap-8 pr-8 items-center whitespace-nowrap">
+            {CONTENT.travel.marquee.map((item, i) => <span key={i}>{item}</span>)}
           </span>
-          <span className="w-1/2 flex justify-around items-center whitespace-nowrap px-4">
-            {CONTENT.travel.marquee.map((item, i) => <span key={`clone-${i}`} className="whitespace-nowrap">{item}</span>)}
+          <span className="flex gap-8 pr-8 items-center whitespace-nowrap">
+            {CONTENT.travel.marquee.map((item, i) => <span key={`clone-${i}`}>{item}</span>)}
           </span>
         </div>
       </div>
@@ -638,11 +639,12 @@ const FitnessCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
+      <div className="absolute inset-0 bg-gradient-to-tr from-red-600 via-rose-600 to-orange-500 opacity-80 mix-blend-screen"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.fitness.bgImage} className="opacity-90" />
+      <BurnRevealImage src={CONTENT.fitness.bgImage} className="opacity-60 mix-blend-luminosity" />
       
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/60 to-rose-900/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/60 to-transparent"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
