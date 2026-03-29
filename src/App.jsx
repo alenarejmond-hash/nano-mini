@@ -172,6 +172,17 @@ const CONTENT = {
 
 // --- Глобальные стили для сложных анимаций (вставляем прямо в компонент) ---
 const globalStyles = `
+  body {
+    background-color: #0a0a0a;
+    overscroll-behavior: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   @keyframes float {
     0% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
     50% { transform: translateY(-15px) rotateX(2deg) rotateY(-2deg); }
@@ -245,10 +256,14 @@ const globalStyles = `
   }
   .burn-img-transition {
     transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1); /* Замедлили до 3.5 сек */
+    will-change: clip-path;
+    transform: translateZ(0);
   }
   .burn-glow-transition {
     /* Огненный край расширяется вместе с фото, плавно затухая в конце */
     transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease-out 2.7s;
+    will-change: clip-path, opacity;
+    transform: translateZ(0);
   }
 `;
 
@@ -260,18 +275,10 @@ const BurnRevealImage = ({ src, className, style }) => {
   
   useEffect(() => {
     setLoaded(false);
-    const img = new Image();
-    img.src = src;
-    
-    // Даем браузеру микро-паузу (50мс) чтобы он успел отрисовать стартовый кадр (clip-burn-start), 
-    // иначе анимация не сработает при первой загрузке страницы. Глазом эта задержка невидима.
-    const triggerAnim = () => setTimeout(() => setLoaded(true), 50);
-
-    if (img.complete) {
-      triggerAnim();
-    } else {
-      img.onload = triggerAnim;
-    }
+    // Убрали ожидание загрузки картинки (img.onload), которое тормозило весь сайт!
+    // Просто даем браузеру 50мс на рендер и сразу запускаем огонь (решает проблему долгой загрузки и лагов)
+    const timer = setTimeout(() => setLoaded(true), 50);
+    return () => clearTimeout(timer);
   }, [src]);
 
   return (
@@ -472,10 +479,10 @@ const TravelCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-tr from-orange-500 via-rose-600 to-indigo-900 opacity-80 mix-blend-screen"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-orange-500 via-rose-500 to-indigo-600 opacity-70 mix-blend-screen"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.travel.bgImage} className="opacity-60 mix-blend-luminosity" />
+      <BurnRevealImage src={CONTENT.travel.bgImage} className="opacity-50" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1206,7 +1213,7 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-4 sm:p-8 font-sans overflow-hidden">
+    <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-4 sm:p-8 font-sans overflow-hidden select-none">
       {/* Вставляем глобальные стили */}
       <style>{globalStyles}</style>
 
