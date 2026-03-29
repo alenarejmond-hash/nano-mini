@@ -4,7 +4,7 @@ import {
   Camera, Play, Phone, Mail, MessageCircle, 
   MapPin, Globe, Award, Star, Compass, UserCircle2,
   Flame, Activity, Building2, Key, TrendingUp, Diamond, Wallet, Crown,
-  QrCode, Share2, Copy, X, Check, MousePointerClick, RefreshCw
+  QrCode, Share2, Copy, X, Check, MousePointerClick, RefreshCw, Droplets
 } from 'lucide-react';
 
 // Кастомная иконка Instagram (т.к. из lucide-react бренды удалили)
@@ -171,6 +171,42 @@ const CONTENT = {
     benefit6Text: 'Премиальный имидж',
     actionText: 'Заказать визитку',
     actionLink: 'https://t.me/elenlime?text=Привет!%20Хочу%20такую%20же%20визитку!'
+  },
+  nail: {
+    bgImage: '/bg-nail.jpg',
+    avatar: '/avatar-nail.jpg',
+    badge: 'Nail Artist',
+    name1: 'АЛИНА',
+    name2: 'РОУЗ',
+    role: 'Premium Aesthetics',
+    status: 'Есть окошки',
+    username: '@alina_nails',
+    subUsername: 'Идеальные блики',
+    service1: 'Аппаратный маникюр',
+    service2: 'Наращивание',
+    service3: 'Smart-педикюр',
+    actionText: 'Записаться на ноготочки',
+    actionLink: 'https://t.me/твой_юзернейм'
+  },
+  alfa: {
+    bgImage: '/bg-alfa.jpg',
+    avatar: '/avatar-alfa.jpg',
+    badge: 'АГЕНТ ВЛИЯНИЯ',
+    name1: 'ВИКТОР',
+    name2: 'ГРОМОВ',
+    role: 'Альфа Партнер',
+    status: 'Топ-Лидер',
+    username: '@gromov_alfa',
+    subUsername: 'Корпоративный Elite',
+    stat1Title: 'Доход команды',
+    stat1Value: '5M+',
+    stat2Title: 'Партнеров',
+    stat2Value: '1200+',
+    service1: 'Заработок с нуля',
+    service2: 'Построение сети',
+    service3: 'Выдача продуктов',
+    actionText: 'Стать Своим',
+    actionLink: 'https://t.me/твой_юзернейм'
   }
 };
 
@@ -281,6 +317,42 @@ const globalStyles = `
     0%   { transform: scale(1); opacity: 0.8; }
     50%  { transform: scale(2.2); opacity: 0; }
     100% { transform: scale(1); opacity: 0.8; }
+  }
+  
+  /* === АНИМАЦИИ ТРЕНЕРА (Пульсация прогресс-баров) === */
+  @keyframes fitness-bar-1 {
+    0%, 100% { width: 80%; }
+    50% { width: 100%; }
+  }
+  @keyframes fitness-bar-2 {
+    0%, 100% { width: 65%; }
+    50% { width: 100%; }
+  }
+  
+  /* === АНИМАЦИИ ДЛЯ МАНИКЮРА (Жемчужный перелив и Блик) === */
+  @keyframes pearl-shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .animate-pearl {
+    background-size: 200% 200%;
+    animation: pearl-shimmer 8s ease infinite;
+  }
+  @keyframes shine {
+    100% { left: 200%; }
+  }
+  
+  /* === АНИМАЦИИ ДЛЯ АЛЬФА ПАРТНЕРА (Красный Монолит) === */
+  @keyframes alfa-chart-draw {
+    0% { stroke-dashoffset: 1000; opacity: 0; }
+    20% { opacity: 0.3; }
+    100% { stroke-dashoffset: 0; opacity: 0.3; }
+  }
+  .animate-alfa-chart {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: alfa-chart-draw 4s ease-out forwards infinite;
   }
 `;
 
@@ -860,17 +932,17 @@ const FitnessCard = () => (
         {/* Ссылки-прогрессбары */}
         <div className="flex-1 flex flex-col justify-center gap-3">
            <a href={CONTENT.fitness.link1Url} className="relative w-full h-[3.25rem] bg-zinc-900 border border-zinc-800 transform -skew-x-6 overflow-hidden group shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
-             <div className="absolute top-0 left-0 h-full bg-red-600 w-[80%] group-hover:w-full transition-all duration-500 ease-out"></div>
+             <div className="absolute top-0 left-0 h-full bg-red-600 transition-all duration-500 ease-out" style={{ animation: 'fitness-bar-1 3s ease-in-out infinite' }}></div>
              <div className="absolute inset-0 flex items-center justify-between px-5 transform skew-x-6">
                 <span className="font-black italic uppercase text-xs tracking-widest text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)]">{CONTENT.fitness.link1Text}</span>
-                <Activity className="w-5 h-5 text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform" />
+                <Activity className="w-5 h-5 text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform animate-pulse" />
              </div>
            </a>
            <a href={CONTENT.fitness.link2Url} className="relative w-full h-[3.25rem] bg-zinc-900 border border-zinc-800 transform -skew-x-6 overflow-hidden group shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
-             <div className="absolute top-0 left-0 h-full bg-orange-600 w-[65%] group-hover:w-full transition-all duration-500 ease-out"></div>
+             <div className="absolute top-0 left-0 h-full bg-orange-600 transition-all duration-500 ease-out" style={{ animation: 'fitness-bar-2 3.5s ease-in-out infinite 1s' }}></div>
              <div className="absolute inset-0 flex items-center justify-between px-5 transform skew-x-6">
                 <span className="font-black italic uppercase text-xs tracking-widest text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)]">{CONTENT.fitness.link2Text}</span>
-                <Flame className="w-5 h-5 text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform" />
+                <Flame className="w-5 h-5 text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform animate-pulse" />
              </div>
            </a>
         </div>
@@ -941,15 +1013,15 @@ const RealEstateCard = () => (
         {/* Thin elegant divider */}
         <div className="w-8 h-[0.5px] bg-amber-600/40 my-1"></div>
 
-        {/* Stats */}
-        <div className="flex w-full justify-center gap-12">
-          <div className="flex flex-col items-center">
-            <p className="font-serif font-light text-2xl text-white/90">{CONTENT.broker.stat1Value}</p>
-            <p className="text-[7px] text-amber-600/50 uppercase tracking-[0.3em] mt-1">{CONTENT.broker.stat1Title}</p>
+        {/* Stats - Выделили в явные карточки с обводкой */}
+        <div className="flex w-full justify-center gap-4 px-2">
+          <div className="flex-1 flex flex-col items-center bg-zinc-900/40 border border-amber-600/40 rounded-xl py-3 shadow-lg">
+            <p className="font-serif font-light text-xl text-white/90">{CONTENT.broker.stat1Value}</p>
+            <p className="text-[7px] text-amber-600/70 uppercase tracking-[0.3em] mt-1 text-center">{CONTENT.broker.stat1Title}</p>
           </div>
-          <div className="flex flex-col items-center">
-            <p className="font-serif font-light text-2xl text-amber-500/90">{CONTENT.broker.stat2Value}</p>
-            <p className="text-[7px] text-amber-600/50 uppercase tracking-[0.3em] mt-1">{CONTENT.broker.stat2Title}</p>
+          <div className="flex-1 flex flex-col items-center bg-zinc-900/40 border border-amber-600/40 rounded-xl py-3 shadow-lg">
+            <p className="font-serif font-light text-xl text-amber-500/90">{CONTENT.broker.stat2Value}</p>
+            <p className="text-[7px] text-amber-600/70 uppercase tracking-[0.3em] mt-1 text-center">{CONTENT.broker.stat2Title}</p>
           </div>
         </div>
 
@@ -1195,6 +1267,209 @@ const StarterCard = () => (
   </>
 );
 
+// 9. МАСТЕР МАНИКЮРА (Nail Artist)
+const NailArtistCard = () => (
+  <>
+    {/* ЛИЦЕВАЯ СТОРОНА */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(244,114,182,0.3)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,114,182,0.5)] transition-shadow duration-700">
+      <div className="absolute inset-0 bg-gradient-to-tr from-rose-900 via-pink-800 to-amber-700/50 opacity-80 mix-blend-screen"></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-70 mix-blend-luminosity sepia-[.2]" />
+      
+      <div className="relative z-10 flex flex-col h-full justify-between">
+        <div className="flex justify-between items-start">
+          <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-pink-300/30 flex items-center gap-2 shadow-[0_0_15px_rgba(244,114,182,0.2)]">
+            <Sparkles className="w-4 h-4 text-pink-300" />
+            <span className="text-xs font-medium tracking-widest uppercase text-pink-50">{CONTENT.nail.badge}</span>
+          </div>
+          <Droplets className="w-8 h-8 text-pink-200/80 drop-shadow-[0_0_15px_rgba(244,114,182,0.6)]" />
+        </div>
+
+        <div className="text-center pb-2">
+          <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-light mb-1 uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-100 via-white to-rose-200 drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
+            {CONTENT.nail.name1}
+            <br />
+            {CONTENT.nail.name2}
+          </h2>
+          <div className="flex flex-col items-center gap-2 mt-3">
+            <p className="text-pink-200 font-serif font-medium text-[10px] uppercase tracking-[0.3em] bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full border border-pink-300/30">
+              {CONTENT.nail.role}
+            </p>
+            <div className="flex items-center gap-1.5 mt-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse shadow-[0_0_8px_rgba(251,113,133,0.8)]"></span>
+              <span className="text-[8px] font-bold uppercase tracking-widest text-rose-200">{CONTENT.nail.status}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* ОБРАТНАЯ СТОРОНА (Dark Liquid Glass / Приглушенный Глянец) */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(244,114,182,0.3)] overflow-hidden flex flex-col p-6 text-white border border-rose-500/20 bg-gradient-to-br from-[#1c0f14] via-[#2a131d] to-[#120a0d] animate-pearl" style={{ transform: 'rotateY(180deg)' }}>
+      
+      {/* Блики глянца (Приглушенные темные orbs) */}
+      <div className="absolute -top-10 -left-10 w-48 h-48 bg-rose-500/20 blur-[40px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute top-1/2 -right-12 w-40 h-40 bg-pink-600/20 blur-[50px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-56 h-56 bg-rose-400/15 blur-[40px] rounded-full pointer-events-none mix-blend-screen"></div>
+
+      <div className="relative z-10 flex flex-col h-full gap-4">
+        
+        {/* Header */}
+        <div className="flex flex-col items-center mt-2">
+          <div className="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-rose-500 to-pink-300 shadow-[0_8px_20px_rgba(244,114,182,0.15)] mb-3">
+            <img src={CONTENT.nail.avatar} alt={CONTENT.nail.name1} className="w-full h-full object-cover rounded-full border-2 border-[#1c0f14]" />
+          </div>
+          <h3 className="text-lg font-serif font-medium tracking-[0.15em] text-rose-50 uppercase">{CONTENT.nail.username}</h3>
+          <p className="text-rose-400 text-[9px] mt-1 uppercase tracking-[0.2em] font-medium">{CONTENT.nail.subUsername}</p>
+        </div>
+
+        {/* Изящный разделитель */}
+        <div className="flex justify-center items-center gap-2 my-1">
+          <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-rose-500/50"></div>
+          <Star className="w-3 h-3 text-rose-400" />
+          <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-rose-500/50"></div>
+        </div>
+
+        {/* Услуги (Glassmorphism list, Dark Theme) */}
+        <div className="flex-1 flex flex-col gap-2.5 justify-center w-full">
+          {[CONTENT.nail.service1, CONTENT.nail.service2, CONTENT.nail.service3].map((service, idx) => (
+            <div key={idx} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-3 flex items-center justify-between shadow-[0_4px_15px_rgba(0,0,0,0.2)]">
+              <span className="font-serif font-light text-[13px] tracking-wide text-rose-50">{service}</span>
+              <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center shadow-inner border border-rose-500/30">
+                <Check className="w-3 h-3 text-rose-300" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Глянцевая манящая кнопка */}
+        <a href={CONTENT.nail.actionLink} className="w-full bg-gradient-to-r from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white font-serif font-medium uppercase tracking-[0.15em] text-[11px] py-4 rounded-3xl flex items-center justify-center gap-2 transition-all shadow-[0_10px_25px_rgba(225,29,72,0.3)] border border-rose-500/30 relative overflow-hidden group mt-auto">
+          {/* Эффект пробегающего блика */}
+          <div className="absolute top-0 left-[-100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg] group-hover:animate-[shine_1s_ease-in-out]"></div>
+          <Sparkles className="w-4 h-4 relative z-10" />
+          <span className="relative z-10">{CONTENT.nail.actionText}</span>
+        </a>
+      </div>
+    </div>
+  </>
+);
+
+// 10. АЛЬФА-ПАРТНЕР (Red Monolith / Corporate Elite)
+const AlfaCard = () => (
+  <>
+    {/* ЛИЦЕВАЯ СТОРОНА */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(220,38,38,0.4)] overflow-hidden bg-[#0a0a0a] text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(239,68,68,0.6)] transition-shadow duration-700">
+      <div className="absolute inset-0 bg-gradient-to-tr from-red-900 via-black to-zinc-900 opacity-90 mix-blend-multiply"></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60 mix-blend-luminosity contrast-125" />
+      
+      {/* Абстрактные красные лучи */}
+      <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-600/30 blur-[80px] rounded-full pointer-events-none"></div>
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-red-800/40 blur-[90px] rounded-full pointer-events-none"></div>
+
+      <div className="relative z-10 flex flex-col h-full justify-between">
+        <div className="flex justify-between items-start">
+          <div className="bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-red-600/50 flex items-center gap-2 shadow-[4px_4px_0_rgba(220,38,38,0.3)]">
+            <Award className="w-4 h-4 text-red-500" />
+            <span className="text-xs font-black tracking-widest uppercase text-white">{CONTENT.alfa.badge}</span>
+          </div>
+          
+          {/* КАСТОМНЫЙ ЛОГОТИП АЛЬФЫ ИЗ ФОТО */}
+          <div className="w-10 h-10 flex items-center justify-center bg-[#ef3124] rounded-lg shadow-[0_0_15px_rgba(220,38,38,0.8)] shrink-0 border border-red-400/20">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.5 3h3l6.5 14h-3.5l-1.5-3.5h-6L7.5 17H4l6.5-14zm1.5 3.5L10 11h4l-2-4.5z"/>
+              <rect x="4" y="19" width="16" height="3"/>
+            </svg>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-1 uppercase tracking-tighter text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+            {CONTENT.alfa.name1}
+            <br />
+            {CONTENT.alfa.name2}
+          </h2>
+          <div className="flex flex-wrap items-center gap-3 mt-3">
+            <p className="text-white font-bold text-[10px] uppercase tracking-[0.2em] bg-red-600 px-3 py-1.5 rounded-lg shadow-[2px_2px_0_rgba(153,27,27,1)]">
+              {CONTENT.alfa.role}
+            </p>
+            <div className="flex items-center gap-1.5 border border-red-600/50 bg-black/50 px-3 py-1.5 rounded-lg">
+              <span className="w-2 h-2 bg-red-500 rounded-sm animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+              <span className="text-[9px] font-bold uppercase tracking-widest text-zinc-300">{CONTENT.alfa.status}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* ОБРАТНАЯ СТОРОНА (Corporate Elite / Geometric) */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(220,38,38,0.4)] overflow-hidden bg-[#050505] flex flex-col p-6 text-white border-2 border-zinc-900" style={{ transform: 'rotateY(180deg)' }}>
+      
+      {/* Восходящий график на фоне */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
+         <path d="M-10,110 L10,80 L30,85 L50,50 L70,55 L90,20 L110,10" fill="none" stroke="#dc2626" strokeWidth="0.5" className="animate-alfa-chart" strokeLinecap="square" strokeLinejoin="miter" />
+         <path d="M-10,110 L10,80 L30,85 L50,50 L70,55 L90,20 L110,10 L110,110 Z" fill="url(#alfa-grad-trend)" stroke="none" />
+         <defs>
+           <linearGradient id="alfa-grad-trend" x1="0" y1="0" x2="0" y2="1">
+             <stop offset="0%" stopColor="#dc2626" stopOpacity="0.15" />
+             <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
+           </linearGradient>
+         </defs>
+      </svg>
+
+      <div className="relative z-10 flex flex-col h-full gap-5">
+        
+        {/* Хедер: Строгий Аватар и Имя (Скругленный квадрат вместо круга) */}
+        <div className="flex items-center gap-4 mt-1 border-b border-zinc-800 pb-4">
+          <div className="relative w-16 h-16 shrink-0 rounded-2xl overflow-hidden border-2 border-red-600 bg-zinc-900 shadow-[0_0_20px_rgba(220,38,38,0.2)] p-[2px]">
+            <img src={CONTENT.alfa.avatar} alt={CONTENT.alfa.name1} className="w-full h-full object-cover rounded-xl grayscale contrast-125 opacity-90" />
+          </div>
+          <div className="flex flex-col">
+            <h3 className="text-[1.15rem] font-black uppercase tracking-wider text-white leading-none mb-1.5">{CONTENT.alfa.username}</h3>
+            <span className="bg-red-600 text-white text-[9px] font-bold uppercase tracking-[0.2em] px-2 py-0.5 rounded w-fit shadow-[2px_2px_0_rgba(153,27,27,1)]">
+              {CONTENT.alfa.subUsername}
+            </span>
+          </div>
+        </div>
+
+        {/* Статистика (Главный акцент - Крупная и строгая) */}
+        <div className="grid grid-cols-2 gap-3">
+          <div className="bg-[#0a0a0a] border border-red-900/50 rounded-2xl p-4 flex flex-col justify-center relative overflow-hidden group shadow-[inset_0_0_20px_rgba(220,38,38,0.02)] hover:border-red-600/80 transition-colors">
+            <div className="absolute top-0 right-0 w-8 h-8 bg-red-600/10 rounded-bl-2xl"></div>
+            <p className="text-[9px] text-zinc-500 uppercase font-bold tracking-widest mb-1">{CONTENT.alfa.stat1Title}</p>
+            <p className="font-black text-2xl text-white tracking-tighter drop-shadow-[0_2px_10px_rgba(220,38,38,0.4)]">{CONTENT.alfa.stat1Value}</p>
+          </div>
+          <div className="bg-[#0a0a0a] border border-red-900/50 rounded-2xl p-4 flex flex-col justify-center relative overflow-hidden group shadow-[inset_0_0_20px_rgba(220,38,38,0.02)] hover:border-red-600/80 transition-colors">
+            <div className="absolute top-0 right-0 w-8 h-8 bg-red-600/10 rounded-bl-2xl"></div>
+            <p className="text-[9px] text-zinc-500 uppercase font-bold tracking-widest mb-1">{CONTENT.alfa.stat2Title}</p>
+            <p className="font-black text-2xl text-white tracking-tighter drop-shadow-[0_2px_10px_rgba(220,38,38,0.4)]">{CONTENT.alfa.stat2Value}</p>
+          </div>
+        </div>
+
+        {/* Услуги / Шаги (Строгая геометрия с ромбами) */}
+        <div className="flex-1 flex flex-col justify-center gap-2">
+          {[CONTENT.alfa.service1, CONTENT.alfa.service2, CONTENT.alfa.service3].map((service, idx) => (
+            <div key={idx} className="bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-xl p-3.5 flex items-center gap-4">
+              <div className="w-4 h-4 bg-red-600 transform rotate-45 flex items-center justify-center shadow-[0_0_10px_rgba(220,38,38,0.4)] shrink-0">
+                 <div className="w-1.5 h-1.5 bg-black"></div>
+              </div>
+              <span className="font-bold text-[11px] uppercase tracking-wider text-zinc-200">{service}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Массивная Кнопка */}
+        <a href={CONTENT.alfa.actionLink} className="w-full bg-red-600 hover:bg-red-500 text-white font-black uppercase tracking-[0.15em] text-xs py-4.5 rounded-xl flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(220,38,38,0.3)] border border-red-500/50 mt-1 active:scale-95">
+          <Activity className="w-5 h-5" />
+          {CONTENT.alfa.actionText}
+        </a>
+      </div>
+    </div>
+  </>
+);
+
 // ==========================================
 // ОСНОВНОЙ КОМПОНЕНТ ПРИЛОЖЕНИЯ
 // ==========================================
@@ -1370,8 +1645,10 @@ const App = () => {
       'rgba(249,115,22,0.6)', // 3: Турагент
       'rgba(236,72,153,0.6)', // 4: Блогер
       'rgba(225,29,72,0.6)',  // 5: Тренер
-      'rgba(29,78,216,0.6)',  // 6: Брокер
-      'rgba(16,185,129,0.6)'  // 7: Заработок
+      'rgba(244,114,182,0.6)', // 6: Маникюр
+      'rgba(220,38,38,0.6)',  // 7: Альфа
+      'rgba(29,78,216,0.6)',  // 8: Брокер
+      'rgba(16,185,129,0.6)'  // 9: Заработок
     ];
     return colors[activeTab] || colors[0];
   };
@@ -1385,8 +1662,10 @@ const App = () => {
       { bg: 'rgba(249,115,22,0.15)', border: 'rgba(249,115,22,0.3)', icon: 'text-orange-400' }, // 3: Турагент
       { bg: 'rgba(236,72,153,0.15)', border: 'rgba(236,72,153,0.3)', icon: 'text-pink-400' }, // 4: Блогер
       { bg: 'rgba(225,29,72,0.15)', border: 'rgba(225,29,72,0.3)', icon: 'text-rose-400' }, // 5: Тренер
-      { bg: 'rgba(217,119,6,0.15)', border: 'rgba(217,119,6,0.3)', icon: 'text-amber-400' }, // 6: Брокер
-      { bg: 'rgba(16,185,129,0.15)', border: 'rgba(16,185,129,0.3)', icon: 'text-emerald-400' } // 7: Заработок
+      { bg: 'rgba(244,114,182,0.15)', border: 'rgba(244,114,182,0.3)', icon: 'text-pink-400' }, // 6: Маникюр
+      { bg: 'rgba(220,38,38,0.15)', border: 'rgba(220,38,38,0.3)', icon: 'text-red-500' },    // 7: Альфа
+      { bg: 'rgba(217,119,6,0.15)', border: 'rgba(217,119,6,0.3)', icon: 'text-amber-400' }, // 8: Брокер
+      { bg: 'rgba(16,185,129,0.15)', border: 'rgba(16,185,129,0.3)', icon: 'text-emerald-400' } // 9: Заработок
     ];
     return themes[activeTab] || themes[0];
   };
@@ -1421,8 +1700,10 @@ const App = () => {
     { id: 3, name: 'Турагент', icon: <PlaneTakeoff className="w-3 h-3 sm:w-4 sm:h-4" /> },
     { id: 4, name: 'Блогер', icon: <Camera className="w-3 h-3 sm:w-4 sm:h-4" /> },
     { id: 5, name: 'Тренер', icon: <Activity className="w-3 h-3 sm:w-4 sm:h-4" /> },
-    { id: 6, name: 'Брокер', icon: <Building2 className="w-3 h-3 sm:w-4 sm:h-4" /> },
-    { id: 7, name: 'Заработок', icon: <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 6, name: 'Маникюр', icon: <Droplets className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 7, name: 'Альфа', icon: <Award className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 8, name: 'Брокер', icon: <Building2 className="w-3 h-3 sm:w-4 sm:h-4" /> },
+    { id: 9, name: 'Заработок', icon: <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" /> },
   ];
 
   // Выбор активной карточки
@@ -1434,8 +1715,10 @@ const App = () => {
       case 3: return <TravelCard />;
       case 4: return <BloggerCard />;
       case 5: return <FitnessCard />;
-      case 6: return <RealEstateCard />;
-      case 7: return <MoneyCard />;
+      case 6: return <NailArtistCard />;
+      case 7: return <AlfaCard />;
+      case 8: return <RealEstateCard />;
+      case 9: return <MoneyCard />;
       default: return <StarterCard />;
     }
   };
