@@ -275,25 +275,16 @@ const BurnRevealImage = ({ src, className, style }) => {
     let isMounted = true;
     setLoaded(false);
     
-    const img = new Image();
-    img.src = src;
+    // Мгновенный запуск для супер-быстрой загрузки!
+    // Убрали img.onload, чтобы анимация не ждала скачивания тяжелых фото при плохом интернете.
+    const timer = setTimeout(() => {
+      if (isMounted) setLoaded(true);
+    }, 50);
 
-    const startAnimation = () => {
-      if (!isMounted) return;
-      // Ждем ровно 50мс ПОСЛЕ реальной загрузки картинки.
-      // Это гарантирует, что браузер сначала отрисует стартовый кадр, а потом запустит огонь.
-      setTimeout(() => {
-        if (isMounted) setLoaded(true);
-      }, 50);
+    return () => { 
+      isMounted = false; 
+      clearTimeout(timer);
     };
-
-    if (img.complete) {
-      startAnimation();
-    } else {
-      img.onload = startAnimation;
-    }
-
-    return () => { isMounted = false; };
   }, [src]);
 
   return (
@@ -361,10 +352,10 @@ const EsotericCard = () => (
     {/* ОБРАТНАЯ СТОРОНА (Mandala / Aura Style) */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-[#050505] flex flex-col items-center p-6 text-white border border-purple-900/30" style={{ transform: 'rotateY(180deg)' }}>
       
-      {/* ФОН МАНДАЛЫ (Орбиты и Аура) - Сделали ярче для мобилок! */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square rounded-full border border-purple-500/30 border-dashed animate-[spin_60s_linear_infinite]"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] aspect-square rounded-full border-[1.5px] border-amber-500/30 animate-[spin_40s_linear_infinite_reverse]"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] aspect-square rounded-full border-2 border-purple-500/40"></div>
+      {/* ФОН МАНДАЛЫ (Орбиты и Аура) - Сместили центры, чтобы они красиво расходились и пересекались! */}
+      <div className="absolute top-[45%] left-[48%] -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square rounded-full border border-purple-500/30 border-dashed animate-[spin_60s_linear_infinite]"></div>
+      <div className="absolute top-[55%] left-[52%] -translate-x-1/2 -translate-y-1/2 w-[110%] aspect-square rounded-full border-[1.5px] border-amber-500/30 animate-[spin_40s_linear_infinite_reverse]"></div>
+      <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[75%] aspect-square rounded-full border-2 border-purple-500/40"></div>
       
       {/* Пульсирующая аура - усилили свечение */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square rounded-full bg-purple-900/40 blur-[50px] pointer-events-none"></div>
@@ -1350,6 +1341,21 @@ const App = () => {
     return colors[activeTab] || colors[0];
   };
 
+  // Получение индивидуальной темы для воздушного модального окна
+  const getModalTheme = () => {
+    const themes = [
+      { bg: 'rgba(234,179,8,0.15)', border: 'rgba(234,179,8,0.3)', icon: 'text-yellow-400' }, // 0: Старт
+      { bg: 'rgba(147,51,234,0.15)', border: 'rgba(147,51,234,0.3)', icon: 'text-purple-400' }, // 1: Эзотерик
+      { bg: 'rgba(20,184,166,0.15)', border: 'rgba(20,184,166,0.3)', icon: 'text-teal-400' }, // 2: Психолог
+      { bg: 'rgba(249,115,22,0.15)', border: 'rgba(249,115,22,0.3)', icon: 'text-orange-400' }, // 3: Турагент
+      { bg: 'rgba(236,72,153,0.15)', border: 'rgba(236,72,153,0.3)', icon: 'text-pink-400' }, // 4: Блогер
+      { bg: 'rgba(225,29,72,0.15)', border: 'rgba(225,29,72,0.3)', icon: 'text-rose-400' }, // 5: Тренер
+      { bg: 'rgba(217,119,6,0.15)', border: 'rgba(217,119,6,0.3)', icon: 'text-amber-400' }, // 6: Брокер
+      { bg: 'rgba(16,185,129,0.15)', border: 'rgba(16,185,129,0.3)', icon: 'text-emerald-400' } // 7: Заработок
+    ];
+    return themes[activeTab] || themes[0];
+  };
+
   // Функции для шаринга
   const handleCopy = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -1532,44 +1538,45 @@ const App = () => {
         </div>
       </div>
 
-      {/* КНОПКА ПОДЕЛИТЬСЯ (Еле заметная) */}
+      {/* КНОПКА ПОДЕЛИТЬСЯ (Уменьшена на мобилках, чтобы не залезать на визитку) */}
       <button
         onClick={() => {
           if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(15);
           setShowShare(true);
         }}
-        className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 p-3.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white/40 hover:text-white/90 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 group touch-manipulation"
+        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 p-2.5 sm:p-3.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white/40 hover:text-white/90 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 group touch-manipulation"
         aria-label="Поделиться"
       >
-        <QrCode className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
+        <QrCode className="w-4 h-4 sm:w-5 sm:h-5 sm:group-hover:scale-110 transition-transform" />
       </button>
 
-      {/* МОДАЛЬНОЕ ОКНО ПОДЕЛИТЬСЯ (Glassmorphism) */}
+      {/* МОДАЛЬНОЕ ОКНО ПОДЕЛИТЬСЯ (Индивидуальное, Воздушное) */}
       {showShare && (
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md transition-opacity animate-in fade-in duration-200" 
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm transition-opacity animate-in fade-in duration-200" 
           onClick={() => setShowShare(false)}
         >
           <div 
-            className="bg-neutral-900/80 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-6 sm:p-8 w-full max-w-sm flex flex-col items-center relative shadow-2xl animate-in zoom-in-95 duration-200" 
+            className="backdrop-blur-3xl rounded-[2.5rem] p-6 sm:p-8 w-full max-w-sm flex flex-col items-center relative shadow-2xl animate-in zoom-in-95 duration-200 border" 
+            style={{ backgroundColor: getModalTheme().bg, borderColor: getModalTheme().border }}
             onClick={e => e.stopPropagation()}
           >
             <button 
               onClick={() => setShowShare(false)} 
-              className="absolute top-5 right-5 text-white/40 hover:text-white bg-white/5 hover:bg-white/10 rounded-full p-2 transition-colors"
+              className="absolute top-5 right-5 text-white/40 hover:text-white bg-black/20 hover:bg-black/40 rounded-full p-2 transition-colors border border-white/5"
             >
               <X className="w-5 h-5" />
             </button>
             
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-4 border border-white/10">
-              <QrCode className="w-6 h-6 text-white/80" />
+            <div className={`w-12 h-12 rounded-full bg-black/20 flex items-center justify-center mb-4 border ${getModalTheme().icon.replace('text', 'border').replace('400', '500/30')}`}>
+              <QrCode className={`w-6 h-6 ${getModalTheme().icon}`} />
             </div>
             
             <h3 className="text-xl font-bold text-white mb-2 tracking-wide">Поделиться визиткой</h3>
-            <p className="text-sm text-neutral-400 text-center mb-6 leading-relaxed">Дайте отсканировать QR-код или отправьте ссылку напрямую.</p>
+            <p className="text-sm text-white/60 text-center mb-6 leading-relaxed">Дайте отсканировать QR-код или отправьте ссылку напрямую.</p>
             
-            {/* Динамический QR код (Генерируется автоматически под текущий домен) */}
-            <div className="bg-white p-4 rounded-3xl mb-6 shadow-[0_0_30px_rgba(255,255,255,0.1)] flex items-center justify-center">
+            {/* Динамический QR код (Белый непрозрачный фон для сканера) */}
+            <div className="bg-white p-4 rounded-3xl mb-6 shadow-[0_0_40px_rgba(255,255,255,0.15)] flex items-center justify-center">
               <img 
                 src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://nice-app.ru')}`} 
                 alt="QR Code" 
@@ -1580,14 +1587,14 @@ const App = () => {
             <div className="flex gap-3 w-full">
               <button 
                 onClick={handleCopy}
-                className="flex-1 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-medium py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 transition-colors text-sm"
+                className="flex-1 bg-black/20 hover:bg-black/40 border border-white/10 text-white font-medium py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 transition-colors text-sm"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 {copied ? 'Скопировано!' : 'Копировать'}
               </button>
               <button 
                 onClick={handleShare}
-                className="flex-1 bg-white text-black font-bold py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-neutral-200 transition-colors shadow-lg text-sm"
+                className={`flex-1 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-bold py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 transition-colors text-sm`}
               >
                 <Share2 className="w-4 h-4" />
                 Отправить
