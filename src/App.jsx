@@ -235,11 +235,11 @@ const globalStyles = `
     opacity: 1;
   }
   .clip-burn-end {
-    clip-path: circle(250% at 100% 0%); /* Увеличили со 150% до 250%, чтобы точно достало до левого нижнего угла! */
+    clip-path: circle(300% at 100% 0%); /* Увеличили со 250% до 300%, чтобы точно достало до левого нижнего угла! */
     opacity: 1;
   }
   .clip-burn-glow {
-    clip-path: circle(255% at 100% 0%); /* Пропорционально увеличили свечение */
+    clip-path: circle(305% at 100% 0%); /* Пропорционально увеличили свечение */
     opacity: 0;
   }
   .burn-img-transition {
@@ -269,18 +269,18 @@ const BurnRevealImage = ({ src, className, style }) => {
   }, [src]);
 
   return (
-    // Добавили жесткую обрезку углов (overflow-hidden rounded-[2.5rem]), чтобы огонь не вылезал за края карточки
-    <div className={`absolute inset-0 pointer-events-none overflow-hidden rounded-[2.5rem] ${className}`} style={style}>
+    // Добавили жесткую обрезку углов (overflow-hidden rounded-[2.5rem]) и WebkitMaskImage против бага Safari, чтобы огонь не вылезал за края карточки
+    <div className={`absolute inset-0 pointer-events-none overflow-hidden rounded-[2.5rem] ${className}`} style={{ ...style, WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
       {/* 1. Слой огненного края (с SVG-искажением для рваности) */}
-      <div className="absolute inset-0" style={{ filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)' }}>
+      <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden" style={{ filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)' }}>
         <div 
-          className={`absolute inset-0 bg-cover bg-center burn-glow-transition ${loaded ? 'clip-burn-glow' : 'clip-burn-start'}`}
+          className={`absolute inset-0 bg-cover bg-center burn-glow-transition rounded-[2.5rem] ${loaded ? 'clip-burn-glow' : 'clip-burn-start'}`}
           style={{ backgroundImage: `url(${src})` }}
         />
       </div>
       {/* 2. Слой самого фото */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center burn-img-transition ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
+        className={`absolute inset-0 bg-cover bg-center burn-img-transition rounded-[2.5rem] ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
         style={{ backgroundImage: `url(${src})` }}
       />
     </div>
@@ -378,10 +378,10 @@ const PsychologistCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(20,184,166,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 via-cyan-600 to-emerald-700 opacity-80 mix-blend-screen"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-teal-800 via-cyan-900 to-emerald-950 opacity-60 mix-blend-overlay"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.psychologist.bgImage} className="opacity-60 mix-blend-luminosity" />
+      <BurnRevealImage src={CONTENT.psychologist.bgImage} className="opacity-50" />
       
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/60 to-transparent"></div>
       
@@ -417,43 +417,43 @@ const PsychologistCard = () => (
     </div>
 
     {/* ОБРАТНАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-zinc-50 flex flex-col p-5 text-zinc-800" style={{ transform: 'rotateY(180deg)' }}>
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-50/80 via-white to-emerald-50/80"></div>
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white" style={{ transform: 'rotateY(180deg)' }}>
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-900/30 via-zinc-950 to-emerald-900/30"></div>
       
       <div className="relative z-10 flex flex-col h-full gap-3">
-        <div className="bg-white/60 backdrop-blur-xl rounded-[2rem] p-4 border border-white flex items-center gap-4 shadow-[0_8px_30px_rgba(13,148,136,0.05)]">
-          <div className="w-14 h-14 rounded-full border-2 border-teal-200 p-0.5 shrink-0 overflow-hidden">
+        <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-teal-500/20 flex items-center gap-4 shadow-lg">
+          <div className="w-14 h-14 rounded-full border-2 border-teal-500/50 p-0.5 shrink-0 overflow-hidden">
             <img src={CONTENT.psychologist.avatar} alt={CONTENT.psychologist.name1} className="w-full h-full object-cover rounded-full" />
           </div>
           <div>
-            <h3 className="text-lg font-serif font-bold text-teal-950">{CONTENT.psychologist.username}</h3>
-            <p className="text-teal-600/80 text-[10px] mt-0.5 uppercase tracking-widest font-medium">{CONTENT.psychologist.subUsername}</p>
+            <h3 className="text-lg font-serif font-bold text-teal-100">{CONTENT.psychologist.username}</h3>
+            <p className="text-teal-400 text-[10px] mt-0.5 uppercase tracking-widest font-medium">{CONTENT.psychologist.subUsername}</p>
           </div>
         </div>
         
         <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white/60 backdrop-blur-xl rounded-[2rem] p-4 border border-white text-center shadow-[0_8px_30px_rgba(13,148,136,0.05)]">
-            <Award className="w-6 h-6 mx-auto mb-2 text-emerald-500" />
-            <p className="text-[10px] text-teal-600/60 uppercase font-bold tracking-wider">{CONTENT.psychologist.stat1Title}</p>
-            <p className="font-serif font-bold text-lg mt-0.5 text-teal-950">{CONTENT.psychologist.stat1Value}</p>
+          <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-teal-500/20 text-center shadow-lg">
+            <Award className="w-6 h-6 mx-auto mb-2 text-emerald-400" />
+            <p className="text-[10px] text-teal-500 uppercase font-bold tracking-wider">{CONTENT.psychologist.stat1Title}</p>
+            <p className="font-serif font-bold text-lg mt-0.5 text-teal-100">{CONTENT.psychologist.stat1Value}</p>
           </div>
-          <div className="bg-white/60 backdrop-blur-xl rounded-[2rem] p-4 border border-white text-center shadow-[0_8px_30px_rgba(13,148,136,0.05)]">
-            <MapPin className="w-6 h-6 mx-auto mb-2 text-teal-500" />
-            <p className="text-[10px] text-teal-600/60 uppercase font-bold tracking-wider">{CONTENT.psychologist.stat2Title}</p>
-            <p className="font-serif font-bold text-sm mt-1.5 text-teal-950">{CONTENT.psychologist.stat2Value}</p>
+          <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-teal-500/20 text-center shadow-lg">
+            <MapPin className="w-6 h-6 mx-auto mb-2 text-teal-400" />
+            <p className="text-[10px] text-teal-500 uppercase font-bold tracking-wider">{CONTENT.psychologist.stat2Title}</p>
+            <p className="font-serif font-bold text-sm mt-1.5 text-teal-100">{CONTENT.psychologist.stat2Value}</p>
           </div>
         </div>
 
         <div className="flex-1 flex items-center justify-center px-4">
-           <p className="text-center font-serif text-teal-900/60 text-sm leading-relaxed relative">
-             <span className="text-4xl absolute -top-4 -left-2 text-teal-200 opacity-50 font-serif">"</span>
+           <p className="text-center font-serif text-teal-100/80 text-sm leading-relaxed relative">
+             <span className="text-4xl absolute -top-4 -left-2 text-teal-500/30 font-serif">"</span>
              {CONTENT.psychologist.quote1} {CONTENT.psychologist.quote2}
-             <span className="text-4xl absolute -bottom-6 -right-2 text-teal-200 opacity-50 font-serif">"</span>
+             <span className="text-4xl absolute -bottom-6 -right-2 text-teal-500/30 font-serif">"</span>
            </p>
         </div>
 
-        <a href={CONTENT.psychologist.actionLink} className="mt-auto w-full bg-teal-900 text-white font-medium py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:bg-teal-800 transition-all shadow-lg">
-          <Phone className="w-5 h-5 text-teal-200" />
+        <a href={CONTENT.psychologist.actionLink} className="mt-auto w-full bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:from-teal-500 hover:to-emerald-500 transition-all shadow-[0_0_20px_rgba(13,148,136,0.3)] border border-teal-500/30">
+          <Phone className="w-5 h-5" />
           {CONTENT.psychologist.actionText}
         </a>
       </div>
@@ -639,10 +639,10 @@ const FitnessCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-tr from-red-600 via-rose-600 to-orange-500 opacity-80 mix-blend-screen"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-red-800 via-rose-900 to-orange-900 opacity-60 mix-blend-overlay"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.fitness.bgImage} className="opacity-60 mix-blend-luminosity" />
+      <BurnRevealImage src={CONTENT.fitness.bgImage} className="opacity-50" />
       
       <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/60 to-transparent"></div>
       
