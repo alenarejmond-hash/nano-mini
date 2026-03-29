@@ -15,6 +15,160 @@ const InstagramIcon = ({ className }) => (
   </svg>
 );
 
+// ==========================================
+// ⚙️ НАСТРОЙКИ КОНТЕНТА (МЕНЯТЬ ТЕКСТ, ФОТО И ССЫЛКИ ТОЛЬКО ЗДЕСЬ!)
+// ==========================================
+const CONTENT = {
+  esoteric: {
+    bgImage: '/bg-esoteric.jpg', // Название файла в папке public
+    avatar: '/avatar.jpg',       // Название файла в папке public
+    badge: 'Таро & Астрология',
+    name1: 'Алена',              // Первая строка имени
+    name2: 'Светлая',                // Вторая строка имени
+    role: 'Элитный Астролог',
+    status: 'Запись открыта',
+    username: '@elena_myth',
+    subUsername: 'Премиум Доступ',
+    quote1: 'Открой двери в свое',
+    quote2: 'истинное предназначение',
+    tgLink: 'https://t.me/твой_юзернейм',
+    instLink: 'https://instagram.com/твой_юзернейм',
+    actionText: 'Личный Расклад',
+    actionLink: 'https://t.me/твой_юзернейм?text=Привет!%20Хочу%20расклад'
+  },
+  psychologist: {
+    bgImage: '/bg-psychologist.jpg',
+    avatar: '/avatar.jpg',
+    badge: 'Терапия',
+    name1: 'Алена',
+    name2: 'СВЕТЛАЯ',
+    role: 'Клинический Психолог',
+    status: 'Онлайн',
+    username: '@psy_svetplaya',
+    subUsername: 'Бережный подход',
+    stat1Title: 'Практика',
+    stat1Value: '12 лет',
+    stat2Title: 'Прием',
+    stat2Value: 'МСК / Web',
+    quote1: 'Здесь безопасно быть собой.',
+    quote2: 'Начнем путь к гармонии вместе.',
+    actionText: 'Записаться на сессию',
+    actionLink: 'https://t.me/твой_юзернейм?text=Здравствуйте!%20Хочу%20на%20сессию'
+  },
+  travel: {
+    bgImage: '/bg-travel.jpg',
+    avatar: '/avatar.jpg',
+    badge: 'VIP Tours',
+    name1: 'МАКСИМ',
+    name2: 'ВОЯЖ',
+    role: 'Премиум Отдых',
+    statusBack: 'Первый Класс',
+    agentName: 'Max Voyage',
+    destination: 'Весь Мир',
+    tgText: 'Telegram Консьерж',
+    tgLink: 'https://t.me/твой_юзернейм',
+    tourText: 'Подобрать тур',
+    tourLink: 'https://t.me/твой_юзернейм',
+    marquee: ['✈️ СЕЙШЕЛЫ', '⭐ МАЛЬДИВЫ', '🌴 БАЛИ'] // Текст бегущей строки
+  },
+  blogger: {
+    bgImage: '/bg-blogger.jpg',
+    avatar: '/avatar.jpg',
+    badge: 'В эфире',
+    name1: 'ALEX',
+    name2: 'NEO',
+    role: 'Лайфстайл Креатор',
+    username: '@alexneo_real',
+    subUsername: 'Контент Креатор',
+    stat1Title: 'YouTube',
+    stat1Value: '850K',
+    stat2Title: 'Instagram',
+    stat2Value: '1.2M',
+    quote1: 'Открыт для сотрудничества',
+    quote2: 'и медиа',
+    actionText: 'Написать',
+    actionLink: 'https://t.me/твой_юзернейм?text=Привет!%20По%20поводу%20рекламы'
+  },
+  fitness: {
+    bgImage: '/bg-fitness.jpg',
+    avatar: '/avatar.jpg',
+    badge: 'Трансформация',
+    name1: 'Алена',
+    name2: 'Светлая',
+    role: 'Элитный Тренер',
+    username: '@alena_sila',
+    subUsername: 'Без Отговорок',
+    stat1Title: 'Лет Опыта',
+    stat1Value: '8',
+    stat2Title: 'Трансформаций',
+    stat2Value: '500+',
+    link1Text: 'Программа Питания',
+    link1Url: 'https://t.me/твой_юзернейм',
+    link2Text: 'Онлайн Ведение',
+    link2Url: 'https://t.me/твой_юзернейм',
+    actionText: 'Начать работу',
+    actionLink: 'https://t.me/твой_юзернейм?text=Хочу%20тело%20мечты!'
+  },
+  broker: {
+    bgImage: '/bg-broker.jpg',
+    bgBack: '/bg-broker.jpg',
+    avatar: '/avatar.jpg',
+    badge: 'Приватные ключи',
+    name1: 'АРТУР',
+    name2: 'ГРАНД',
+    role: 'Элитная Недвижимость',
+    username: '@artur_grand',
+    subUsername: 'Премиум Брокер',
+    stat1Title: 'Вилл в базе',
+    stat1Value: '120+',
+    stat2Title: 'Объем сделок',
+    stat2Value: '$50M+',
+    quote: 'Доступ к закрытым объектам off-market',
+    actionText: 'Связаться в Telegram',
+    actionLink: 'https://t.me/твой_юзернейм'
+  },
+  money: {
+    bgImage: '/bg-money.jpg',
+    avatar: '/avatar.jpg',
+    badge: 'Умные Деньги',
+    name1: 'МАКС',
+    name2: 'ПРОФИТ',
+    role: 'Цифровой Капитал',
+    status: 'Команда 200+',
+    username: '@max_profit',
+    subUsername: '< Проверен />',
+    stat1Title: 'Общий Объем',
+    stat1Value: '$1.2M+',
+    stat2Title: 'Участники',
+    stat2Value: '204',
+    infoTitle: 'Система заработка',
+    infoSub: 'v.2.0',
+    placesLeft: 'Осталось 15 мест',
+    actionText: 'Забрать доступ',
+    actionLink: 'https://t.me/твой_юзернейм'
+  },
+  creator: {
+    bgImage: '/bg-creator.jpg',
+    bgBack: '/bg-creator-back.jpg',
+    avatar: '/avatar.jpg',
+    badge: 'Главный Босс',
+    name1: 'Elena',
+    name2: 'Sotnikova',
+    role: 'Цифровой Архитектор',
+    status: 'Основатель',
+    username: '@elenlime',
+    subUsername: 'Создатель Магии',
+    stat1Title: 'Вау-визиток',
+    stat1Value: '100+',
+    stat2Title: 'Отвал бошки',
+    stat2Value: '∞',
+    quote1: 'Делаю дизайн, который',
+    quote2: 'продает за тебя',
+    actionText: 'Заказать визитку',
+    actionLink: 'https://t.me/elenlime?text=Привет!%20Хочу%20такую%20же%20визитку!'
+  }
+};
+
 // --- Глобальные стили для сложных анимаций (вставляем прямо в компонент) ---
 const globalStyles = `
   @keyframes float {
@@ -85,32 +239,31 @@ const EsotericCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(168,85,247,0.6)] transition-shadow duration-700">
-      {/* Мистический градиент и фон */}
       <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-purple-600 to-amber-500 opacity-70 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('/bg-esoteric.jpg')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.esoteric.bgImage})` }}></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-purple-500/30 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-300" />
-            <span className="text-xs font-bold tracking-wider uppercase text-purple-100">Таро & Звезды</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-purple-100">{CONTENT.esoteric.badge}</span>
           </div>
           <Moon className="w-8 h-8 text-amber-200/80 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-serif font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            ЕЛЕНА
+          <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+            {CONTENT.esoteric.name1}
             <br />
-            МИФ
+            {CONTENT.esoteric.name2}
           </h2>
           <div className="flex flex-wrap items-center gap-3 mt-2">
-            <p className="text-amber-300 font-bold text-sm uppercase tracking-[0.3em] border-l-2 border-purple-500 pl-3">
-              Элитный Астролог
+            <p className="text-amber-300 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-purple-500 pl-3">
+              {CONTENT.esoteric.role}
             </p>
             <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-purple-500/30">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
-              <span className="text-[8px] font-bold uppercase tracking-wider text-amber-100">Запись открыта</span>
+              <span className="text-[8px] font-bold uppercase tracking-wider text-amber-100">{CONTENT.esoteric.status}</span>
             </div>
           </div>
         </div>
@@ -119,46 +272,41 @@ const EsotericCard = () => (
 
     {/* ОБРАТНАЯ СТОРОНА (Bento Grid Style) */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white" style={{ transform: 'rotateY(180deg)' }}>
-      {/* Магические сферы на фоне */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle_at_100%_0%,_rgba(147,51,234,0.3),_transparent_60%)]"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-[radial-gradient(circle_at_0%_100%,_rgba(245,158,11,0.15),_transparent_60%)]"></div>
       
       <div className="relative z-10 flex flex-col h-full gap-3">
-        {/* Шапка профиля */}
         <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex items-center gap-4 shadow-lg">
           <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-purple-500 to-amber-500 p-0.5 shrink-0">
-            <img src="/avatar.jpg" alt="Елена" className="w-full h-full object-cover rounded-full border border-zinc-950" />
+            <img src={CONTENT.esoteric.avatar} alt={CONTENT.esoteric.name1} className="w-full h-full object-cover rounded-full border border-zinc-950" />
           </div>
           <div>
-            <h3 className="text-lg font-serif font-bold text-amber-100">@elena_myth</h3>
-            <p className="text-purple-400 text-[10px] mt-0.5 uppercase tracking-widest">Премиум Доступ</p>
+            <h3 className="text-lg font-serif font-bold text-amber-100">{CONTENT.esoteric.username}</h3>
+            <p className="text-purple-400 text-[10px] mt-0.5 uppercase tracking-widest">{CONTENT.esoteric.subUsername}</p>
           </div>
         </div>
         
-        {/* Кнопки соцсетей (Сетка) */}
         <div className="grid grid-cols-2 gap-3">
-          <a href="#" className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex flex-col items-center justify-center gap-2 hover:border-amber-500/50 hover:bg-purple-900/20 transition-all group shadow-lg">
+          <a href={CONTENT.esoteric.tgLink} className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex flex-col items-center justify-center gap-2 hover:border-amber-500/50 hover:bg-purple-900/20 transition-all group shadow-lg">
             <MessageCircle className="w-6 h-6 text-purple-400 group-hover:text-amber-300 transition-colors" />
             <span className="font-medium text-[11px] uppercase tracking-wider text-purple-200">Telegram</span>
           </a>
-          <a href="#" className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex flex-col items-center justify-center gap-2 hover:border-amber-500/50 hover:bg-purple-900/20 transition-all group shadow-lg">
+          <a href={CONTENT.esoteric.instLink} className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex flex-col items-center justify-center gap-2 hover:border-amber-500/50 hover:bg-purple-900/20 transition-all group shadow-lg">
             <InstagramIcon className="w-6 h-6 text-purple-400 group-hover:text-amber-300 transition-colors" />
             <span className="font-medium text-[11px] uppercase tracking-wider text-purple-200">Instagram</span>
           </a>
         </div>
 
-        {/* Инфо-блок */}
         <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-5 border border-purple-500/20 flex-1 relative overflow-hidden flex flex-col justify-center items-center shadow-lg group">
           <Moon className="absolute -right-4 -bottom-4 w-24 h-24 text-amber-500/10 group-hover:rotate-12 transition-transform duration-700" />
           <p className="font-serif italic text-amber-100/90 text-[13px] text-center leading-relaxed">
-            "Открой двери в свое<br/>истинное предназначение"
+            "{CONTENT.esoteric.quote1}<br/>{CONTENT.esoteric.quote2}"
           </p>
         </div>
 
-        {/* Главное действие */}
-        <a href="#" className="mt-auto w-full bg-gradient-to-r from-purple-900 to-indigo-900 text-amber-100 font-bold py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:from-purple-800 hover:to-indigo-800 transition-all shadow-[0_0_20px_rgba(147,51,234,0.3)] border border-purple-500/30">
+        <a href={CONTENT.esoteric.actionLink} className="mt-auto w-full bg-gradient-to-r from-purple-900 to-indigo-900 text-amber-100 font-bold py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:from-purple-800 hover:to-indigo-800 transition-all shadow-[0_0_20px_rgba(147,51,234,0.3)] border border-purple-500/30">
           <Sparkles className="w-5 h-5" />
-          Личный Расклад
+          {CONTENT.esoteric.actionText}
         </a>
       </div>
     </div>
@@ -170,83 +318,79 @@ const PsychologistCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(20,184,166,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-bl from-teal-500 via-emerald-700 to-slate-900 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('/bg-psychologist.jpg')] bg-cover bg-center opacity-50 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-cover bg-center opacity-90" style={{ backgroundImage: `url(${CONTENT.psychologist.bgImage})` }}></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/60 to-emerald-900/20"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-teal-500/30 flex items-center gap-2">
             <Heart className="w-4 h-4 text-rose-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-teal-100">Терапия</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-teal-100">{CONTENT.psychologist.badge}</span>
           </div>
           <Brain className="w-8 h-8 text-teal-200/80 drop-shadow-[0_0_10px_rgba(45,212,191,0.5)]" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-serif font-medium mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            АННА
+          <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-medium mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+            {CONTENT.psychologist.name1}
             <br />
-            СВЕТЛАЯ
+            {CONTENT.psychologist.name2}
           </h2>
           <div className="flex flex-wrap items-center gap-3 mt-2">
-            <p className="text-teal-300 font-bold text-sm uppercase tracking-[0.3em] border-l-2 border-emerald-500 pl-3">
-              Клинический Психолог
+            <p className="text-teal-300 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-emerald-500 pl-3">
+              {CONTENT.psychologist.role}
             </p>
             <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-teal-500/30">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
               </span>
-              <span className="text-[8px] font-bold uppercase tracking-wider text-emerald-100">Онлайн</span>
+              <span className="text-[8px] font-bold uppercase tracking-wider text-emerald-100">{CONTENT.psychologist.status}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Glass & Air Style) */}
+    {/* ОБРАТНАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-zinc-50 flex flex-col p-5 text-zinc-800" style={{ transform: 'rotateY(180deg)' }}>
-      {/* Воздушный градиент на фоне */}
       <div className="absolute inset-0 bg-gradient-to-br from-teal-50/80 via-white to-emerald-50/80"></div>
       
       <div className="relative z-10 flex flex-col h-full gap-3">
-        {/* Профиль */}
         <div className="bg-white/60 backdrop-blur-xl rounded-[2rem] p-4 border border-white flex items-center gap-4 shadow-[0_8px_30px_rgba(13,148,136,0.05)]">
           <div className="w-14 h-14 rounded-full border-2 border-teal-200 p-0.5 shrink-0 overflow-hidden">
-            <img src="/avatar.jpg" alt="Анна" className="w-full h-full object-cover rounded-full" />
+            <img src={CONTENT.psychologist.avatar} alt={CONTENT.psychologist.name1} className="w-full h-full object-cover rounded-full" />
           </div>
           <div>
-            <h3 className="text-lg font-serif font-bold text-teal-950">@psy_svetplaya</h3>
-            <p className="text-teal-600/80 text-[10px] mt-0.5 uppercase tracking-widest font-medium">Бережный подход</p>
+            <h3 className="text-lg font-serif font-bold text-teal-950">{CONTENT.psychologist.username}</h3>
+            <p className="text-teal-600/80 text-[10px] mt-0.5 uppercase tracking-widest font-medium">{CONTENT.psychologist.subUsername}</p>
           </div>
         </div>
         
-        {/* Статистика с мягкими тенями */}
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-white/60 backdrop-blur-xl rounded-[2rem] p-4 border border-white text-center shadow-[0_8px_30px_rgba(13,148,136,0.05)]">
             <Award className="w-6 h-6 mx-auto mb-2 text-emerald-500" />
-            <p className="text-[10px] text-teal-600/60 uppercase font-bold tracking-wider">Практика</p>
-            <p className="font-serif font-bold text-lg mt-0.5 text-teal-950">12 лет</p>
+            <p className="text-[10px] text-teal-600/60 uppercase font-bold tracking-wider">{CONTENT.psychologist.stat1Title}</p>
+            <p className="font-serif font-bold text-lg mt-0.5 text-teal-950">{CONTENT.psychologist.stat1Value}</p>
           </div>
           <div className="bg-white/60 backdrop-blur-xl rounded-[2rem] p-4 border border-white text-center shadow-[0_8px_30px_rgba(13,148,136,0.05)]">
             <MapPin className="w-6 h-6 mx-auto mb-2 text-teal-500" />
-            <p className="text-[10px] text-teal-600/60 uppercase font-bold tracking-wider">Прием</p>
-            <p className="font-serif font-bold text-sm mt-1.5 text-teal-950">МСК / Web</p>
+            <p className="text-[10px] text-teal-600/60 uppercase font-bold tracking-wider">{CONTENT.psychologist.stat2Title}</p>
+            <p className="font-serif font-bold text-sm mt-1.5 text-teal-950">{CONTENT.psychologist.stat2Value}</p>
           </div>
         </div>
 
-        {/* Элегантная цитата */}
         <div className="flex-1 flex items-center justify-center px-4">
            <p className="text-center font-serif text-teal-900/60 text-sm leading-relaxed relative">
              <span className="text-4xl absolute -top-4 -left-2 text-teal-200 opacity-50 font-serif">"</span>
-             Здесь безопасно быть собой. Начнем путь к гармонии вместе.
+             {CONTENT.psychologist.quote1} {CONTENT.psychologist.quote2}
              <span className="text-4xl absolute -bottom-6 -right-2 text-teal-200 opacity-50 font-serif">"</span>
            </p>
         </div>
 
-        <a href="#" className="mt-auto w-full bg-teal-900 text-white font-medium py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:bg-teal-800 transition-all shadow-lg">
+        <a href={CONTENT.psychologist.actionLink} className="mt-auto w-full bg-teal-900 text-white font-medium py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:bg-teal-800 transition-all shadow-lg">
           <Phone className="w-5 h-5 text-teal-200" />
-          Записаться на сессию
+          {CONTENT.psychologist.actionText}
         </a>
       </div>
     </div>
@@ -259,25 +403,25 @@ const TravelCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-orange-500 via-rose-600 to-indigo-900 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('/bg-travel.jpg')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.travel.bgImage})` }}></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-orange-500/30 flex items-center gap-2">
             <Compass className="w-4 h-4 text-orange-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-rose-100">VIP Tours</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-rose-100">{CONTENT.travel.badge}</span>
           </div>
           <PlaneTakeoff className="w-8 h-8 text-rose-200/80 drop-shadow-[0_0_10px_rgba(244,63,94,0.5)]" />
         </div>
 
         <div className="pb-6">
-          <h2 className="text-5xl font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            МАКСИМ
+          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+            {CONTENT.travel.name1}
             <br />
-            ВОЯЖ
+            {CONTENT.travel.name2}
           </h2>
-          <p className="text-orange-300 font-bold text-sm uppercase tracking-[0.3em] mt-2 border-l-2 border-rose-500 pl-3">
-            Премиум Отдых
+          <p className="text-orange-300 font-bold text-xs uppercase tracking-[0.2em] mt-2 border-l-2 border-rose-500 pl-3">
+            {CONTENT.travel.role}
           </p>
         </div>
       </div>
@@ -286,66 +430,58 @@ const TravelCard = () => (
       <div className="absolute bottom-0 left-0 w-full overflow-hidden bg-black/40 backdrop-blur-md border-t border-rose-500/30 py-1.5 z-20">
         <div className="flex w-[200%] animate-scroll text-[9px] font-bold uppercase tracking-[0.2em] text-rose-100">
           <span className="w-1/2 flex justify-around">
-            <span>✈️ СЕЙШЕЛЫ</span>
-            <span>⭐ МАЛЬДИВЫ</span>
-            <span>🌴 БАЛИ</span>
+            {CONTENT.travel.marquee.map((item, i) => <span key={i}>{item}</span>)}
           </span>
           <span className="w-1/2 flex justify-around">
-            <span>✈️ СЕЙШЕЛЫ</span>
-            <span>⭐ МАЛЬДИВЫ</span>
-            <span>🌴 БАЛИ</span>
+            {CONTENT.travel.marquee.map((item, i) => <span key={`clone-${i}`}>{item}</span>)}
           </span>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Black Card / Boarding Pass Hybrid) */}
+    {/* ОБРАТНАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] overflow-hidden bg-zinc-900 border border-zinc-700 flex flex-col text-white" style={{ transform: 'rotateY(180deg)' }}>
-      {/* Текстура карты мира */}
-      <div className="absolute inset-0 opacity-5 bg-[url('/bg-travel.jpg')] bg-cover bg-center"></div>
+      <div className="absolute inset-0 opacity-5 bg-cover bg-center" style={{ backgroundImage: `url(${CONTENT.travel.bgImage})` }}></div>
       
-      {/* Шапка First Class */}
       <div className="bg-gradient-to-r from-orange-600 to-rose-600 p-5 relative z-10 flex justify-between items-end shadow-md">
         <div>
           <h3 className="text-[10px] text-rose-200 uppercase tracking-widest font-bold mb-1">Статус</h3>
-          <p className="text-xl font-black tracking-widest uppercase drop-shadow-md">Первый Класс</p>
+          <p className="text-xl font-black tracking-widest uppercase drop-shadow-md">{CONTENT.travel.statusBack}</p>
         </div>
         <PlaneTakeoff className="w-8 h-8 text-white/50" />
       </div>
       
       <div className="p-5 flex flex-col gap-4 flex-1 relative z-10 bg-gradient-to-b from-zinc-800 to-zinc-950 rounded-t-3xl -mt-4 shadow-[0_-10px_20px_rgba(0,0,0,0.3)]">
         
-        {/* Данные "пассажира" */}
         <div className="flex items-center gap-4 bg-zinc-900/80 p-3 rounded-2xl border border-zinc-700/50">
           <div className="w-12 h-12 rounded-full overflow-hidden border border-orange-500/50 shrink-0">
-            <img src="/avatar.jpg" alt="Максим" className="w-full h-full object-cover" />
+            <img src={CONTENT.travel.avatar} alt={CONTENT.travel.name1} className="w-full h-full object-cover" />
           </div>
           <div className="grid grid-cols-2 w-full gap-2">
             <div>
               <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-wider">Агент</p>
-              <p className="font-bold text-sm text-zinc-100">Max Voyage</p>
+              <p className="font-bold text-sm text-zinc-100">{CONTENT.travel.agentName}</p>
             </div>
             <div>
               <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-wider">Куда</p>
-              <p className="font-bold text-sm text-orange-400">Весь Мир</p>
+              <p className="font-bold text-sm text-orange-400">{CONTENT.travel.destination}</p>
             </div>
           </div>
         </div>
 
-        {/* Штрихкод декоративный */}
         <div className="w-full h-8 bg-[repeating-linear-gradient(90deg,#fff,#fff_2px,transparent_2px,transparent_4px,#fff_4px,#fff_5px,transparent_5px,transparent_8px)] opacity-20 my-2"></div>
 
         <div className="flex flex-col gap-2 mt-auto">
-          <a href="#" className="flex items-center justify-between p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition-colors border border-zinc-700">
+          <a href={CONTENT.travel.tgLink} className="flex items-center justify-between p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition-colors border border-zinc-700">
             <div className="flex items-center gap-3">
               <MessageCircle className="w-5 h-5 text-orange-400" />
-              <span className="font-medium text-sm text-zinc-200">Telegram Консьерж</span>
+              <span className="font-medium text-sm text-zinc-200">{CONTENT.travel.tgText}</span>
             </div>
           </a>
-          <a href="#" className="flex items-center justify-between p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition-colors border border-zinc-700">
+          <a href={CONTENT.travel.tourLink} className="flex items-center justify-between p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition-colors border border-zinc-700">
             <div className="flex items-center gap-3">
               <Globe className="w-5 h-5 text-rose-400" />
-              <span className="font-medium text-sm text-zinc-200">Подобрать тур</span>
+              <span className="font-medium text-sm text-zinc-200">{CONTENT.travel.tourText}</span>
             </div>
           </a>
         </div>
@@ -360,73 +496,70 @@ const BloggerCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(236,72,153,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(6,182,212,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 via-purple-500 to-pink-500 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('/bg-blogger.jpg')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.blogger.bgImage})` }}></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-            <span className="text-xs font-bold tracking-wider uppercase">В эфире</span>
+            <span className="text-xs font-bold tracking-wider uppercase">{CONTENT.blogger.badge}</span>
           </div>
           <Camera className="w-8 h-8 text-white/80" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-black mb-1 uppercase tracking-tighter mix-blend-overlay text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
-            ALEX
+          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-1 uppercase tracking-tighter mix-blend-overlay text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+            {CONTENT.blogger.name1}
             <br />
-            NEO
+            {CONTENT.blogger.name2}
           </h2>
-          <p className="text-cyan-300 font-bold text-sm uppercase tracking-[0.3em] mt-2 border-l-2 border-pink-500 pl-3">
-            Лайфстайл Креатор
+          <p className="text-cyan-300 font-bold text-xs uppercase tracking-[0.2em] mt-2 border-l-2 border-pink-500 pl-3">
+            {CONTENT.blogger.role}
           </p>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Cyberpunk / Neumorphic Dark) */}
+    {/* ОБРАТНАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(6,182,212,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border border-zinc-800" style={{ transform: 'rotateY(180deg)' }}>
-      {/* Неоновая подсветка */}
       <div className="absolute -top-10 -right-10 w-48 h-48 bg-pink-500/20 blur-[60px] rounded-full pointer-events-none"></div>
       <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-cyan-500/20 blur-[60px] rounded-full pointer-events-none"></div>
       
       <div className="relative z-10 flex flex-col h-full gap-3">
-        {/* Аватар-блок */}
         <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex items-center justify-between">
           <div>
-            <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-pink-500 text-transparent bg-clip-text">@alexneo_real</h3>
-            <p className="text-zinc-500 text-[10px] mt-1 uppercase tracking-widest font-bold">Контент Креатор</p>
+            <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-pink-500 text-transparent bg-clip-text">{CONTENT.blogger.username}</h3>
+            <p className="text-zinc-500 text-[10px] mt-1 uppercase tracking-widest font-bold">{CONTENT.blogger.subUsername}</p>
           </div>
           <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-pink-500 to-cyan-500 p-[2px] shadow-[0_0_15px_rgba(236,72,153,0.3)]">
-            <img src="/avatar.jpg" alt="Alex Neo" className="w-full h-full object-cover rounded-full border border-zinc-950" />
+            <img src={CONTENT.blogger.avatar} alt={CONTENT.blogger.name1} className="w-full h-full object-cover rounded-full border border-zinc-950" />
           </div>
         </div>
         
-        {/* Дашборд статы */}
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex flex-col items-center relative overflow-hidden group">
             <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-pink-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
             <Play className="w-5 h-5 mb-2 text-pink-500" />
-            <p className="font-black text-lg">850K</p>
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">YouTube</p>
+            <p className="font-black text-lg">{CONTENT.blogger.stat1Value}</p>
+            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">{CONTENT.blogger.stat1Title}</p>
           </div>
           <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex flex-col items-center relative overflow-hidden group">
              <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
             <InstagramIcon className="w-5 h-5 mb-2 text-cyan-500" />
-            <p className="font-black text-lg">1.2M</p>
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">Instagram</p>
+            <p className="font-black text-lg">{CONTENT.blogger.stat2Value}</p>
+            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">{CONTENT.blogger.stat2Title}</p>
           </div>
         </div>
 
         <div className="flex-1 bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex items-center justify-center">
            <p className="text-zinc-400 text-xs text-center font-mono uppercase tracking-widest leading-loose">
-             Открыт для<br/> <span className="text-white font-bold bg-white/10 px-2 py-1 rounded">сотрудничества</span><br/> и медиа
+             {CONTENT.blogger.quote1}<br/> <span className="text-white font-bold bg-white/10 px-2 py-1 rounded">{CONTENT.blogger.quote2}</span>
            </p>
         </div>
 
-        <a href="#" className="w-full bg-white text-black font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300">
+        <a href={CONTENT.blogger.actionLink} className="w-full bg-white text-black font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300">
           <Mail className="w-5 h-5" />
-          Написать
+          {CONTENT.blogger.actionText}
         </a>
       </div>
     </div>
@@ -438,74 +571,70 @@ const FitnessCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-tr from-rose-700 via-red-600 to-orange-500 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('/bg-fitness.jpg')] bg-cover bg-center opacity-60 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-cover bg-center opacity-90" style={{ backgroundImage: `url(${CONTENT.fitness.bgImage})` }}></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/60 to-rose-900/20"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-red-500/30 flex items-center gap-2">
             <Flame className="w-4 h-4 text-orange-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-rose-100">Трансформация</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-rose-100">{CONTENT.fitness.badge}</span>
           </div>
           <Activity className="w-8 h-8 text-rose-200/80 drop-shadow-[0_0_10px_rgba(244,63,94,0.5)]" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            ИВАН
+          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+            {CONTENT.fitness.name1}
             <br />
-            СИЛА
+            {CONTENT.fitness.name2}
           </h2>
-          <p className="text-rose-300 font-bold text-sm uppercase tracking-[0.3em] mt-2 border-l-2 border-orange-500 pl-3">
-            Элитный Тренер
+          <p className="text-rose-300 font-bold text-xs uppercase tracking-[0.2em] mt-2 border-l-2 border-orange-500 pl-3">
+            {CONTENT.fitness.role}
           </p>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Aggressive / Carbon Grid Style) */}
+    {/* ОБРАТНАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border-2 border-red-900/50" style={{ transform: 'rotateY(180deg)' }}>
-      {/* Перфорированный фон */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(225,29,72,0.15)_1px,_transparent_1px)]" style={{ backgroundSize: '12px 12px' }}></div>
       
       <div className="relative z-10 flex flex-col h-full gap-3">
-        {/* Профиль в брутальном стиле */}
         <div className="bg-zinc-900 p-4 rounded-2xl border-l-4 border-l-red-600 border border-zinc-800 flex items-center gap-4">
-          <img src="/avatar.jpg" alt="Иван Сила" className="w-14 h-14 object-cover rounded-xl grayscale hover:grayscale-0 transition-all border border-zinc-700" />
+          <img src={CONTENT.fitness.avatar} alt={CONTENT.fitness.name1} className="w-14 h-14 object-cover rounded-xl transition-all border border-zinc-700" />
           <div>
-            <h3 className="text-xl font-black uppercase italic tracking-wider text-zinc-100">@ivan_sila</h3>
-            <p className="text-red-500 text-[10px] uppercase tracking-[0.2em] font-bold">Без Отговорок</p>
+            <h3 className="text-xl font-black uppercase italic tracking-wider text-zinc-100">{CONTENT.fitness.username}</h3>
+            <p className="text-red-500 text-[10px] uppercase tracking-[0.2em] font-bold">{CONTENT.fitness.subUsername}</p>
           </div>
         </div>
         
-        {/* Статы */}
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-8 h-8 bg-red-600/10 rounded-bl-full"></div>
-            <p className="font-black text-2xl text-white italic">8</p>
-            <p className="text-[9px] text-zinc-400 uppercase font-bold tracking-widest mt-1">Лет Опыта</p>
+            <p className="font-black text-2xl text-white italic">{CONTENT.fitness.stat1Value}</p>
+            <p className="text-[9px] text-zinc-400 uppercase font-bold tracking-widest mt-1">{CONTENT.fitness.stat1Title}</p>
           </div>
           <div className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-8 h-8 bg-orange-600/10 rounded-bl-full"></div>
-            <p className="font-black text-2xl text-red-500 italic">500+</p>
-            <p className="text-[9px] text-zinc-400 uppercase font-bold tracking-widest mt-1">Трансформаций</p>
+            <p className="font-black text-2xl text-red-500 italic">{CONTENT.fitness.stat2Value}</p>
+            <p className="text-[9px] text-zinc-400 uppercase font-bold tracking-widest mt-1">{CONTENT.fitness.stat2Title}</p>
           </div>
         </div>
 
-        {/* Ссылки */}
         <div className="flex-1 flex flex-col gap-2 justify-center">
-           <a href="#" className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 flex items-center justify-between hover:bg-zinc-800 transition-colors group">
-              <span className="font-bold uppercase tracking-wider text-xs text-zinc-300 group-hover:text-white">Программа Питания</span>
+           <a href={CONTENT.fitness.link1Url} className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 flex items-center justify-between hover:bg-zinc-800 transition-colors group">
+              <span className="font-bold uppercase tracking-wider text-xs text-zinc-300 group-hover:text-white">{CONTENT.fitness.link1Text}</span>
               <Activity className="w-4 h-4 text-orange-500" />
            </a>
-           <a href="#" className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 flex items-center justify-between hover:bg-zinc-800 transition-colors group">
-              <span className="font-bold uppercase tracking-wider text-xs text-zinc-300 group-hover:text-white">Онлайн Ведение</span>
+           <a href={CONTENT.fitness.link2Url} className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 flex items-center justify-between hover:bg-zinc-800 transition-colors group">
+              <span className="font-bold uppercase tracking-wider text-xs text-zinc-300 group-hover:text-white">{CONTENT.fitness.link2Text}</span>
               <Flame className="w-4 h-4 text-red-500" />
            </a>
         </div>
 
-        <a href="#" className="w-full bg-red-600 text-white font-black uppercase italic tracking-widest py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-red-500 transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)]">
-          Начать работу
+        <a href={CONTENT.fitness.actionLink} className="w-full bg-red-600 text-white font-black uppercase italic tracking-widest py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-red-500 transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)]">
+          {CONTENT.fitness.actionText}
         </a>
       </div>
     </div>
@@ -518,72 +647,69 @@ const RealEstateCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(29,78,216,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(37,99,235,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-bl from-blue-700 via-slate-800 to-amber-600 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('/bg-broker.jpg')] bg-cover bg-center opacity-50 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-cover bg-center opacity-50 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.broker.bgImage})` }}></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-blue-500/30 flex items-center gap-2">
             <Key className="w-4 h-4 text-amber-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-blue-100">Приватные ключи</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-blue-100">{CONTENT.broker.badge}</span>
           </div>
           <Building2 className="w-8 h-8 text-blue-200/80 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-serif font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            АРТУР
+          <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+            {CONTENT.broker.name1}
             <br />
-            ГРАНД
+            {CONTENT.broker.name2}
           </h2>
-          <p className="text-amber-300 font-bold text-sm uppercase tracking-[0.3em] mt-2 border-l-2 border-blue-500 pl-3">
-            Элитная Недвижимость
+          <p className="text-amber-300 font-bold text-xs uppercase tracking-[0.2em] mt-2 border-l-2 border-blue-500 pl-3">
+            {CONTENT.broker.role}
           </p>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Navy & Gold Luxury) */}
+    {/* ОБРАТНАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(29,78,216,0.4)] overflow-hidden bg-[#0a0f1c] flex flex-col p-5 text-white" style={{ transform: 'rotateY(180deg)' }}>
-      {/* Мраморная/золотая пыль на фоне */}
-      <div className="absolute inset-0 bg-[url('/bg-broker.jpg')] opacity-[0.05] mix-blend-screen"></div>
+      <div className="absolute inset-0 opacity-[0.05] mix-blend-screen bg-cover bg-center" style={{ backgroundImage: `url(${CONTENT.broker.bgBack})` }}></div>
       <div className="absolute top-0 right-0 w-64 h-64 bg-blue-900/20 blur-[80px] rounded-full pointer-events-none"></div>
       
-      {/* Тонкая золотая рамка */}
       <div className="absolute inset-3 border border-amber-600/20 rounded-[2rem] pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col h-full gap-3">
-        {/* Профиль */}
         <div className="bg-[#121a2f]/80 backdrop-blur-md p-4 rounded-[2rem] border border-blue-900/50 flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-serif font-bold text-amber-50">@artur_grand</h3>
-            <p className="text-amber-500/80 text-[9px] mt-1 uppercase tracking-widest font-bold">Премиум Брокер</p>
+            <h3 className="text-lg font-serif font-bold text-amber-50">{CONTENT.broker.username}</h3>
+            <p className="text-amber-500/80 text-[9px] mt-1 uppercase tracking-widest font-bold">{CONTENT.broker.subUsername}</p>
           </div>
           <div className="w-12 h-12 rounded-full border border-amber-500/50 p-[1px]">
-             <img src="/avatar.jpg" alt="Артур Гранд" className="w-full h-full object-cover rounded-full" />
+             <img src={CONTENT.broker.avatar} alt={CONTENT.broker.name1} className="w-full h-full object-cover rounded-full" />
           </div>
         </div>
         
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-[#121a2f]/80 backdrop-blur-md p-4 rounded-[2rem] border border-blue-900/50 text-center">
-            <p className="font-serif font-bold text-xl text-blue-200">120+</p>
-            <p className="text-[9px] text-blue-400/60 uppercase font-bold tracking-widest mt-1">Вилл в базе</p>
+            <p className="font-serif font-bold text-xl text-blue-200">{CONTENT.broker.stat1Value}</p>
+            <p className="text-[9px] text-blue-400/60 uppercase font-bold tracking-widest mt-1">{CONTENT.broker.stat1Title}</p>
           </div>
           <div className="bg-[#121a2f]/80 backdrop-blur-md p-4 rounded-[2rem] border border-blue-900/50 text-center">
-            <p className="font-serif font-bold text-xl text-amber-400">$50M+</p>
-            <p className="text-[9px] text-amber-500/60 uppercase font-bold tracking-widest mt-1">Объем сделок</p>
+            <p className="font-serif font-bold text-xl text-amber-400">{CONTENT.broker.stat2Value}</p>
+            <p className="text-[9px] text-amber-500/60 uppercase font-bold tracking-widest mt-1">{CONTENT.broker.stat2Title}</p>
           </div>
         </div>
 
         <div className="flex-1 flex flex-col gap-2 justify-center">
           <div className="bg-[#121a2f]/80 backdrop-blur-md p-4 rounded-[2rem] border border-blue-900/50 text-center flex flex-col items-center justify-center h-full">
             <Key className="w-6 h-6 text-amber-500/50 mb-2" />
-            <p className="font-serif text-sm text-blue-100/80">Доступ к закрытым объектам off-market</p>
+            <p className="font-serif text-sm text-blue-100/80">{CONTENT.broker.quote}</p>
           </div>
         </div>
 
-        <a href="#" className="w-full bg-gradient-to-r from-amber-600 to-amber-500 text-[#0a0f1c] font-bold py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+        <a href={CONTENT.broker.actionLink} className="w-full bg-gradient-to-r from-amber-600 to-amber-500 text-[#0a0f1c] font-bold py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
           <MessageCircle className="w-5 h-5" />
-          Связаться в Telegram
+          {CONTENT.broker.actionText}
         </a>
       </div>
     </div>
@@ -596,89 +722,85 @@ const MoneyCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(16,185,129,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(5,150,105,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-emerald-700 via-zinc-900 to-amber-500 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-[url('/bg-money.jpg')] bg-cover bg-center opacity-40 mix-blend-luminosity"></div>
+      <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.money.bgImage})` }}></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-emerald-500/30 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-emerald-100">Умные Деньги</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-emerald-100">{CONTENT.money.badge}</span>
           </div>
           <Diamond className="w-8 h-8 text-amber-200/80 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            МАКС
+          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+            {CONTENT.money.name1}
             <br />
-            ПРОФИТ
+            {CONTENT.money.name2}
           </h2>
           <div className="flex flex-wrap items-center gap-3 mt-2">
-            <p className="text-amber-400 font-bold text-sm uppercase tracking-[0.3em] border-l-2 border-emerald-500 pl-3">
-              Цифровой Капитал
+            <p className="text-amber-400 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-emerald-500 pl-3">
+              {CONTENT.money.role}
             </p>
             <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-emerald-500/30">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
-              <span className="text-[8px] font-bold uppercase tracking-wider text-emerald-100">Команда 200+</span>
+              <span className="text-[8px] font-bold uppercase tracking-wider text-emerald-100">{CONTENT.money.status}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Tech Grid / Trading Terminal) */}
+    {/* ОБРАТНАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(16,185,129,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border border-emerald-900/30" style={{ transform: 'rotateY(180deg)' }}>
-      {/* Сетка терминала */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.05)_1px,transparent_1px)]" style={{ backgroundSize: '20px 20px' }}></div>
       <div className="absolute top-0 w-full h-full bg-gradient-to-b from-emerald-900/10 to-transparent"></div>
       
       <div className="relative z-10 flex flex-col h-full gap-3 font-mono">
-        {/* Хедер-блок */}
         <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex items-center gap-4">
           <div className="relative">
             <div className="w-14 h-14 rounded-xl overflow-hidden border border-emerald-500/50">
-               <img src="/avatar.jpg" alt="Макс Профит" className="w-full h-full object-cover grayscale opacity-80" />
+               <img src={CONTENT.money.avatar} alt={CONTENT.money.name1} className="w-full h-full object-cover grayscale opacity-80" />
             </div>
             <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-zinc-900"></div>
           </div>
           <div>
-            <h3 className="text-lg font-bold text-emerald-50 tracking-wider">@max_profit</h3>
-            <p className="text-emerald-500 text-[9px] mt-1 uppercase tracking-widest bg-emerald-950/50 px-2 py-0.5 rounded w-fit">&lt; Проверен /&gt;</p>
+            <h3 className="text-lg font-bold text-emerald-50 tracking-wider">{CONTENT.money.username}</h3>
+            <p className="text-emerald-500 text-[9px] mt-1 uppercase tracking-widest bg-emerald-950/50 px-2 py-0.5 rounded w-fit">{CONTENT.money.subUsername}</p>
           </div>
         </div>
         
-        {/* Дашборд доходов */}
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex flex-col justify-center">
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">Общий Объем</p>
-            <p className="font-bold text-xl text-emerald-400">$1.2M+</p>
+            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">{CONTENT.money.stat1Title}</p>
+            <p className="font-bold text-xl text-emerald-400">{CONTENT.money.stat1Value}</p>
           </div>
           <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex flex-col justify-center">
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">Участники</p>
+            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mb-1">{CONTENT.money.stat2Title}</p>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-              <p className="font-bold text-xl text-white">204</p>
+              <p className="font-bold text-xl text-white">{CONTENT.money.stat2Value}</p>
             </div>
           </div>
         </div>
 
-        {/* Экшен блок */}
         <div className="flex-1 bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex flex-col justify-center">
            <div className="flex items-center justify-between mb-2">
-             <span className="text-xs text-zinc-400">Система заработка</span>
-             <span className="text-[10px] text-emerald-400 bg-emerald-900/30 px-2 py-1 rounded">v.2.0</span>
+             <span className="text-xs text-zinc-400">{CONTENT.money.infoTitle}</span>
+             <span className="text-[10px] text-emerald-400 bg-emerald-900/30 px-2 py-1 rounded">{CONTENT.money.infoSub}</span>
            </div>
            <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
              <div className="bg-gradient-to-r from-emerald-600 to-amber-400 h-full w-[85%] rounded-full relative">
                <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
              </div>
            </div>
-           <p className="text-[9px] text-right mt-1 text-zinc-500">Осталось 15 мест</p>
+           <p className="text-[9px] text-right mt-1 text-zinc-500">{CONTENT.money.placesLeft}</p>
         </div>
 
-        <a href="#" className="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black uppercase tracking-widest py-4 rounded-3xl flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] border border-emerald-400">
+        <a href={CONTENT.money.actionLink} className="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black uppercase tracking-widest py-4 rounded-3xl flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] border border-emerald-400">
           <Wallet className="w-5 h-5" />
-          Забрать доступ
+          {CONTENT.money.actionText}
         </a>
       </div>
     </div>
@@ -688,86 +810,81 @@ const MoneyCard = () => (
 // 8. СОЗДАТЕЛЬ / CREATOR (Специально для тебя!)
 const CreatorCard = () => (
   <>
-    {/* ЛИЦЕВАЯ СТОРОНА (Platinum & Liquid Chrome) */}
+    {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(255,255,255,0.2)] overflow-hidden bg-zinc-950 text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(255,255,255,0.4)] transition-shadow duration-700 border border-zinc-700/50">
       <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-950 opacity-90 mix-blend-screen"></div>
-      {/* Голографический жидкий металл */}
-      <div className="absolute inset-0 bg-[url('/bg-creator.jpg')] bg-cover bg-center opacity-70 mix-blend-screen filter contrast-125 grayscale-[30%]"></div>
+      <div className="absolute inset-0 bg-cover bg-center opacity-70 mix-blend-screen filter contrast-125 grayscale-[30%]" style={{ backgroundImage: `url(${CONTENT.creator.bgImage})` }}></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
           <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 flex items-center gap-2 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
             <Crown className="w-4 h-4 text-white" />
-            <span className="text-xs font-bold tracking-wider uppercase text-zinc-100">Главный Босс</span>
+            <span className="text-xs font-bold tracking-wider uppercase text-zinc-100">{CONTENT.creator.badge}</span>
           </div>
           <Sparkles className="w-8 h-8 text-white/90 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] animate-pulse" />
         </div>
 
         <div>
-          <h2 className="text-5xl font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            ТВОЕ
+          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+            {CONTENT.creator.name1}
             <br />
-            ИМЯ
+            {CONTENT.creator.name2}
           </h2>
           <div className="flex flex-wrap items-center gap-3 mt-2">
-            <p className="text-zinc-200 font-bold text-sm uppercase tracking-[0.3em] border-l-2 border-white pl-3">
-              Цифровой Архитектор
+            <p className="text-zinc-200 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-white pl-3">
+              {CONTENT.creator.role}
             </p>
             <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-2 py-1 rounded-full border border-white/20">
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping shadow-[0_0_8px_rgba(255,255,255,1)]"></span>
-              <span className="text-[8px] font-bold uppercase tracking-wider text-white">Основатель</span>
+              <span className="text-[8px] font-bold uppercase tracking-wider text-white">{CONTENT.creator.status}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Ultra Glass & Platinum Grid) */}
+    {/* ОБРАТНАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(255,255,255,0.1)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border border-zinc-800" style={{ transform: 'rotateY(180deg)' }}>
-      {/* Элегантное белое свечение */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-white/10 blur-[80px] rounded-full pointer-events-none"></div>
-      <div className="absolute inset-0 bg-[url('/bg-creator-back.jpg')] opacity-[0.08] mix-blend-screen"></div>
+      <div className="absolute inset-0 opacity-[0.08] mix-blend-screen bg-cover bg-center" style={{ backgroundImage: `url(${CONTENT.creator.bgBack})` }}></div>
       
       <div className="relative z-10 flex flex-col h-full gap-3">
-        {/* Хедер профиля */}
         <div className="bg-zinc-900/40 backdrop-blur-xl p-4 rounded-[2rem] border border-white/10 flex items-center justify-between shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
           <div>
-            <h3 className="text-xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-500 text-transparent bg-clip-text tracking-wide">@твоя_телега</h3>
-            <p className="text-zinc-400 text-[9px] mt-1 uppercase tracking-widest font-bold">Создатель Магии</p>
+            <h3 className="text-xl font-bold bg-gradient-to-r from-zinc-100 to-zinc-500 text-transparent bg-clip-text tracking-wide">{CONTENT.creator.username}</h3>
+            <p className="text-zinc-400 text-[9px] mt-1 uppercase tracking-widest font-bold">{CONTENT.creator.subUsername}</p>
           </div>
           <div className="relative">
             <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-zinc-300 to-zinc-700 p-[2px] shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-              <img src="/avatar.jpg" alt="Твое Фото" className="w-full h-full object-cover rounded-full border border-zinc-950" />
+              <img src={CONTENT.creator.avatar} alt={CONTENT.creator.name1} className="w-full h-full object-cover rounded-full border border-zinc-950" />
             </div>
             <Crown className="absolute -bottom-1 -right-1 w-5 h-5 text-zinc-100 bg-zinc-900 rounded-full p-0.5 border border-zinc-700" />
           </div>
         </div>
         
-        {/* Дашборд крутости */}
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-zinc-900/40 backdrop-blur-xl p-4 rounded-[2rem] border border-white/10 flex flex-col items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.5)] group hover:bg-white/5 transition-colors">
             <Sparkles className="w-5 h-5 mb-2 text-zinc-300 group-hover:animate-spin" />
-            <p className="font-black text-xl tracking-tighter">100+</p>
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">Вау-визиток</p>
+            <p className="font-black text-xl tracking-tighter">{CONTENT.creator.stat1Value}</p>
+            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">{CONTENT.creator.stat1Title}</p>
           </div>
           <div className="bg-zinc-900/40 backdrop-blur-xl p-4 rounded-[2rem] border border-white/10 flex flex-col items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.5)] group hover:bg-white/5 transition-colors">
             <Diamond className="w-5 h-5 mb-2 text-zinc-300 group-hover:scale-110 transition-transform" />
-            <p className="font-black text-xl tracking-tighter">∞</p>
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">Отвал бошки</p>
+            <p className="font-black text-xl tracking-tighter">{CONTENT.creator.stat2Value}</p>
+            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">{CONTENT.creator.stat2Title}</p>
           </div>
         </div>
 
-        {/* УТП Блок */}
         <div className="flex-1 bg-zinc-900/40 backdrop-blur-xl p-4 rounded-[2rem] border border-white/10 flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer_3s_infinite]"></div>
            <p className="text-zinc-300 text-xs text-center uppercase tracking-widest leading-relaxed font-medium">
-             Делаю дизайн, который <br/> <span className="text-white font-bold border-b border-white/30">продает за тебя</span>
+             {CONTENT.creator.quote1} <br/> <span className="text-white font-bold border-b border-white/30">{CONTENT.creator.quote2}</span>
            </p>
         </div>
 
-        <a href="#" className="w-full bg-zinc-100 hover:bg-white text-zinc-950 font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+        <a href={CONTENT.creator.actionLink} className="w-full bg-zinc-100 hover:bg-white text-zinc-950 font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">
           <Crown className="w-5 h-5" />
-          Заказать визитку
+          {CONTENT.creator.actionText}
         </a>
       </div>
     </div>
@@ -993,8 +1110,8 @@ const App = () => {
         style={{ transform: `translate(${bgOffset.x * 1.5}px, ${bgOffset.y * 1.5}px)` }}
       ></div>
 
-      {/* ПЕРЕКЛЮЧАТЕЛЬ ШАБЛОНОВ */}
-      <div className="relative z-20 mb-6 sm:mb-10 w-full max-w-md">
+      {/* ПЕРЕКЛЮЧАТЕЛЬ ШАБЛОНОВ (Парит под адресной строкой) */}
+      <div className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4 sm:px-0">
         <div className="flex p-1 bg-neutral-900/80 backdrop-blur-xl rounded-full border border-neutral-800 shadow-2xl overflow-x-auto hide-scrollbar">
           {tabs.map((tab) => (
             <button
