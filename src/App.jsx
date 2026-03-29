@@ -538,52 +538,99 @@ const TravelCard = () => (
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] overflow-hidden bg-zinc-900 border border-zinc-700 flex flex-col text-white" style={{ transform: 'rotateY(180deg)' }}>
-      <div className="absolute inset-0 opacity-5 bg-cover bg-center" style={{ backgroundImage: `url(${CONTENT.travel.bgImage})` }}></div>
+    {/* ОБРАТНАЯ СТОРОНА (Boarding Pass Style) */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] overflow-hidden bg-[#f4f1ea] flex flex-col text-zinc-900 border border-zinc-200" style={{ transform: 'rotateY(180deg)' }}>
       
-      <div className="bg-gradient-to-r from-orange-600 to-rose-600 p-5 relative z-10 flex justify-between items-end shadow-md">
-        <div>
-          <h3 className="text-[10px] text-rose-200 uppercase tracking-widest font-bold mb-1">Статус</h3>
-          <p className="text-xl font-black tracking-widest uppercase drop-shadow-md">{CONTENT.travel.statusBack}</p>
-        </div>
-        <PlaneTakeoff className="w-8 h-8 text-white/50" />
+      {/* Текстура бумаги / Водяные знаки */}
+      <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_1px,transparent_1px)] [background-size:12px_12px] opacity-40 pointer-events-none"></div>
+
+      {/* Штампы таможни */}
+      <div className="absolute top-20 right-[-10px] w-28 h-28 border-[3px] border-rose-600/30 rounded-full flex flex-col items-center justify-center rotate-12 pointer-events-none z-0">
+         <span className="text-rose-600/40 font-black tracking-widest uppercase text-lg border-b-2 border-rose-600/30 px-2 mb-1">DEPARTED</span>
+         <span className="text-rose-600/40 font-bold tracking-widest text-[8px]">VIP CUSTOMS</span>
       </div>
-      
-      <div className="p-5 flex flex-col gap-4 flex-1 relative z-10 bg-gradient-to-b from-zinc-800 to-zinc-950 rounded-t-3xl -mt-4 shadow-[0_-10px_20px_rgba(0,0,0,0.3)]">
+      <div className="absolute bottom-32 left-[-15px] w-24 h-24 border-[2px] border-orange-500/30 rounded-full flex flex-col items-center justify-center -rotate-12 pointer-events-none z-0">
+         <span className="text-orange-500/40 font-bold tracking-widest text-[8px] mb-1">APPROVED</span>
+         <span className="text-orange-500/40 font-black tracking-widest uppercase text-xl border-t-2 border-orange-500/30 px-2">FIRST</span>
+      </div>
+
+      {/* Верхняя часть (Шапка билета) */}
+      <div className="bg-zinc-900 text-white p-5 pb-6 relative z-10 border-b-4 border-orange-500 shadow-md">
+        <div className="flex justify-between items-center mb-1">
+          <h3 className="text-[9px] text-zinc-400 uppercase tracking-widest font-bold">Boarding Pass</h3>
+          <PlaneTakeoff className="w-5 h-5 text-orange-400" />
+        </div>
+        <p className="text-2xl font-black tracking-widest uppercase text-white drop-shadow-md">{CONTENT.travel.statusBack}</p>
+      </div>
+
+      {/* Основная часть с данными */}
+      <div className="flex-1 px-5 pt-5 pb-4 relative z-10 flex flex-col gap-3">
         
-        <div className="flex items-center gap-4 bg-zinc-900/80 p-3 rounded-2xl border border-zinc-700/50">
-          <div className="w-12 h-12 rounded-full overflow-hidden border border-orange-500/50 shrink-0">
-            <img src={CONTENT.travel.avatar} alt={CONTENT.travel.name1} className="w-full h-full object-cover" />
+        <div className="flex justify-between items-start">
+           <div>
+             <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-widest mb-0.5">Passenger</p>
+             <p className="font-mono font-bold text-sm text-zinc-900 uppercase">{CONTENT.travel.agentName}</p>
+           </div>
+           <div className="w-12 h-12 rounded-lg overflow-hidden border-2 border-white shadow-md shrink-0 rotate-3 bg-zinc-200">
+             <img src={CONTENT.travel.avatar} alt={CONTENT.travel.name1} className="w-full h-full object-cover grayscale opacity-90" />
+           </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-y-3 gap-x-2 mt-1">
+          <div>
+            <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-widest mb-0.5">Destination</p>
+            <p className="font-mono font-black text-lg text-orange-600 uppercase leading-none">{CONTENT.travel.destination}</p>
           </div>
-          <div className="grid grid-cols-2 w-full gap-2">
-            <div>
-              <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-wider">Агент</p>
-              <p className="font-bold text-sm text-zinc-100">{CONTENT.travel.agentName}</p>
-            </div>
-            <div>
-              <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-wider">Куда</p>
-              <p className="font-bold text-sm text-orange-400">{CONTENT.travel.destination}</p>
-            </div>
+          <div>
+            <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-widest mb-0.5">Flight</p>
+            <p className="font-mono font-black text-lg text-zinc-900 leading-none">VIP-01</p>
+          </div>
+          <div>
+            <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-widest mb-0.5">Date</p>
+            <p className="font-mono font-bold text-base text-zinc-900 leading-none">OPEN</p>
+          </div>
+          <div>
+             <p className="text-[8px] text-zinc-500 uppercase font-bold tracking-widest mb-0.5">Seat</p>
+             <p className="font-mono font-bold text-base text-zinc-900 leading-none">1A</p>
           </div>
         </div>
 
-        <div className="w-full h-8 bg-[repeating-linear-gradient(90deg,#fff,#fff_2px,transparent_2px,transparent_4px,#fff_4px,#fff_5px,transparent_5px,transparent_8px)] opacity-20 my-2"></div>
-
-        <div className="flex flex-col gap-2 mt-auto">
-          <a href={CONTENT.travel.tgLink} className="flex items-center justify-between p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition-colors border border-zinc-700">
-            <div className="flex items-center gap-3">
-              <MessageCircle className="w-5 h-5 text-orange-400" />
-              <span className="font-medium text-sm text-zinc-200">{CONTENT.travel.tgText}</span>
-            </div>
-          </a>
-          <a href={CONTENT.travel.tourLink} className="flex items-center justify-between p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition-colors border border-zinc-700">
-            <div className="flex items-center gap-3">
-              <Globe className="w-5 h-5 text-rose-400" />
-              <span className="font-medium text-sm text-zinc-200">{CONTENT.travel.tourText}</span>
-            </div>
-          </a>
+        {/* Отрывная линия (Имитация отрывного корешка) */}
+        <div className="relative w-full flex items-center my-3">
+          {/* Левый круглый вырез, цвет совпадает с фоном сайта */}
+          <div className="absolute -left-5 -translate-x-1/2 w-6 h-6 bg-[#0a0a0a] rounded-full z-20 shadow-[inset_-2px_0_4px_rgba(0,0,0,0.15)]"></div>
+          <div className="w-full border-t-[2.5px] border-dashed border-zinc-400"></div>
+          {/* Правый круглый вырез */}
+          <div className="absolute -right-5 translate-x-1/2 w-6 h-6 bg-[#0a0a0a] rounded-full z-20 shadow-[inset_2px_0_4px_rgba(0,0,0,0.15)]"></div>
         </div>
+
+        {/* Нижняя отрывная часть (Штрихкод + Кнопки) */}
+        <div className="flex items-center justify-between h-full pt-1">
+           <div className="flex flex-col gap-2.5 flex-1 pr-6">
+              <a href={CONTENT.travel.tgLink} className="flex items-center justify-center gap-2 py-3 rounded-xl bg-zinc-900 text-white hover:bg-zinc-800 transition-colors shadow-md group">
+                <MessageCircle className="w-4 h-4 text-orange-400 group-hover:scale-110 transition-transform" />
+                <span className="font-mono text-[10px] uppercase font-bold tracking-wider">{CONTENT.travel.tgText}</span>
+              </a>
+              <a href={CONTENT.travel.tourLink} className="flex items-center justify-center gap-2 py-3 rounded-xl bg-orange-600 text-white hover:bg-orange-500 transition-colors shadow-md group">
+                <Globe className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span className="font-mono text-[10px] uppercase font-bold tracking-wider">{CONTENT.travel.tourText}</span>
+              </a>
+           </div>
+           
+           {/* Векторный штрихкод */}
+           <svg className="h-[90%] w-8 text-zinc-800 mix-blend-multiply opacity-80" preserveAspectRatio="none" viewBox="0 0 24 100">
+             <rect x="0" y="0" width="2" height="100" fill="currentColor"/>
+             <rect x="3" y="0" width="1" height="100" fill="currentColor"/>
+             <rect x="5" y="0" width="3" height="100" fill="currentColor"/>
+             <rect x="9" y="0" width="1" height="100" fill="currentColor"/>
+             <rect x="11" y="0" width="2" height="100" fill="currentColor"/>
+             <rect x="14" y="0" width="1" height="100" fill="currentColor"/>
+             <rect x="16" y="0" width="4" height="100" fill="currentColor"/>
+             <rect x="21" y="0" width="1" height="100" fill="currentColor"/>
+             <rect x="23" y="0" width="1" height="100" fill="currentColor"/>
+           </svg>
+        </div>
+
       </div>
     </div>
   </>
