@@ -261,10 +261,15 @@ const BurnRevealImage = ({ src, className, style }) => {
     setLoaded(false);
     const img = new Image();
     img.src = src;
+    
+    // Даем браузеру микро-паузу (50мс) чтобы он успел отрисовать стартовый кадр (clip-burn-start), 
+    // иначе анимация не сработает при первой загрузке страницы. Глазом эта задержка невидима.
+    const triggerAnim = () => setTimeout(() => setLoaded(true), 50);
+
     if (img.complete) {
-      setLoaded(true); // Убрали задержку
+      triggerAnim();
     } else {
-      img.onload = () => setLoaded(true); // Убрали задержку
+      img.onload = triggerAnim;
     }
   }, [src]);
 
