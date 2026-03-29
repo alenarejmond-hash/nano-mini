@@ -228,7 +228,64 @@ const globalStyles = `
       spark-explode 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards,
       spark-wander var(--wt) linear 0.8s forwards;
   }
+  
+  /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА СГОРАЮЩЕЙ БУМАГИ === */
+  .clip-burn-start {
+    clip-path: circle(0% at 0% 0%);
+    opacity: 1;
+  }
+  .clip-burn-end {
+    clip-path: circle(150% at 0% 0%);
+    opacity: 1;
+  }
+  .clip-burn-glow {
+    clip-path: circle(155% at 0% 0%);
+    opacity: 0;
+  }
+  .burn-img-transition {
+    transition: clip-path 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .burn-glow-transition {
+    /* Огненный край расширяется вместе с фото, но в конце плавно затухает */
+    transition: clip-path 2.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-out 1.7s;
+  }
 `;
+
+// ==========================================
+// 🪄 КОМПОНЕНТ ЭФФЕКТА СГОРАНИЯ
+// ==========================================
+const BurnRevealImage = ({ src, className, style }) => {
+  const [loaded, setLoaded] = useState(false);
+  
+  useEffect(() => {
+    setLoaded(false);
+    const img = new Image();
+    img.src = src;
+    if (img.complete) {
+      setTimeout(() => setLoaded(true), 150);
+    } else {
+      img.onload = () => setTimeout(() => setLoaded(true), 150);
+    }
+  }, [src]);
+
+  return (
+    <div className={`absolute inset-0 pointer-events-none ${className}`} style={style}>
+      {/* 1. Слой огненного края (с SVG-искажением для рваности) */}
+      <div className="absolute inset-0" style={{ filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)' }}>
+        <div 
+          className={`absolute inset-0 bg-cover bg-center burn-glow-transition ${loaded ? 'clip-burn-glow' : 'clip-burn-start'}`}
+          style={{ backgroundImage: `url(${src})` }}
+        />
+      </div>
+      {/* 2. Слой самого фото */}
+      <div 
+        className={`absolute inset-0 bg-cover bg-center burn-img-transition ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
+        style={{ backgroundImage: `url(${src})` }}
+      />
+    </div>
+  );
+};
+
 
 // ==========================================
 // ШАБЛОНЫ ВИЗИТОК (4 направления)
@@ -240,7 +297,9 @@ const EsotericCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(168,85,247,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-purple-600 to-amber-500 opacity-70 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.esoteric.bgImage})` }}></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.esoteric.bgImage} className="opacity-60 mix-blend-luminosity" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -318,7 +377,10 @@ const PsychologistCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(20,184,166,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-cover bg-center opacity-90" style={{ backgroundImage: `url(${CONTENT.psychologist.bgImage})` }}></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.psychologist.bgImage} className="opacity-90" />
+      
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/60 to-emerald-900/20"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
@@ -403,7 +465,9 @@ const TravelCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-orange-500 via-rose-600 to-indigo-900 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.travel.bgImage})` }}></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.travel.bgImage} className="opacity-60 mix-blend-luminosity" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -496,7 +560,9 @@ const BloggerCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(236,72,153,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(6,182,212,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 via-purple-500 to-pink-500 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.blogger.bgImage})` }}></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.blogger.bgImage} className="opacity-60 mix-blend-luminosity" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -571,7 +637,10 @@ const FitnessCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-cover bg-center opacity-90" style={{ backgroundImage: `url(${CONTENT.fitness.bgImage})` }}></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.fitness.bgImage} className="opacity-90" />
+      
       <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/60 to-rose-900/20"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
@@ -647,7 +716,9 @@ const RealEstateCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(29,78,216,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(37,99,235,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-bl from-blue-700 via-slate-800 to-amber-600 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-cover bg-center opacity-50 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.broker.bgImage})` }}></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.broker.bgImage} className="opacity-50 mix-blend-luminosity" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -722,7 +793,9 @@ const MoneyCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(16,185,129,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(5,150,105,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-emerald-700 via-zinc-900 to-amber-500 opacity-80 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity" style={{ backgroundImage: `url(${CONTENT.money.bgImage})` }}></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.money.bgImage} className="opacity-40 mix-blend-luminosity" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -813,7 +886,9 @@ const CreatorCard = () => (
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(255,255,255,0.2)] overflow-hidden bg-zinc-950 text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(255,255,255,0.4)] transition-shadow duration-700 border border-zinc-700/50">
       <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-950 opacity-90 mix-blend-screen"></div>
-      <div className="absolute inset-0 bg-cover bg-center opacity-70 mix-blend-screen filter contrast-125 grayscale-[30%]" style={{ backgroundImage: `url(${CONTENT.creator.bgImage})` }}></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.creator.bgImage} className="opacity-70 mix-blend-screen filter contrast-125 grayscale-[30%]" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1099,6 +1174,14 @@ const App = () => {
     <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-4 sm:p-8 font-sans overflow-hidden">
       {/* Вставляем глобальные стили */}
       <style>{globalStyles}</style>
+
+      {/* SVG-Фильтр для эффекта рваной горящей бумаги */}
+      <svg width="0" height="0" className="absolute pointer-events-none">
+        <filter id="burn-edge-filter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
 
       {/* Фоновое свечение приложения (Живые сферы) */}
       <div 
