@@ -359,7 +359,7 @@ const globalStyles = `
 // ==========================================
 // 🪄 КОМПОНЕНТ ЭФФЕКТА СГОРАНИЯ
 // ==========================================
-const BurnRevealImage = ({ src, className, style }) => {
+const BurnRevealImage = ({ src, className, style, imgClassName = "" }) => {
   const [loaded, setLoaded] = useState(false);
   
   useEffect(() => {
@@ -390,7 +390,7 @@ const BurnRevealImage = ({ src, className, style }) => {
       </div>
       {/* 2. Слой самого фото */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center burn-img-transition ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
+        className={`absolute inset-0 bg-cover bg-center burn-img-transition ${imgClassName} ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
         style={{ backgroundImage: `url(${src})` }}
       />
     </div>
@@ -1275,7 +1275,7 @@ const NailArtistCard = () => (
       <div className="absolute inset-0 bg-gradient-to-tr from-rose-900 via-pink-800 to-amber-700/50 opacity-80 mix-blend-screen"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Ускоренная отрисовка через grayscale) */}
-      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-70 grayscale sepia-[.2]" />
+      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-70" imgClassName="grayscale sepia-[.2]" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1363,7 +1363,7 @@ const AlfaCard = () => (
       <div className="absolute inset-0 bg-gradient-to-tr from-red-900 via-black to-zinc-900 opacity-90 mix-blend-multiply"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Ускоренная отрисовка через grayscale) */}
-      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60 grayscale contrast-125" />
+      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60" imgClassName="grayscale contrast-125" />
       
       {/* Абстрактные красные лучи */}
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-600/30 blur-[80px] rounded-full pointer-events-none"></div>
