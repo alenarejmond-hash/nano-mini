@@ -287,21 +287,24 @@ const globalStyles = `
     opacity: 1;
   }
   .clip-burn-end {
-    clip-path: circle(300% at 100% 0%); /* Увеличили со 250% до 300%, чтобы точно достало до левого нижнего угла! */
+    clip-path: circle(150% at 100% 0%); /* Оптимизировано до 150% для устранения лагов */
     opacity: 1;
   }
   .clip-burn-glow {
-    clip-path: circle(305% at 100% 0%); /* Пропорционально увеличили свечение */
+    clip-path: circle(155% at 100% 0%); 
     opacity: 0;
   }
   .burn-img-transition {
-    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1); /* Замедлили до 3.5 сек */
-    /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
+    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: clip-path; /* Возвращаем аппаратное ускорение */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
   .burn-glow-transition {
-    /* Огненный край расширяется вместе с фото, плавно затухая в конце */
     transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease-out 2.7s;
-    /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
+    will-change: clip-path, opacity; /* Возвращаем аппаратное ускорение */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
   
   /* === АНИМАЦИИ ЭЗОТЕРИКА (Медленное, однонаправленное движение) === */
@@ -1728,11 +1731,11 @@ const App = () => {
       {/* Вставляем глобальные стили */}
       <style>{globalStyles}</style>
 
-      {/* SVG-Фильтр для эффекта рваной горящей бумаги */}
+      {/* SVG-Фильтр для эффекта рваной горящей бумаги (Оптимизирован для плавной отрисовки) */}
       <svg width="0" height="0" className="absolute pointer-events-none">
         <filter id="burn-edge-filter">
-          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" />
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G" />
         </filter>
       </svg>
 
