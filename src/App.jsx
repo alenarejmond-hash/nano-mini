@@ -152,7 +152,7 @@ const CONTENT = {
     bgImage: '/bg-starter.jpg', // Загрузи сюда текстуру черного шелка или абстрактного золота
     badge: 'Digital Визитка',
     title1: 'НОВЫЙ УРОВЕНЬ',
-    title2: 'НЕТВОРКИНГА',
+    title2: 'ТВОЕГО БРЕНДА',
     role: 'WOW-эффект обеспечен',
     instruction1: 'Выбери шаблон в меню выше',
     instruction2: 'Нажми, чтобы перевернуть',
@@ -272,11 +272,28 @@ const BurnRevealImage = ({ src, className, style }) => {
   const [loaded, setLoaded] = useState(false);
   
   useEffect(() => {
+    let isMounted = true;
     setLoaded(false);
-    // Убрали ожидание загрузки картинки (img.onload), которое тормозило весь сайт!
-    // Просто даем браузеру 50мс на рендер и сразу запускаем огонь (решает проблему долгой загрузки и лагов)
-    const timer = setTimeout(() => setLoaded(true), 50);
-    return () => clearTimeout(timer);
+    
+    const img = new Image();
+    img.src = src;
+
+    const startAnimation = () => {
+      if (!isMounted) return;
+      // Ждем ровно 50мс ПОСЛЕ реальной загрузки картинки.
+      // Это гарантирует, что браузер сначала отрисует стартовый кадр, а потом запустит огонь.
+      setTimeout(() => {
+        if (isMounted) setLoaded(true);
+      }, 50);
+    };
+
+    if (img.complete) {
+      startAnimation();
+    } else {
+      img.onload = startAnimation;
+    }
+
+    return () => { isMounted = false; };
   }, [src]);
 
   return (
@@ -344,14 +361,14 @@ const EsotericCard = () => (
     {/* ОБРАТНАЯ СТОРОНА (Mandala / Aura Style) */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-[#050505] flex flex-col items-center p-6 text-white border border-purple-900/30" style={{ transform: 'rotateY(180deg)' }}>
       
-      {/* ФОН МАНДАЛЫ (Орбиты и Аура) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square rounded-full border-[0.5px] border-purple-500/10 border-dashed animate-[spin_60s_linear_infinite]"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] aspect-square rounded-full border-[0.5px] border-amber-500/10 animate-[spin_40s_linear_infinite_reverse]"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] aspect-square rounded-full border-[0.5px] border-purple-500/20"></div>
+      {/* ФОН МАНДАЛЫ (Орбиты и Аура) - Сделали ярче для мобилок! */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square rounded-full border border-purple-500/30 border-dashed animate-[spin_60s_linear_infinite]"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] aspect-square rounded-full border-[1.5px] border-amber-500/30 animate-[spin_40s_linear_infinite_reverse]"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] aspect-square rounded-full border-2 border-purple-500/40"></div>
       
-      {/* Пульсирующая аура */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square rounded-full bg-purple-900/20 blur-[50px] pointer-events-none"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] aspect-square rounded-full bg-amber-600/10 blur-[40px] animate-pulse pointer-events-none"></div>
+      {/* Пульсирующая аура - усилили свечение */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square rounded-full bg-purple-900/40 blur-[50px] pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] aspect-square rounded-full bg-amber-600/20 blur-[40px] animate-pulse pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col items-center h-full w-full">
         
@@ -822,7 +839,8 @@ const FitnessCard = () => (
                 <circle cx="32" cy="32" r="26" stroke="currentColor" strokeWidth="5" fill="transparent" strokeDasharray="163" strokeDashoffset="8" className="text-orange-500 transition-all duration-1000 ease-out" strokeLinecap="round" />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-black italic text-lg text-orange-400 drop-shadow-md">{CONTENT.fitness.stat2Value}</span>
+                {/* Уменьшили размер шрифта с text-lg на text-sm, чтобы длинные числа (500+) не касались краев */}
+                <span className="font-black italic text-sm text-orange-400 drop-shadow-md">{CONTENT.fitness.stat2Value}</span>
               </div>
             </div>
             <p className="text-[9px] text-zinc-400 uppercase font-black tracking-widest leading-none">{CONTENT.fitness.stat2Title}</p>
@@ -883,7 +901,8 @@ const RealEstateCard = () => (
             <br />
             {CONTENT.broker.name2}
           </h2>
-          <p className="text-amber-500/80 font-serif font-light text-[10px] uppercase tracking-[0.3em] mt-3">
+          {/* Убрали прозрачность, сделали текст ярче (amber-300) и добавили легкую тень, чтобы не терялся */}
+          <p className="text-amber-300 font-serif font-medium text-[11px] uppercase tracking-[0.3em] mt-3 drop-shadow-md bg-black/20 w-fit mx-auto px-3 py-1 rounded-full border border-amber-600/20">
             {CONTENT.broker.role}
           </p>
         </div>
