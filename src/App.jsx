@@ -295,12 +295,12 @@ const globalStyles = `
     opacity: 0;
   }
   .burn-img-transition {
-    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1); /* Замедлили до 3.5 сек */
+    transition: clip-path 3.5s ease-in-out; /* Плавно и без рывков */
     /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
   }
   .burn-glow-transition {
     /* Огненный край расширяется вместе с фото, плавно затухая в конце */
-    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease-out 2.7s;
+    transition: clip-path 3.5s ease-in-out, opacity 1s ease-out 2.5s;
     /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
   }
   
@@ -1728,11 +1728,11 @@ const App = () => {
       {/* Вставляем глобальные стили */}
       <style>{globalStyles}</style>
 
-      {/* SVG-Фильтр для эффекта рваной горящей бумаги */}
+      {/* SVG-Фильтр для эффекта рваной горящей бумаги (Оптимизировано для плавности) */}
       <svg width="0" height="0" className="absolute pointer-events-none">
-        <filter id="burn-edge-filter">
-          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" />
+        <filter id="burn-edge-filter" colorInterpolationFilters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="25" xChannelSelector="R" yChannelSelector="G" />
         </filter>
       </svg>
 
