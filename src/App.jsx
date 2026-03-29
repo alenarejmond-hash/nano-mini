@@ -291,7 +291,7 @@ const globalStyles = `
     opacity: 1;
   }
   .clip-burn-glow {
-    clip-path: circle(155% at 100% 0%); 
+    clip-path: circle(165% at 100% 0%); /* Значительно больше, чтобы огонь выходил за край и был широким */
     opacity: 0;
   }
   .burn-img-transition {
@@ -301,7 +301,8 @@ const globalStyles = `
     -webkit-transform: translateZ(0);
   }
   .burn-glow-transition {
-    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease-out 2.7s;
+    /* Затухание только в самом конце, чтобы огонь ярко горел весь путь */
+    transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-out 2.7s;
     will-change: clip-path, opacity; /* Возвращаем аппаратное ускорение */
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
@@ -384,14 +385,23 @@ const BurnRevealImage = ({ src, className, style }) => {
   return (
     // Возвращаем чистый эффект! Используем clipPath для обрезки острых углов, потому что WebkitMaskImage и overflow-hidden убивали огонь
     <div className={`absolute inset-0 pointer-events-none ${className}`} style={{ ...style, clipPath: 'inset(0 round 2.5rem)', WebkitClipPath: 'inset(0 round 2.5rem)' }}>
-      {/* 1. Слой огненного края (с SVG-искажением для рваности) */}
-      <div className="absolute inset-0" style={{ filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)' }}>
+      
+      {/* 1. Слой огненного края (Отрисовывается первым, находится СНИЗУ) */}
+      {/* Расширяем контейнер (-30px), чтобы дать фильтру место для искажения и избежать ровной линии на мобильных! */}
+      <div 
+        className="absolute inset-[-30px]" 
+        style={{ 
+          filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)',
+          WebkitFilter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)'
+        }}
+      >
         <div 
-          className={`absolute inset-0 bg-cover bg-center burn-glow-transition ${loaded ? 'clip-burn-glow' : 'clip-burn-start'}`}
+          className={`absolute inset-[30px] bg-cover bg-center burn-glow-transition ${loaded ? 'clip-burn-glow' : 'clip-burn-start'}`}
           style={{ backgroundImage: `url(${src})` }}
         />
       </div>
-      {/* 2. Слой самого фото */}
+
+      {/* 2. Слой самого фото (Отрисовывается ВТОРЫМ, находится СВЕРХУ, без фильтров для скорости) */}
       <div 
         className={`absolute inset-0 bg-cover bg-center burn-img-transition ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
         style={{ backgroundImage: `url(${src})` }}
@@ -1733,9 +1743,10 @@ const App = () => {
 
       {/* SVG-Фильтр для эффекта рваной горящей бумаги (Оптимизирован для плавной отрисовки) */}
       <svg width="0" height="0" className="absolute pointer-events-none">
-        <filter id="burn-edge-filter">
+        {/* ВАЖНО: x, y, width, height расширены, чтобы фильтр не обрезался в прямую линию на iOS/Safari! */}
+        <filter id="burn-edge-filter" x="-30%" y="-30%" width="160%" height="160%">
           <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="35" xChannelSelector="R" yChannelSelector="G" />
         </filter>
       </svg>
 
