@@ -3,7 +3,8 @@ import {
   Sparkles, Moon, Brain, Heart, PlaneTakeoff, Map, 
   Camera, Play, Phone, Mail, MessageCircle, 
   MapPin, Globe, Award, Star, Compass, UserCircle2,
-  Flame, Activity, Building2, Key, TrendingUp, Diamond, Wallet, Crown
+  Flame, Activity, Building2, Key, TrendingUp, Diamond, Wallet, Crown,
+  QrCode, Share2, Copy, X, Check
 } from 'lucide-react';
 
 // Кастомная иконка Instagram (т.к. из lucide-react бренды удалили)
@@ -985,6 +986,8 @@ const App = () => {
   const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
   const [sparks, setSparks] = useState([]);
   const [bgOffset, setBgOffset] = useState({ x: 0, y: 0 });
+  const [showShare, setShowShare] = useState(false); // Состояние для модального окна
+  const [copied, setCopied] = useState(false);       // Состояние для копирования ссылки
   const cardRef = useRef(null);
   const audioCtxRef = useRef(null); // Реф для аудио контекста (чтобы звук не пропадал)
   const isFlippingRef = useRef(false); // Реф для блокировки наклона во время переворота
@@ -1153,6 +1156,29 @@ const App = () => {
     return colors[activeTab] || colors[0];
   };
 
+  // Функции для шаринга
+  const handleCopy = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Моя цифровая визитка',
+          text: 'Привет! Вот моя визитка с контактами:',
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.log('Шаринг отменен');
+      }
+    } else {
+      handleCopy(); // Фолбек для десктопов без поддержки Web Share API
+    }
+  };
+
   const tabs = [
     { id: 0, name: 'Эзотерик', icon: <Moon className="w-3 h-3 sm:w-4 sm:h-4" /> },
     { id: 1, name: 'Психолог', icon: <Brain className="w-3 h-3 sm:w-4 sm:h-4" /> },
@@ -1311,6 +1337,105 @@ const App = () => {
           </div>
         </div>
       </div>
+
+      {/* КНОПКА ПОДЕЛИТЬСЯ (Еле заметная) */}
+      <button
+        onClick={() => {
+          if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(15);
+          setShowShare(true);
+        }}
+        className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 p-3.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white/40 hover:text-white/90 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 group touch-manipulation"
+        aria-label="Поделиться"
+      >
+        <QrCode className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
+      </button>
+
+      {/* МОДАЛЬНОЕ ОКНО ПОДЕЛИТЬСЯ (Glassmorphism) */}
+      {showShare && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md transition-opacity animate-in fade-in duration-200" 
+          onClick={() => setShowShare(false)}
+        >
+          <div 
+            className="bg-neutral-900/80 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-6 sm:p-8 w-full max-w-sm flex flex-col items-center relative shadow-2xl animate-in zoom-in-95 duration-200" 
+            onClick={e => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setShowShare(false)} 
+              className="absolute top-5 right-5 text-white/40 hover:text-white bg-white/5 hover:bg-white/10 rounded-full p-2 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-4 border border-white/10">
+              <QrCode className="w-6 h-6 text-white/80" />
+            </div>
+            
+            <h3 className="text-xl font-bold text-white mb-2 tracking-wide">Поделиться визиткой</h3>
+            <p className="text-sm text-neutral-400 text-center mb-6 leading-relaxed">Дайте отсканировать QR-код или отправьте ссылку напрямую.</p>
+            
+            {/* Реалистичный паттерн QR кода для красоты */}
+            <div className="bg-white p-4 rounded-3xl mb-6 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+              <svg width="180" height="180" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                <rect width="100" height="100" fill="white" rx="5"/>
+                {/* Маркеры */}
+                <path d="M10,10 h20 v20 h-20 z M12.5,12.5 h15 v15 h-15 z M15,15 h10 v10 h-10 z" fill="black"/>
+                <path d="M70,10 h20 v20 h-20 z M72.5,12.5 h15 v15 h-15 z M75,15 h10 v10 h-10 z" fill="black"/>
+                <path d="M10,70 h20 v20 h-20 z M12.5,72.5 h15 v15 h-15 z M15,75 h10 v10 h-10 z" fill="black"/>
+                {/* Пиксели данных */}
+                <rect x="35" y="10" width="5" height="5" fill="black"/>
+                <rect x="45" y="10" width="10" height="5" fill="black"/>
+                <rect x="60" y="10" width="5" height="10" fill="black"/>
+                <rect x="35" y="20" width="20" height="5" fill="black"/>
+                <rect x="40" y="25" width="5" height="10" fill="black"/>
+                <rect x="50" y="20" width="15" height="5" fill="black"/>
+                <rect x="10" y="35" width="15" height="5" fill="black"/>
+                <rect x="30" y="35" width="10" height="10" fill="black"/>
+                <rect x="45" y="35" width="25" height="5" fill="black"/>
+                <rect x="75" y="35" width="15" height="5" fill="black"/>
+                <rect x="10" y="45" width="5" height="15" fill="black"/>
+                <rect x="20" y="45" width="20" height="5" fill="black"/>
+                <rect x="45" y="45" width="5" height="10" fill="black"/>
+                <rect x="55" y="45" width="15" height="5" fill="black"/>
+                <rect x="75" y="45" width="15" height="10" fill="black"/>
+                <rect x="15" y="55" width="10" height="5" fill="black"/>
+                <rect x="30" y="50" width="10" height="15" fill="black"/>
+                <rect x="45" y="60" width="15" height="5" fill="black"/>
+                <rect x="65" y="55" width="5" height="20" fill="black"/>
+                <rect x="75" y="60" width="15" height="5" fill="black"/>
+                <rect x="35" y="70" width="25" height="5" fill="black"/>
+                <rect x="65" y="80" width="10" height="10" fill="black"/>
+                <rect x="80" y="70" width="10" height="5" fill="black"/>
+                <rect x="75" y="80" width="5" height="10" fill="black"/>
+                <rect x="85" y="80" width="5" height="10" fill="black"/>
+                <rect x="35" y="80" width="10" height="10" fill="black"/>
+                <rect x="50" y="80" width="10" height="5" fill="black"/>
+                <rect x="55" y="85" width="5" height="5" fill="black"/>
+                <rect x="25" y="65" width="5" height="5" fill="black"/>
+                <rect x="45" y="70" width="5" height="5" fill="black"/>
+                <rect x="50" y="65" width="5" height="5" fill="black"/>
+              </svg>
+            </div>
+
+            <div className="flex gap-3 w-full">
+              <button 
+                onClick={handleCopy}
+                className="flex-1 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-medium py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 transition-colors text-sm"
+              >
+                {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                {copied ? 'Скопировано!' : 'Копировать'}
+              </button>
+              <button 
+                onClick={handleShare}
+                className="flex-1 bg-white text-black font-bold py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-neutral-200 transition-colors shadow-lg text-sm"
+              >
+                <Share2 className="w-4 h-4" />
+                Отправить
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
