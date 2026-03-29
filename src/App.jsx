@@ -668,46 +668,71 @@ const BloggerCard = () => (
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(6,182,212,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border border-zinc-800" style={{ transform: 'rotateY(180deg)' }}>
-      <div className="absolute -top-10 -right-10 w-48 h-48 bg-pink-500/20 blur-[60px] rounded-full pointer-events-none"></div>
-      <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-cyan-500/20 blur-[60px] rounded-full pointer-events-none"></div>
+    {/* ОБРАТНАЯ СТОРОНА (Neo-Brutalism / Glossy Style) */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(6,182,212,0.4)] overflow-hidden bg-zinc-950 flex flex-col text-white border-2 border-zinc-800" style={{ transform: 'rotateY(180deg)' }}>
       
-      <div className="relative z-10 flex flex-col h-full gap-3">
-        <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex items-center justify-between">
-          <div>
-            <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-pink-500 text-transparent bg-clip-text">{CONTENT.blogger.username}</h3>
-            <p className="text-zinc-500 text-[10px] mt-1 uppercase tracking-widest font-bold">{CONTENT.blogger.subUsername}</p>
+      {/* Глянцевые неоновые засветы */}
+      <div className="absolute -top-20 -right-20 w-64 h-64 bg-pink-500/30 blur-[80px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-cyan-500/30 blur-[80px] rounded-full pointer-events-none mix-blend-screen"></div>
+      
+      {/* Огромная вертикальная типографика */}
+      <div className="absolute left-0 top-0 bottom-0 w-[4.5rem] bg-zinc-900/80 backdrop-blur-md border-r border-zinc-800 flex items-center justify-center z-0 overflow-hidden">
+        <h3 className="text-[5rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-cyan-400 to-pink-500 -rotate-90 whitespace-nowrap tracking-tighter mix-blend-screen opacity-50">
+          {CONTENT.blogger.name1}
+        </h3>
+      </div>
+
+      {/* Основной контент (смещен вправо из-за вертикального текста) */}
+      <div className="relative z-10 flex flex-col h-full w-full pl-[4.5rem] p-5">
+        
+        {/* Шапка: Юзернейм и Аватар */}
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex flex-col mt-2">
+            <span className="bg-cyan-400 text-black text-[9px] font-black uppercase tracking-[0.2em] px-2 py-0.5 self-start mb-1 transform -skew-x-12 shadow-[2px_2px_0px_#ec4899]">
+              {CONTENT.blogger.subUsername}
+            </span>
+            <h3 className="text-xl font-black uppercase tracking-tighter leading-none text-white drop-shadow-[2px_2px_0px_#ec4899]">{CONTENT.blogger.username}</h3>
           </div>
-          <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-pink-500 to-cyan-500 p-[2px] shadow-[0_0_15px_rgba(236,72,153,0.3)]">
-            <img src={CONTENT.blogger.avatar} alt={CONTENT.blogger.name1} className="w-full h-full object-cover rounded-full border border-zinc-950" />
+          {/* Брутальный квадратный аватар в стиле глянца */}
+          <div className="w-14 h-14 shrink-0 border-2 border-white shadow-[4px_4px_0px_#ec4899] transform rotate-3 bg-zinc-800 overflow-hidden">
+            <img src={CONTENT.blogger.avatar} alt={CONTENT.blogger.name1} className="w-full h-full object-cover grayscale contrast-125" />
           </div>
         </div>
         
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex flex-col items-center relative overflow-hidden group">
-            <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-pink-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <Play className="w-5 h-5 mb-2 text-pink-500" />
-            <p className="font-black text-lg">{CONTENT.blogger.stat1Value}</p>
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">{CONTENT.blogger.stat1Title}</p>
+        {/* Асимметричная статистика (Лесенкой) */}
+        <div className="flex flex-col gap-3 mt-2 mb-auto">
+          {/* Блок 1 */}
+          <div className="bg-zinc-900 border-2 border-zinc-800 p-3 flex justify-between items-center shadow-[4px_4px_0px_#22d3ee] transform -rotate-2 hover:rotate-0 transition-transform">
+            <div className="flex items-center gap-2">
+              <Play className="w-5 h-5 text-cyan-400 fill-cyan-400" />
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{CONTENT.blogger.stat1Title}</span>
+            </div>
+            <span className="text-2xl font-black text-white">{CONTENT.blogger.stat1Value}</span>
           </div>
-          <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex flex-col items-center relative overflow-hidden group">
-             <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <InstagramIcon className="w-5 h-5 mb-2 text-cyan-500" />
-            <p className="font-black text-lg">{CONTENT.blogger.stat2Value}</p>
-            <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">{CONTENT.blogger.stat2Title}</p>
+          {/* Блок 2 (Смещенный вправо) */}
+          <div className="bg-zinc-900 border-2 border-zinc-800 p-3 flex justify-between items-center shadow-[4px_4px_0px_#ec4899] transform rotate-1 hover:rotate-0 transition-transform ml-4">
+            <div className="flex items-center gap-2">
+              <InstagramIcon className="w-5 h-5 text-pink-500" />
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{CONTENT.blogger.stat2Title}</span>
+            </div>
+            <span className="text-2xl font-black text-white">{CONTENT.blogger.stat2Value}</span>
           </div>
         </div>
 
-        <div className="flex-1 bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex items-center justify-center">
-           <p className="text-zinc-400 text-xs text-center font-mono uppercase tracking-widest leading-loose">
-             {CONTENT.blogger.quote1}<br/> <span className="text-white font-bold bg-white/10 px-2 py-1 rounded">{CONTENT.blogger.quote2}</span>
+        {/* Дерзкая цитата (Эффект текстовыделителя) */}
+        <div className="mb-6 relative z-20">
+           <p className="font-black text-[13px] uppercase tracking-tighter leading-relaxed">
+             <span className="bg-white text-black px-1.5 py-0.5 box-decoration-clone">{CONTENT.blogger.quote1}</span>
+             <br/>
+             <span className="bg-pink-500 text-white px-1.5 py-0.5 box-decoration-clone inline-block mt-0.5 shadow-[2px_2px_0px_#22d3ee]">{CONTENT.blogger.quote2}</span>
            </p>
         </div>
 
-        <a href={CONTENT.blogger.actionLink} className="w-full bg-white text-black font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300">
-          <Mail className="w-5 h-5" />
-          {CONTENT.blogger.actionText}
+        {/* Интерактивная брутальная кнопка */}
+        <a href={CONTENT.blogger.actionLink} className="w-full bg-cyan-400 text-black font-black uppercase tracking-widest py-3.5 flex items-center justify-center gap-2 transition-all duration-200 shadow-[5px_5px_0px_#ec4899] active:translate-x-[5px] active:translate-y-[5px] active:shadow-none border-2 border-transparent hover:border-black group relative overflow-hidden z-20">
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+          <Mail className="w-5 h-5 relative z-10" />
+          <span className="relative z-10">{CONTENT.blogger.actionText}</span>
         </a>
       </div>
     </div>
@@ -728,65 +753,105 @@ const FitnessCard = () => (
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
-          <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-red-500/30 flex items-center gap-2">
-            <Flame className="w-4 h-4 text-orange-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-rose-100">{CONTENT.fitness.badge}</span>
+          <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-red-500/50 flex items-center gap-2 transform -skew-x-6 shadow-[4px_4px_0_rgba(225,29,72,0.5)]">
+            <Flame className="w-4 h-4 text-orange-400 transform skew-x-6" />
+            <span className="text-xs font-black italic tracking-widest uppercase text-rose-100 transform skew-x-6">{CONTENT.fitness.badge}</span>
           </div>
-          <Activity className="w-8 h-8 text-rose-200/80 drop-shadow-[0_0_10px_rgba(244,63,94,0.5)]" />
+          <Activity className="w-8 h-8 text-rose-200/80 drop-shadow-[0_0_10px_rgba(244,63,94,0.8)]" />
         </div>
 
         <div>
-          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+          <h2 className="text-3xl sm:text-4xl leading-tight font-black italic mb-1 uppercase tracking-tighter text-white drop-shadow-[4px_4px_0px_rgba(220,38,38,0.8)]">
             {CONTENT.fitness.name1}
             <br />
             {CONTENT.fitness.name2}
           </h2>
-          <p className="text-rose-300 font-bold text-xs uppercase tracking-[0.2em] mt-2 border-l-2 border-orange-500 pl-3">
+          <p className="text-rose-300 font-black italic text-xs uppercase tracking-[0.2em] mt-2 border-l-4 border-orange-500 pl-3">
             {CONTENT.fitness.role}
           </p>
         </div>
       </div>
     </div>
 
-    {/* ОБРАТНАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border-2 border-red-900/50" style={{ transform: 'rotateY(180deg)' }}>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(225,29,72,0.15)_1px,_transparent_1px)]" style={{ backgroundSize: '12px 12px' }}></div>
+    {/* ОБРАТНАЯ СТОРОНА (Dynamics & Power Style) */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-[#0a0a0a] flex flex-col p-5 text-white border-2 border-red-600/30" style={{ transform: 'rotateY(180deg)' }}>
       
-      <div className="relative z-10 flex flex-col h-full gap-3">
-        <div className="bg-zinc-900 p-4 rounded-2xl border-l-4 border-l-red-600 border border-zinc-800 flex items-center gap-4">
-          <img src={CONTENT.fitness.avatar} alt={CONTENT.fitness.name1} className="w-14 h-14 object-cover rounded-xl transition-all border border-zinc-700" />
-          <div>
-            <h3 className="text-xl font-black uppercase italic tracking-wider text-zinc-100">{CONTENT.fitness.username}</h3>
-            <p className="text-red-500 text-[10px] uppercase tracking-[0.2em] font-bold">{CONTENT.fitness.subUsername}</p>
+      {/* Агрессивный фон: диагональные гоночные полосы (Карбон/Трек) */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'repeating-linear-gradient(-45deg, #000 0, #000 3px, #dc2626 3px, #dc2626 6px)', backgroundSize: '16px 16px' }}></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent pointer-events-none"></div>
+
+      <div className="relative z-10 flex flex-col h-full gap-4">
+        
+        {/* Хедер: Аватар и Имя со скосом */}
+        <div className="flex items-center gap-4 mt-1">
+          <div className="relative w-16 h-16 shrink-0 transform -skew-x-6 overflow-hidden border-b-4 border-r-4 border-red-600 bg-zinc-800 shadow-[4px_4px_15px_rgba(220,38,38,0.3)]">
+            <img src={CONTENT.fitness.avatar} alt={CONTENT.fitness.name1} className="w-full h-full object-cover transform skew-x-6 scale-125 grayscale contrast-125" />
+          </div>
+          <div className="flex flex-col">
+            <h3 className="text-xl font-black uppercase italic tracking-tighter text-white leading-none drop-shadow-[2px_2px_0px_#dc2626]">{CONTENT.fitness.username}</h3>
+            <p className="text-white text-[10px] uppercase tracking-[0.2em] font-black bg-red-600 w-fit px-2 py-0.5 mt-1.5 transform -skew-x-6 shadow-[2px_2px_0px_#7f1d1d]">{CONTENT.fitness.subUsername}</p>
           </div>
         </div>
         
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-8 h-8 bg-red-600/10 rounded-bl-full"></div>
-            <p className="font-black text-2xl text-white italic">{CONTENT.fitness.stat1Value}</p>
-            <p className="text-[9px] text-zinc-400 uppercase font-bold tracking-widest mt-1">{CONTENT.fitness.stat1Title}</p>
+        {/* Кольца активности (Smartwatch UI) */}
+        <div className="flex justify-around items-center bg-zinc-900/80 backdrop-blur-md py-4 px-2 border-y-2 border-red-600/50 transform -skew-x-3 shadow-[0_0_20px_rgba(220,38,38,0.15)]">
+          {/* Кольцо 1 */}
+          <div className="flex flex-col items-center transform skew-x-3">
+            <div className="relative w-16 h-16 mb-2">
+              <svg className="w-full h-full transform -rotate-90 drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]">
+                <circle cx="32" cy="32" r="26" stroke="currentColor" strokeWidth="5" fill="transparent" className="text-zinc-800" />
+                {/* strokeDasharray для радиуса 26 = ~163. Заполняем на 80% (offset 32) */}
+                <circle cx="32" cy="32" r="26" stroke="currentColor" strokeWidth="5" fill="transparent" strokeDasharray="163" strokeDashoffset="32" className="text-red-500 transition-all duration-1000 ease-out" strokeLinecap="round" />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="font-black italic text-lg text-white drop-shadow-md">{CONTENT.fitness.stat1Value}</span>
+              </div>
+            </div>
+            <p className="text-[9px] text-zinc-400 uppercase font-black tracking-widest leading-none">{CONTENT.fitness.stat1Title}</p>
           </div>
-          <div className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-8 h-8 bg-orange-600/10 rounded-bl-full"></div>
-            <p className="font-black text-2xl text-red-500 italic">{CONTENT.fitness.stat2Value}</p>
-            <p className="text-[9px] text-zinc-400 uppercase font-bold tracking-widest mt-1">{CONTENT.fitness.stat2Title}</p>
+          
+          {/* Вертикальный разделитель */}
+          <div className="w-0.5 h-12 bg-zinc-800 transform skew-x-3"></div>
+
+          {/* Кольцо 2 */}
+          <div className="flex flex-col items-center transform skew-x-3">
+            <div className="relative w-16 h-16 mb-2">
+              <svg className="w-full h-full transform -rotate-90 drop-shadow-[0_0_8px_rgba(249,115,22,0.6)]">
+                <circle cx="32" cy="32" r="26" stroke="currentColor" strokeWidth="5" fill="transparent" className="text-zinc-800" />
+                {/* Заполняем на 95% (offset 8) */}
+                <circle cx="32" cy="32" r="26" stroke="currentColor" strokeWidth="5" fill="transparent" strokeDasharray="163" strokeDashoffset="8" className="text-orange-500 transition-all duration-1000 ease-out" strokeLinecap="round" />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="font-black italic text-lg text-orange-400 drop-shadow-md">{CONTENT.fitness.stat2Value}</span>
+              </div>
+            </div>
+            <p className="text-[9px] text-zinc-400 uppercase font-black tracking-widest leading-none">{CONTENT.fitness.stat2Title}</p>
           </div>
         </div>
 
-        <div className="flex-1 flex flex-col gap-2 justify-center">
-           <a href={CONTENT.fitness.link1Url} className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 flex items-center justify-between hover:bg-zinc-800 transition-colors group">
-              <span className="font-bold uppercase tracking-wider text-xs text-zinc-300 group-hover:text-white">{CONTENT.fitness.link1Text}</span>
-              <Activity className="w-4 h-4 text-orange-500" />
+        {/* Ссылки-прогрессбары */}
+        <div className="flex-1 flex flex-col justify-center gap-3">
+           <a href={CONTENT.fitness.link1Url} className="relative w-full h-[3.25rem] bg-zinc-900 border border-zinc-800 transform -skew-x-6 overflow-hidden group shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
+             <div className="absolute top-0 left-0 h-full bg-red-600 w-[80%] group-hover:w-full transition-all duration-500 ease-out"></div>
+             <div className="absolute inset-0 flex items-center justify-between px-5 transform skew-x-6">
+                <span className="font-black italic uppercase text-xs tracking-widest text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)]">{CONTENT.fitness.link1Text}</span>
+                <Activity className="w-5 h-5 text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform" />
+             </div>
            </a>
-           <a href={CONTENT.fitness.link2Url} className="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 flex items-center justify-between hover:bg-zinc-800 transition-colors group">
-              <span className="font-bold uppercase tracking-wider text-xs text-zinc-300 group-hover:text-white">{CONTENT.fitness.link2Text}</span>
-              <Flame className="w-4 h-4 text-red-500" />
+           <a href={CONTENT.fitness.link2Url} className="relative w-full h-[3.25rem] bg-zinc-900 border border-zinc-800 transform -skew-x-6 overflow-hidden group shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
+             <div className="absolute top-0 left-0 h-full bg-orange-600 w-[65%] group-hover:w-full transition-all duration-500 ease-out"></div>
+             <div className="absolute inset-0 flex items-center justify-between px-5 transform skew-x-6">
+                <span className="font-black italic uppercase text-xs tracking-widest text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)]">{CONTENT.fitness.link2Text}</span>
+                <Flame className="w-5 h-5 text-white drop-shadow-[1px_1px_0_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform" />
+             </div>
            </a>
         </div>
 
-        <a href={CONTENT.fitness.actionLink} className="w-full bg-red-600 text-white font-black uppercase italic tracking-widest py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-red-500 transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)]">
-          {CONTENT.fitness.actionText}
+        {/* Главная кнопка (Педаль газа) */}
+        <a href={CONTENT.fitness.actionLink} className="w-full bg-red-600 text-white font-black italic uppercase tracking-widest py-4 flex items-center justify-center gap-2 hover:bg-red-500 transition-all shadow-[0_0_25px_rgba(220,38,38,0.5)] transform -skew-x-6 border-b-[6px] border-r-[4px] border-red-900 active:border-b-0 active:border-r-0 active:translate-y-[6px] active:translate-x-[4px] mt-1">
+          <span className="transform skew-x-6 flex items-center gap-2 text-sm">
+            {CONTENT.fitness.actionText} <Flame className="w-5 h-5" />
+          </span>
         </a>
       </div>
     </div>
