@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Sparkles, Moon, Brain, Heart, PlaneTakeoff, Map, 
-  Camera, Play, Phone, Mail, Instagram, MessageCircle, 
+  Camera, Play, Phone, Mail, MessageCircle, 
   MapPin, Globe, Award, Star, Compass, UserCircle2,
   Flame, Activity, Building2, Key, TrendingUp, Diamond, Wallet, Crown
 } from 'lucide-react';
+
+// Кастомная иконка Instagram (т.к. из lucide-react бренды удалили)
+const InstagramIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+  </svg>
+);
 
 // --- Глобальные стили для сложных анимаций (вставляем прямо в компонент) ---
 const globalStyles = `
@@ -24,10 +33,13 @@ const globalStyles = `
   }
   .card-preserve-3d {
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
   }
   .card-backface-hidden {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
   .bg-noise {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -94,7 +106,7 @@ const EsotericCard = () => (
         {/* Шапка профиля */}
         <div className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex items-center gap-4 shadow-lg">
           <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-purple-500 to-amber-500 p-0.5 shrink-0">
-            <img src="https://images.unsplash.com/photo-1606322964893-c62584102283?q=80&w=400&auto=format&fit=crop" alt="Елена" className="w-full h-full object-cover rounded-full border border-zinc-950" />
+            <img src="/avatar.jpg" alt="Елена" className="w-full h-full object-cover rounded-full border border-zinc-950" />
           </div>
           <div>
             <h3 className="text-lg font-serif font-bold text-amber-100">@elena_myth</h3>
@@ -109,7 +121,7 @@ const EsotericCard = () => (
             <span className="font-medium text-[11px] uppercase tracking-wider text-purple-200">Telegram</span>
           </a>
           <a href="#" className="bg-zinc-900/60 backdrop-blur-xl rounded-[2rem] p-4 border border-purple-500/20 flex flex-col items-center justify-center gap-2 hover:border-amber-500/50 hover:bg-purple-900/20 transition-all group shadow-lg">
-            <Instagram className="w-6 h-6 text-purple-400 group-hover:text-amber-300 transition-colors" />
+            <InstagramIcon className="w-6 h-6 text-purple-400 group-hover:text-amber-300 transition-colors" />
             <span className="font-medium text-[11px] uppercase tracking-wider text-purple-200">Instagram</span>
           </a>
         </div>
@@ -180,7 +192,7 @@ const PsychologistCard = () => (
         {/* Профиль */}
         <div className="bg-white/60 backdrop-blur-xl rounded-[2rem] p-4 border border-white flex items-center gap-4 shadow-[0_8px_30px_rgba(13,148,136,0.05)]">
           <div className="w-14 h-14 rounded-full border-2 border-teal-200 p-0.5 shrink-0 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" alt="Анна" className="w-full h-full object-cover rounded-full" />
+            <img src="/avatar.jpg" alt="Анна" className="w-full h-full object-cover rounded-full" />
           </div>
           <div>
             <h3 className="text-lg font-serif font-bold text-teal-950">@psy_svetplaya</h3>
@@ -285,7 +297,7 @@ const TravelCard = () => (
         {/* Данные "пассажира" */}
         <div className="flex items-center gap-4 bg-zinc-900/80 p-3 rounded-2xl border border-zinc-700/50">
           <div className="w-12 h-12 rounded-full overflow-hidden border border-orange-500/50 shrink-0">
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop" alt="Максим" className="w-full h-full object-cover" />
+            <img src="/avatar.jpg" alt="Максим" className="w-full h-full object-cover" />
           </div>
           <div className="grid grid-cols-2 w-full gap-2">
             <div>
@@ -365,7 +377,7 @@ const BloggerCard = () => (
             <p className="text-zinc-500 text-[10px] mt-1 uppercase tracking-widest font-bold">Content Creator</p>
           </div>
           <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-pink-500 to-cyan-500 p-[2px] shadow-[0_0_15px_rgba(236,72,153,0.3)]">
-            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop" alt="Alex Neo" className="w-full h-full object-cover rounded-full border border-zinc-950" />
+            <img src="/avatar.jpg" alt="Alex Neo" className="w-full h-full object-cover rounded-full border border-zinc-950" />
           </div>
         </div>
         
@@ -379,7 +391,7 @@ const BloggerCard = () => (
           </div>
           <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-zinc-800 flex flex-col items-center relative overflow-hidden group">
              <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <Instagram className="w-5 h-5 mb-2 text-cyan-500" />
+            <InstagramIcon className="w-5 h-5 mb-2 text-cyan-500" />
             <p className="font-black text-lg">1.2M</p>
             <p className="text-[9px] text-zinc-500 uppercase tracking-widest mt-1">Instagram</p>
           </div>
@@ -438,7 +450,7 @@ const FitnessCard = () => (
       <div className="relative z-10 flex flex-col h-full gap-3">
         {/* Профиль в брутальном стиле */}
         <div className="bg-zinc-900 p-4 rounded-2xl border-l-4 border-l-red-600 border border-zinc-800 flex items-center gap-4">
-          <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=400&auto=format&fit=crop" alt="Иван Сила" className="w-14 h-14 object-cover rounded-xl grayscale hover:grayscale-0 transition-all border border-zinc-700" />
+          <img src="/avatar.jpg" alt="Иван Сила" className="w-14 h-14 object-cover rounded-xl grayscale hover:grayscale-0 transition-all border border-zinc-700" />
           <div>
             <h3 className="text-xl font-black uppercase italic tracking-wider text-zinc-100">@ivan_sila</h3>
             <p className="text-red-500 text-[10px] uppercase tracking-[0.2em] font-bold">No Excuses</p>
@@ -526,7 +538,7 @@ const RealEstateCard = () => (
             <p className="text-amber-500/80 text-[9px] mt-1 uppercase tracking-widest font-bold">Premium Broker</p>
           </div>
           <div className="w-12 h-12 rounded-full border border-amber-500/50 p-[1px]">
-             <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop" alt="Артур Гранд" className="w-full h-full object-cover rounded-full" />
+             <img src="/avatar.jpg" alt="Артур Гранд" className="w-full h-full object-cover rounded-full" />
           </div>
         </div>
         
@@ -604,7 +616,7 @@ const MoneyCard = () => (
         <div className="bg-zinc-900/80 backdrop-blur-md p-4 rounded-3xl border border-emerald-900/50 flex items-center gap-4">
           <div className="relative">
             <div className="w-14 h-14 rounded-xl overflow-hidden border border-emerald-500/50">
-               <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="Макс Профит" className="w-full h-full object-cover grayscale opacity-80" />
+               <img src="/avatar.jpg" alt="Макс Профит" className="w-full h-full object-cover grayscale opacity-80" />
             </div>
             <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-zinc-900"></div>
           </div>
@@ -704,7 +716,7 @@ const CreatorCard = () => (
           </div>
           <div className="relative">
             <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-zinc-300 to-zinc-700 p-[2px] shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" alt="Твое Фото" className="w-full h-full object-cover rounded-full border border-zinc-950" />
+              <img src="/avatar.jpg" alt="Твое Фото" className="w-full h-full object-cover rounded-full border border-zinc-950" />
             </div>
             <Crown className="absolute -bottom-1 -right-1 w-5 h-5 text-zinc-100 bg-zinc-900 rounded-full p-0.5 border border-zinc-700" />
           </div>
@@ -748,11 +760,49 @@ const CreatorCard = () => (
 const App = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
+  const cardRef = useRef(null);
 
   // Сброс переворота при смене вкладки
   useEffect(() => {
     setIsFlipped(false);
+    setRotate({ x: 0, y: 0 });
+    setGlare(prev => ({ ...prev, opacity: 0 }));
   }, [activeTab]);
+
+  // Магнитный 3D наклон за курсором/пальцем
+  const handlePointerMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    
+    // Поддержка как мыши, так и тач-событий
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    // Максимальный угол наклона 15 градусов
+    const rotateX = ((y - centerY) / centerY) * -15;
+    const rotateY = ((x - centerX) / centerX) * 15;
+    
+    // Вычисляем позицию блика (в процентах)
+    const glareX = (x / rect.width) * 100;
+    const glareY = (y / rect.height) * 100;
+    
+    setRotate({ x: rotateX, y: rotateY });
+    setGlare({ x: glareX, y: glareY, opacity: 1 });
+  };
+
+  // Сброс наклона, когда курсор уходит
+  const handlePointerLeave = () => {
+    setRotate({ x: 0, y: 0 });
+    setGlare(prev => ({ ...prev, opacity: 0 }));
+  };
 
   const playFlipSound = () => {
     try {
@@ -849,16 +899,50 @@ const App = () => {
 
       {/* КОНТЕЙНЕР ВИЗИТКИ (3D Сцена) */}
       <div 
-        className="relative z-10 w-full max-w-[22rem] aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float"
+        ref={cardRef}
+        className="relative z-10 w-full max-w-[22rem] aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float touch-none"
         style={{ perspective: '1500px' }}
         onClick={handleFlip}
+        onMouseMove={handlePointerMove}
+        onMouseLeave={handlePointerLeave}
+        onTouchMove={handlePointerMove}
+        onTouchEnd={handlePointerLeave}
       >
-        {/* Сама визитка с анимацией парения и вращения */}
-        <div 
-          className="relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.4,0.2,0.2,1)] card-preserve-3d"
-          style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+        {/* Обертка для магнитного 3D наклона (следит за мышью/пальцем) */}
+        <div
+          className="w-full h-full card-preserve-3d transition-transform duration-100 ease-out"
+          style={{ transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)` }}
         >
-          {renderActiveCard()}
+          {/* Сама визитка с анимацией вращения (переворот на 180) */}
+          <div 
+            className="relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.4,0.2,0.2,1)] card-preserve-3d"
+            style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+          >
+            {renderActiveCard()}
+
+            {/* Бегающий блик (Лицевая сторона) */}
+            <div 
+              className="absolute inset-0 w-full h-full rounded-[2.5rem] pointer-events-none transition-opacity duration-300 card-backface-hidden"
+              style={{
+                background: `radial-gradient(farthest-corner circle at ${glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 65%)`,
+                opacity: glare.opacity,
+                mixBlendMode: 'overlay',
+                zIndex: 50,
+              }}
+            />
+
+            {/* Бегающий блик (Обратная сторона) */}
+            <div 
+              className="absolute inset-0 w-full h-full rounded-[2.5rem] pointer-events-none transition-opacity duration-300 card-backface-hidden"
+              style={{
+                transform: 'rotateY(180deg) translateZ(0)',
+                background: `radial-gradient(farthest-corner circle at ${100 - glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 65%)`,
+                opacity: glare.opacity,
+                mixBlendMode: 'overlay',
+                zIndex: 50,
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
