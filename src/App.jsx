@@ -256,14 +256,12 @@ const globalStyles = `
   }
   .burn-img-transition {
     transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1); /* Замедлили до 3.5 сек */
-    will-change: clip-path;
-    transform: translateZ(0);
+    /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
   }
   .burn-glow-transition {
     /* Огненный край расширяется вместе с фото, плавно затухая в конце */
     transition: clip-path 3.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease-out 2.7s;
-    will-change: clip-path, opacity;
-    transform: translateZ(0);
+    /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
   }
 `;
 
@@ -282,18 +280,18 @@ const BurnRevealImage = ({ src, className, style }) => {
   }, [src]);
 
   return (
-    // Добавили жесткую обрезку углов (overflow-hidden rounded-[2.5rem]) и WebkitMaskImage против бага Safari, чтобы огонь не вылезал за края карточки
-    <div className={`absolute inset-0 pointer-events-none overflow-hidden rounded-[2.5rem] ${className}`} style={{ ...style, WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}>
+    // Возвращаем чистый эффект! Используем clipPath для обрезки острых углов, потому что WebkitMaskImage и overflow-hidden убивали огонь
+    <div className={`absolute inset-0 pointer-events-none ${className}`} style={{ ...style, clipPath: 'inset(0 round 2.5rem)', WebkitClipPath: 'inset(0 round 2.5rem)' }}>
       {/* 1. Слой огненного края (с SVG-искажением для рваности) */}
-      <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden" style={{ filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)' }}>
+      <div className="absolute inset-0" style={{ filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)' }}>
         <div 
-          className={`absolute inset-0 bg-cover bg-center burn-glow-transition rounded-[2.5rem] ${loaded ? 'clip-burn-glow' : 'clip-burn-start'}`}
+          className={`absolute inset-0 bg-cover bg-center burn-glow-transition ${loaded ? 'clip-burn-glow' : 'clip-burn-start'}`}
           style={{ backgroundImage: `url(${src})` }}
         />
       </div>
       {/* 2. Слой самого фото */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center burn-img-transition rounded-[2.5rem] ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
+        className={`absolute inset-0 bg-cover bg-center burn-img-transition ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
         style={{ backgroundImage: `url(${src})` }}
       />
     </div>
