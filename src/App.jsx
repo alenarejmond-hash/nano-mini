@@ -301,11 +301,11 @@ const globalStyles = `
   
   .laser-beam-transition {
     background: linear-gradient(to bottom left, 
-      transparent 49%, 
-      rgba(56, 189, 248, 0.8) 49.6%, 
+      transparent 49.4%, 
+      rgba(56, 189, 248, 0.8) 49.8%, 
       rgba(255, 255, 255, 1) 50%, 
-      rgba(236, 72, 153, 0.8) 50.4%, 
-      transparent 51%
+      rgba(236, 72, 153, 0.8) 50.2%, 
+      transparent 50.6%
     );
     background-size: 300% 300%;
     transition: background-position 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out 1.5s;
@@ -1287,8 +1287,11 @@ const NailArtistCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(244,114,182,0.3)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,114,182,0.5)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-rose-900 via-pink-800 to-amber-700/50 opacity-80 mix-blend-screen"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-70" />
+      {/* Темный градиент для контраста лазера (чтобы он был тонким, как на других) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-rose-950/50 to-transparent"></div>
+      
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Снижена прозрачность для идеального неонового эффекта) */}
+      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-50" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1321,10 +1324,10 @@ const NailArtistCard = () => (
     {/* ОБРАТНАЯ СТОРОНА (Dark Liquid Glass / Приглушенный Глянец) */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(244,114,182,0.3)] overflow-hidden flex flex-col p-6 text-white border border-rose-500/20 bg-gradient-to-br from-[#1c0f14] via-[#2a131d] to-[#120a0d] animate-pearl" style={{ transform: 'rotateY(180deg)' }}>
       
-      {/* Блики глянца (Приглушенные темные orbs) */}
-      <div className="absolute -top-10 -left-10 w-48 h-48 bg-rose-500/20 blur-[40px] rounded-full pointer-events-none mix-blend-screen"></div>
-      <div className="absolute top-1/2 -right-12 w-40 h-40 bg-pink-600/20 blur-[50px] rounded-full pointer-events-none mix-blend-screen"></div>
-      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-56 h-56 bg-rose-400/15 blur-[40px] rounded-full pointer-events-none mix-blend-screen"></div>
+      {/* Блики глянца (Убран тяжелый mix-blend-screen для устранения лагов) */}
+      <div className="absolute -top-10 -left-10 w-48 h-48 bg-rose-500/30 blur-[40px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/2 -right-12 w-40 h-40 bg-pink-600/30 blur-[50px] rounded-full pointer-events-none"></div>
+      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-56 h-56 bg-rose-400/20 blur-[40px] rounded-full pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col h-full gap-4">
         
