@@ -283,11 +283,12 @@ const globalStyles = `
   
   /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА ЛАЗЕРНОГО РАСКАТА (БЕЗ ЛАГОВ) === */
   .mask-wipe-transition {
-    -webkit-mask-image: linear-gradient(to bottom left, black calc(50% - 15px), rgba(0,0,0,0.5) 50%, transparent calc(50% + 15px));
-    mask-image: linear-gradient(to bottom left, black calc(50% - 15px), rgba(0,0,0,0.5) 50%, transparent calc(50% + 15px));
+    -webkit-mask-image: linear-gradient(to bottom left, black 48%, rgba(0,0,0,0.5) 50%, transparent 52%);
+    mask-image: linear-gradient(to bottom left, black 48%, rgba(0,0,0,0.5) 50%, transparent 52%);
     -webkit-mask-size: 300% 300%;
     mask-size: 300% 300%;
     transition: -webkit-mask-position 2s cubic-bezier(0.4, 0, 0.2, 1), mask-position 2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: mask-position, -webkit-mask-position;
   }
   .mask-wipe-start {
     -webkit-mask-position: 0% 100%;
@@ -300,15 +301,16 @@ const globalStyles = `
   
   .laser-beam-transition {
     background: linear-gradient(to bottom left, 
-      transparent calc(50% - 12px), 
-      rgba(56, 189, 248, 0.8) calc(50% - 4px), 
+      transparent 49%, 
+      rgba(56, 189, 248, 0.8) 49.6%, 
       rgba(255, 255, 255, 1) 50%, 
-      rgba(236, 72, 153, 0.8) calc(50% + 4px), 
-      transparent calc(50% + 12px)
+      rgba(236, 72, 153, 0.8) 50.4%, 
+      transparent 51%
     );
     background-size: 300% 300%;
     transition: background-position 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out 1.5s;
     mix-blend-mode: screen;
+    will-change: background-position, opacity;
   }
   .laser-beam-start {
     background-position: 0% 100%;
@@ -514,10 +516,11 @@ const PsychologistCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(20,184,166,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 via-cyan-500 to-emerald-400 opacity-70 mix-blend-screen"></div>
       
+      {/* Темный градиент перенесен ПОД фото, чтобы не перекрывать лазер */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/50 to-transparent"></div>
+      
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
       <BurnRevealImage src={CONTENT.psychologist.bgImage} className="opacity-50" />
-      
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/50 to-transparent"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1372,12 +1375,12 @@ const AlfaCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(220,38,38,0.4)] overflow-hidden bg-[#0a0a0a] text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(239,68,68,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-red-900 via-black to-zinc-900 opacity-90 mix-blend-multiply"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60" />
-      
-      {/* Абстрактные красные лучи */}
+      {/* Абстрактные красные лучи ПЕРЕНЕСЕНЫ ВНИЗ, чтобы не размывать анимацию лазера */}
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-600/30 blur-[80px] rounded-full pointer-events-none"></div>
       <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-red-800/40 blur-[90px] rounded-full pointer-events-none"></div>
+
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60" />
 
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
