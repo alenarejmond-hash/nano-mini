@@ -1291,7 +1291,7 @@ const NailArtistCard = () => (
       <div className="absolute inset-0 bg-gradient-to-t from-black via-rose-950/50 to-transparent"></div>
       
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Снижена прозрачность для идеального неонового эффекта) */}
-      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-50" />
+      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-50 mix-blend-luminosity" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1383,7 +1383,7 @@ const AlfaCard = () => (
       <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-red-800/40 blur-[90px] rounded-full pointer-events-none"></div>
 
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60" />
+      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60 mix-blend-luminosity" />
 
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
