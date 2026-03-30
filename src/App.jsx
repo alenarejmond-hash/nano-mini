@@ -281,43 +281,59 @@ const globalStyles = `
       spark-wander var(--wt) linear 0.8s forwards;
   }
   
-  /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА ЛАЗЕРНОГО РАСКАТА (БЕЗ ЛАГОВ И МЕРЦАНИЙ) === */
+  /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА СГОРАЮЩЕЙ БУМАГИ (ОПТИМИЗИРОВАНО ДЛЯ GPU) === */
   @keyframes burn-mask-reveal {
     0% { -webkit-mask-position: 100% 0%; mask-position: 100% 0%; }
     100% { -webkit-mask-position: 0% 100%; mask-position: 0% 100%; }
   }
   
-  @keyframes burn-laser-scan {
+  @keyframes burn-fire-scan {
     0% { background-position: 100% 0%; opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
+    5% { opacity: 1; }
+    95% { opacity: 1; }
     100% { background-position: 0% 100%; opacity: 0; }
   }
   
   .smooth-mask-wipe {
-    -webkit-mask-image: linear-gradient(225deg, transparent 45%, rgba(0,0,0,0.3) 50%, black 55%);
-    mask-image: linear-gradient(225deg, transparent 45%, rgba(0,0,0,0.3) 50%, black 55%);
+    /* Делаем границу маски чуть более резкой для эффекта сгорания */
+    -webkit-mask-image: linear-gradient(225deg, transparent 47%, rgba(0,0,0,0.6) 49%, black 51%);
+    mask-image: linear-gradient(225deg, transparent 47%, rgba(0,0,0,0.6) 49%, black 51%);
     -webkit-mask-size: 300% 300%;
     mask-size: 300% 300%;
-    /* Скрываем изображение ПРЯМО НА СТАРТЕ, чтобы не было раннего появления */
+    /* Скрываем изображение ПРЯМО НА СТАРТЕ */
     -webkit-mask-position: 100% 0%;
     mask-position: 100% 0%;
-    animation: burn-mask-reveal 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    /* Чуть замедлил анимацию (до 3s), чтобы горение смотрелось эффектнее */
+    animation: burn-mask-reveal 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     will-change: mask-position, -webkit-mask-position;
   }
   
-  .smooth-laser-beam {
-    background: linear-gradient(225deg, 
-      transparent 49%, 
-      rgba(56, 189, 248, 0.6) 49.5%, 
-      rgba(255, 255, 255, 1) 50%, 
-      rgba(236, 72, 153, 0.6) 50.5%, 
-      transparent 51%
-    );
+  .burn-fire-edge {
+    /* Наслаиваем два градиента под чуть разными углами (224 и 226), 
+       чтобы создать легкую неровность горения без лагающих фильтров */
+    background: 
+      linear-gradient(224deg, 
+        transparent 48.5%, 
+        rgba(20, 5, 0, 0.95) 49%,     /* Темный пепел/обугленный край */
+        rgba(220, 38, 38, 0.9) 49.5%, /* Красное тление */
+        rgba(250, 150, 0, 1) 50%,     /* Яркий огонь */
+        rgba(255, 220, 50, 0.8) 50.2%,/* Желтая вспышка */
+        transparent 51%
+      ),
+      linear-gradient(226deg, 
+        transparent 48.5%, 
+        rgba(20, 5, 0, 0.95) 49%, 
+        rgba(220, 38, 38, 0.9) 49.5%, 
+        rgba(250, 150, 0, 1) 50%, 
+        rgba(255, 220, 50, 0.8) 50.2%,
+        transparent 51%
+      );
     background-size: 300% 300%;
     background-position: 100% 0%;
-    mix-blend-mode: screen;
-    animation: burn-laser-scan 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    mix-blend-mode: normal; /* Normal позволяет пеплу перекрывать картинку */
+    /* Легкое размытие и мощное свечение для пламени */
+    filter: drop-shadow(0 0 8px rgba(250, 100, 0, 0.8)) blur(0.5px);
+    animation: burn-fire-scan 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     will-change: background-position, opacity;
   }
   
@@ -377,8 +393,6 @@ const globalStyles = `
 // 🪄 КОМПОНЕНТ ЭФФЕКТА СГОРАНИЯ (ОПТИМИЗИРОВАННЫЙ)
 // ==========================================
 const BurnRevealImage = ({ src, className, style, imgClassName = "" }) => {
-  // Убрали все таймеры (setTimeout) и состояния (useState). 
-  // Теперь анимация запускается мгновенно силами самого CSS, что исключает лаги и "моргания".
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`} style={{ ...style, clipPath: 'inset(0 round 2.5rem)', WebkitClipPath: 'inset(0 round 2.5rem)' }}>
       {/* 1. Слой самого фото (плавное проявление) */}
@@ -386,8 +400,8 @@ const BurnRevealImage = ({ src, className, style, imgClassName = "" }) => {
         className={`absolute inset-0 bg-cover bg-center smooth-mask-wipe ${imgClassName}`}
         style={{ backgroundImage: `url(${src})` }}
       />
-      {/* 2. Эффект неонового лазера */}
-      <div className="absolute inset-0 smooth-laser-beam" />
+      {/* 2. Эффект линии огня и тлеющего края */}
+      <div className="absolute inset-0 burn-fire-edge" />
     </div>
   );
 };
