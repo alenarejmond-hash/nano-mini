@@ -281,44 +281,43 @@ const globalStyles = `
       spark-wander var(--wt) linear 0.8s forwards;
   }
   
-  /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА ЛАЗЕРНОГО РАСКАТА (БЕЗ ЛАГОВ) === */
-  .mask-wipe-transition {
-    -webkit-mask-image: linear-gradient(to bottom left, black 48%, rgba(0,0,0,0.5) 50%, transparent 52%);
-    mask-image: linear-gradient(to bottom left, black 48%, rgba(0,0,0,0.5) 50%, transparent 52%);
-    -webkit-mask-size: 300% 300%;
-    mask-size: 300% 300%;
-    transition: -webkit-mask-position 2s cubic-bezier(0.4, 0, 0.2, 1), mask-position 2s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: mask-position, -webkit-mask-position;
-  }
-  .mask-wipe-start {
-    -webkit-mask-position: 0% 100%;
-    mask-position: 0% 100%;
-  }
-  .mask-wipe-end {
-    -webkit-mask-position: 100% 0%;
-    mask-position: 100% 0%;
+  /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА ЛАЗЕРНОГО РАСКАТА (БЕЗ ЛАГОВ И МЕРЦАНИЙ) === */
+  @keyframes burn-mask-reveal {
+    0% { -webkit-mask-position: 100% 100%; mask-position: 100% 100%; }
+    100% { -webkit-mask-position: 0% 0%; mask-position: 0% 0%; }
   }
   
-  .laser-beam-transition {
-    background: linear-gradient(to bottom left, 
-      transparent 49.4%, 
-      rgba(56, 189, 248, 0.8) 49.8%, 
+  @keyframes burn-laser-scan {
+    0% { background-position: 100% 100%; opacity: 1; }
+    80% { opacity: 1; }
+    100% { background-position: 0% 0%; opacity: 0; }
+  }
+  
+  .smooth-mask-wipe {
+    -webkit-mask-image: linear-gradient(135deg, black 45%, rgba(0,0,0,0.3) 50%, transparent 55%);
+    mask-image: linear-gradient(135deg, black 45%, rgba(0,0,0,0.3) 50%, transparent 55%);
+    -webkit-mask-size: 300% 300%;
+    mask-size: 300% 300%;
+    /* Скрываем изображение ПРЯМО НА СТАРТЕ, чтобы не было раннего появления */
+    -webkit-mask-position: 100% 100%;
+    mask-position: 100% 100%;
+    animation: burn-mask-reveal 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    will-change: mask-position, -webkit-mask-position;
+  }
+  
+  .smooth-laser-beam {
+    background: linear-gradient(135deg, 
+      transparent 49%, 
+      rgba(56, 189, 248, 0.6) 49.5%, 
       rgba(255, 255, 255, 1) 50%, 
-      rgba(236, 72, 153, 0.8) 50.2%, 
-      transparent 50.6%
+      rgba(236, 72, 153, 0.6) 50.5%, 
+      transparent 51%
     );
     background-size: 300% 300%;
-    transition: background-position 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out 1.5s;
+    background-position: 100% 100%;
     mix-blend-mode: screen;
+    animation: burn-laser-scan 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     will-change: background-position, opacity;
-  }
-  .laser-beam-start {
-    background-position: 0% 100%;
-    opacity: 1;
-  }
-  .laser-beam-end {
-    background-position: 100% 0%;
-    opacity: 0;
   }
   
   /* === АНИМАЦИИ ЭЗОТЕРИКА (Медленное, однонаправленное движение) === */
@@ -374,36 +373,20 @@ const globalStyles = `
 `;
 
 // ==========================================
-// 🪄 КОМПОНЕНТ ЭФФЕКТА СГОРАНИЯ
+// 🪄 КОМПОНЕНТ ЭФФЕКТА СГОРАНИЯ (ОПТИМИЗИРОВАННЫЙ)
 // ==========================================
 const BurnRevealImage = ({ src, className, style, imgClassName = "" }) => {
-  const [loaded, setLoaded] = useState(false);
-  
-  useEffect(() => {
-    let isMounted = true;
-    setLoaded(false);
-    
-    // Мгновенный запуск для супер-быстрой загрузки!
-    // Убрали img.onload, чтобы анимация не ждала скачивания тяжелых фото при плохом интернете.
-    const timer = setTimeout(() => {
-      if (isMounted) setLoaded(true);
-    }, 50);
-
-    return () => { 
-      isMounted = false; 
-      clearTimeout(timer);
-    };
-  }, [src]);
-
+  // Убрали все таймеры (setTimeout) и состояния (useState). 
+  // Теперь анимация запускается мгновенно силами самого CSS, что исключает лаги и "моргания".
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`} style={{ ...style, clipPath: 'inset(0 round 2.5rem)', WebkitClipPath: 'inset(0 round 2.5rem)' }}>
-      {/* 1. Слой самого фото (плавное проявление по диагонали без лагов) */}
+      {/* 1. Слой самого фото (плавное проявление) */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center mask-wipe-transition ${imgClassName} ${loaded ? 'mask-wipe-end' : 'mask-wipe-start'}`}
+        className={`absolute inset-0 bg-cover bg-center smooth-mask-wipe ${imgClassName}`}
         style={{ backgroundImage: `url(${src})` }}
       />
-      {/* 2. Эффект неонового лазера (пробегает по прямой линии) */}
-      <div className={`absolute inset-0 laser-beam-transition ${loaded ? 'laser-beam-end' : 'laser-beam-start'}`} />
+      {/* 2. Эффект неонового лазера */}
+      <div className="absolute inset-0 smooth-laser-beam" />
     </div>
   );
 };
