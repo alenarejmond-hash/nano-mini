@@ -283,39 +283,39 @@ const globalStyles = `
   
   /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА ЛАЗЕРНОГО РАСКАТА (БЕЗ ЛАГОВ) === */
   .mask-wipe-transition {
-    -webkit-mask-image: linear-gradient(225deg, transparent 45%, rgba(0,0,0,0.5) 50%, black 55%);
-    mask-image: linear-gradient(225deg, transparent 45%, rgba(0,0,0,0.5) 50%, black 55%);
+    -webkit-mask-image: linear-gradient(to bottom left, black calc(50% - 15px), rgba(0,0,0,0.5) 50%, transparent calc(50% + 15px));
+    mask-image: linear-gradient(to bottom left, black calc(50% - 15px), rgba(0,0,0,0.5) 50%, transparent calc(50% + 15px));
     -webkit-mask-size: 300% 300%;
     mask-size: 300% 300%;
     transition: -webkit-mask-position 2s cubic-bezier(0.4, 0, 0.2, 1), mask-position 2s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .mask-wipe-start {
-    -webkit-mask-position: 100% 0%;
-    mask-position: 100% 0%;
-  }
-  .mask-wipe-end {
     -webkit-mask-position: 0% 100%;
     mask-position: 0% 100%;
   }
+  .mask-wipe-end {
+    -webkit-mask-position: 100% 0%;
+    mask-position: 100% 0%;
+  }
   
   .laser-beam-transition {
-    background: linear-gradient(225deg, 
-      transparent 48.5%, 
-      rgba(56, 189, 248, 0.6) 49.2%, 
+    background: linear-gradient(to bottom left, 
+      transparent calc(50% - 12px), 
+      rgba(56, 189, 248, 0.8) calc(50% - 4px), 
       rgba(255, 255, 255, 1) 50%, 
-      rgba(236, 72, 153, 0.6) 50.8%, 
-      transparent 51.5%
+      rgba(236, 72, 153, 0.8) calc(50% + 4px), 
+      transparent calc(50% + 12px)
     );
     background-size: 300% 300%;
-    transition: background-position 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease-out 1.4s;
+    transition: background-position 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out 1.5s;
     mix-blend-mode: screen;
   }
   .laser-beam-start {
-    background-position: 100% 0%;
+    background-position: 0% 100%;
     opacity: 1;
   }
   .laser-beam-end {
-    background-position: 0% 100%;
+    background-position: 100% 0%;
     opacity: 0;
   }
   
@@ -854,10 +854,11 @@ const FitnessCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(225,29,72,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-red-600 via-rose-500 to-orange-500 opacity-70 mix-blend-screen"></div>
       
+      {/* Темный градиент перенесен ПОД картинку, чтобы не перекрывать лазер */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/50 to-transparent"></div>
+      
       {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
       <BurnRevealImage src={CONTENT.fitness.bgImage} className="opacity-50" />
-      
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/50 to-transparent"></div>
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1283,8 +1284,8 @@ const NailArtistCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(244,114,182,0.3)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,114,182,0.5)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-rose-900 via-pink-800 to-amber-700/50 opacity-80 mix-blend-screen"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Ускоренная отрисовка через grayscale) */}
-      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-70" imgClassName="grayscale sepia-[.2]" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-70" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1371,8 +1372,8 @@ const AlfaCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(220,38,38,0.4)] overflow-hidden bg-[#0a0a0a] text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(239,68,68,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-red-900 via-black to-zinc-900 opacity-90 mix-blend-multiply"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Ускоренная отрисовка через grayscale) */}
-      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60" imgClassName="grayscale contrast-125" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
+      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60" />
       
       {/* Абстрактные красные лучи */}
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-600/30 blur-[80px] rounded-full pointer-events-none"></div>
