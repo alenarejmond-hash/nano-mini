@@ -281,27 +281,42 @@ const globalStyles = `
       spark-wander var(--wt) linear 0.8s forwards;
   }
   
-  /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА СГОРАЮЩЕЙ БУМАГИ === */
-  .clip-burn-start {
-    clip-path: circle(0% at 100% 0%); /* Старт из правого верхнего угла */
+  /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА ЛАЗЕРНОГО РАСКАТА (БЕЗ ЛАГОВ) === */
+  .mask-wipe-transition {
+    -webkit-mask-image: linear-gradient(225deg, transparent 45%, rgba(0,0,0,0.5) 50%, black 55%);
+    mask-image: linear-gradient(225deg, transparent 45%, rgba(0,0,0,0.5) 50%, black 55%);
+    -webkit-mask-size: 300% 300%;
+    mask-size: 300% 300%;
+    transition: -webkit-mask-position 2s cubic-bezier(0.4, 0, 0.2, 1), mask-position 2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mask-wipe-start {
+    -webkit-mask-position: 100% 0%;
+    mask-position: 100% 0%;
+  }
+  .mask-wipe-end {
+    -webkit-mask-position: 0% 100%;
+    mask-position: 0% 100%;
+  }
+  
+  .laser-beam-transition {
+    background: linear-gradient(225deg, 
+      transparent 48.5%, 
+      rgba(56, 189, 248, 0.6) 49.2%, 
+      rgba(255, 255, 255, 1) 50%, 
+      rgba(236, 72, 153, 0.6) 50.8%, 
+      transparent 51.5%
+    );
+    background-size: 300% 300%;
+    transition: background-position 2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease-out 1.4s;
+    mix-blend-mode: screen;
+  }
+  .laser-beam-start {
+    background-position: 100% 0%;
     opacity: 1;
   }
-  .clip-burn-end {
-    clip-path: circle(300% at 100% 0%); /* Увеличили со 250% до 300%, чтобы точно достало до левого нижнего угла! */
-    opacity: 1;
-  }
-  .clip-burn-glow {
-    clip-path: circle(305% at 100% 0%); /* Пропорционально увеличили свечение */
+  .laser-beam-end {
+    background-position: 0% 100%;
     opacity: 0;
-  }
-  .burn-img-transition {
-    transition: clip-path 3.5s ease-in-out; /* Плавно и без рывков */
-    /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
-  }
-  .burn-glow-transition {
-    /* Огненный край расширяется вместе с фото, плавно затухая в конце */
-    transition: clip-path 3.5s ease-in-out, opacity 1s ease-out 2.5s;
-    /* Убрали will-change и translateZ(0), так как они убивали SVG-фильтр рваной бумаги */
   }
   
   /* === АНИМАЦИИ ЭЗОТЕРИКА (Медленное, однонаправленное движение) === */
@@ -379,20 +394,14 @@ const BurnRevealImage = ({ src, className, style, imgClassName = "" }) => {
   }, [src]);
 
   return (
-    // Возвращаем чистый эффект! Используем clipPath для обрезки острых углов, потому что WebkitMaskImage и overflow-hidden убивали огонь
     <div className={`absolute inset-0 pointer-events-none ${className}`} style={{ ...style, clipPath: 'inset(0 round 2.5rem)', WebkitClipPath: 'inset(0 round 2.5rem)' }}>
-      {/* 1. Слой огненного края (с SVG-искажением для рваности) */}
-      <div className="absolute inset-0" style={{ filter: 'url(#burn-edge-filter) brightness(1.8) sepia(1) hue-rotate(-15deg) saturate(5) contrast(1.5)' }}>
-        <div 
-          className={`absolute inset-0 bg-cover bg-center burn-glow-transition ${loaded ? 'clip-burn-glow' : 'clip-burn-start'}`}
-          style={{ backgroundImage: `url(${src})` }}
-        />
-      </div>
-      {/* 2. Слой самого фото */}
+      {/* 1. Слой самого фото (плавное проявление по диагонали без лагов) */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center burn-img-transition ${imgClassName} ${loaded ? 'clip-burn-end' : 'clip-burn-start'}`}
+        className={`absolute inset-0 bg-cover bg-center mask-wipe-transition ${imgClassName} ${loaded ? 'mask-wipe-end' : 'mask-wipe-start'}`}
         style={{ backgroundImage: `url(${src})` }}
       />
+      {/* 2. Эффект неонового лазера (пробегает по прямой линии) */}
+      <div className={`absolute inset-0 laser-beam-transition ${loaded ? 'laser-beam-end' : 'laser-beam-start'}`} />
     </div>
   );
 };
@@ -1727,14 +1736,6 @@ const App = () => {
     <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-4 sm:p-8 font-sans overflow-hidden select-none">
       {/* Вставляем глобальные стили */}
       <style>{globalStyles}</style>
-
-      {/* SVG-Фильтр для эффекта рваной горящей бумаги (Оптимизировано для плавности) */}
-      <svg width="0" height="0" className="absolute pointer-events-none">
-        <filter id="burn-edge-filter" colorInterpolationFilters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="25" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </svg>
 
       {/* Фоновое свечение приложения (Живые сферы) */}
       <div 
