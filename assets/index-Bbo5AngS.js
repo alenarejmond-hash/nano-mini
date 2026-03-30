@@ -289,30 +289,31 @@ Error generating stack: `+s.message+`
   
   /* === АНИМАЦИИ ДЛЯ ЭФФЕКТА ЛАЗЕРНОГО РАСКАТА (БЕЗ ЛАГОВ И МЕРЦАНИЙ) === */
   @keyframes burn-mask-reveal {
-    0% { -webkit-mask-position: 100% 100%; mask-position: 100% 100%; }
-    100% { -webkit-mask-position: 0% 0%; mask-position: 0% 0%; }
+    0% { -webkit-mask-position: 100% 0%; mask-position: 100% 0%; }
+    100% { -webkit-mask-position: 0% 100%; mask-position: 0% 100%; }
   }
   
   @keyframes burn-laser-scan {
-    0% { background-position: 100% 100%; opacity: 1; }
-    80% { opacity: 1; }
-    100% { background-position: 0% 0%; opacity: 0; }
+    0% { background-position: 100% 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { background-position: 0% 100%; opacity: 0; }
   }
   
   .smooth-mask-wipe {
-    -webkit-mask-image: linear-gradient(135deg, black 45%, rgba(0,0,0,0.3) 50%, transparent 55%);
-    mask-image: linear-gradient(135deg, black 45%, rgba(0,0,0,0.3) 50%, transparent 55%);
+    -webkit-mask-image: linear-gradient(225deg, transparent 45%, rgba(0,0,0,0.3) 50%, black 55%);
+    mask-image: linear-gradient(225deg, transparent 45%, rgba(0,0,0,0.3) 50%, black 55%);
     -webkit-mask-size: 300% 300%;
     mask-size: 300% 300%;
     /* Скрываем изображение ПРЯМО НА СТАРТЕ, чтобы не было раннего появления */
-    -webkit-mask-position: 100% 100%;
-    mask-position: 100% 100%;
-    animation: burn-mask-reveal 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    -webkit-mask-position: 100% 0%;
+    mask-position: 100% 0%;
+    animation: burn-mask-reveal 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     will-change: mask-position, -webkit-mask-position;
   }
   
   .smooth-laser-beam {
-    background: linear-gradient(135deg, 
+    background: linear-gradient(225deg, 
       transparent 49%, 
       rgba(56, 189, 248, 0.6) 49.5%, 
       rgba(255, 255, 255, 1) 50%, 
@@ -320,9 +321,9 @@ Error generating stack: `+s.message+`
       transparent 51%
     );
     background-size: 300% 300%;
-    background-position: 100% 100%;
+    background-position: 100% 0%;
     mix-blend-mode: screen;
-    animation: burn-laser-scan 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: burn-laser-scan 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     will-change: background-position, opacity;
   }
   
