@@ -1548,9 +1548,9 @@ const App = () => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    // Максимальный угол наклона 15 градусов
-    const rotateX = ((y - centerY) / centerY) * -15;
-    const rotateY = ((x - centerX) / centerX) * 15;
+    // Максимальный угол наклона увеличен с 15 до 25 градусов для большей подвижности
+    const rotateX = ((y - centerY) / centerY) * -25;
+    const rotateY = ((x - centerX) / centerX) * 25;
     
     // Вычисляем позицию блика (в процентах)
     const glareX = (x / rect.width) * 100;
@@ -1840,7 +1840,7 @@ const App = () => {
             <div 
               className="absolute inset-0 w-full h-full rounded-[2.5rem] pointer-events-none transition-opacity duration-300 card-backface-hidden"
               style={{
-                background: `radial-gradient(farthest-corner circle at ${glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 65%)`,
+                background: `radial-gradient(farthest-corner circle at ${glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 80%)`,
                 opacity: glare.opacity,
                 mixBlendMode: 'overlay',
                 zIndex: 50,
@@ -1852,7 +1852,7 @@ const App = () => {
               className="absolute inset-0 w-full h-full rounded-[2.5rem] pointer-events-none transition-opacity duration-300 card-backface-hidden"
               style={{
                 transform: 'rotateY(180deg) translateZ(0)',
-                background: `radial-gradient(farthest-corner circle at ${100 - glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 65%)`,
+                background: `radial-gradient(farthest-corner circle at ${100 - glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 80%)`,
                 opacity: glare.opacity,
                 mixBlendMode: 'overlay',
                 zIndex: 50,
