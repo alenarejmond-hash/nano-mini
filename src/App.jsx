@@ -387,16 +387,6 @@ const globalStyles = `
     stroke-dashoffset: 1000;
     animation: alfa-chart-draw 4s ease-out forwards infinite;
   }
-  
-  /* === АНИМАЦИЯ ВЫЛЕТА КАРТОЧКИ СНИЗУ ПРИ ЗАГРУЗКЕ === */
-  @keyframes slide-up-entrance {
-    0% { transform: translateY(100vh); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-  }
-  .animate-entrance {
-    opacity: 0; /* Скрыто в первую секунду */
-    animation: slide-up-entrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
-  }
 `;
 
 // ==========================================
@@ -1298,8 +1288,8 @@ const NailArtistCard = () => (
       {/* Темный градиент для контраста лазера (чтобы он был тонким, как на других) */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-rose-950/50 to-transparent"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Снижена прозрачность для идеального неонового эффекта) */}
-      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-50 mix-blend-luminosity" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Убран тяжелый mix-blend-luminosity для плавной анимации на мобилках) */}
+      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-40 grayscale" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1317,7 +1307,8 @@ const NailArtistCard = () => (
             {CONTENT.nail.name2}
           </h2>
           <div className="flex flex-col items-center gap-2 mt-3">
-            <p className="text-pink-200 font-serif font-medium text-[10px] uppercase tracking-[0.3em] bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full border border-pink-300/30">
+            {/* ОПТИМИЗАЦИЯ: убрали backdrop-blur-sm, который накладывался на сгорание и убивал FPS. Заменили на bg-black/40 */}
+            <p className="text-pink-200 font-serif font-medium text-[10px] uppercase tracking-[0.3em] bg-black/40 px-4 py-1.5 rounded-full border border-pink-300/30">
               {CONTENT.nail.role}
             </p>
             <div className="flex items-center gap-1.5 mt-1">
@@ -1330,7 +1321,8 @@ const NailArtistCard = () => (
     </div>
 
     {/* ОБРАТНАЯ СТОРОНА (Dark Liquid Glass / Приглушенный Глянец) */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(244,114,182,0.3)] overflow-hidden flex flex-col p-6 text-white border border-rose-500/20 bg-gradient-to-br from-[#1c0f14] via-[#2a131d] to-[#120a0d] animate-pearl" style={{ transform: 'rotateY(180deg)' }}>
+    {/* ОПТИМИЗАЦИЯ: убрали класс animate-pearl, который заставлял телефон бесконечно перерисовывать фон */}
+    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(244,114,182,0.3)] overflow-hidden flex flex-col p-6 text-white border border-rose-500/20 bg-gradient-to-br from-[#1c0f14] via-[#2a131d] to-[#120a0d]" style={{ transform: 'rotateY(180deg)' }}>
       
       {/* Блики глянца (Убран тяжелый mix-blend-screen для устранения лагов) */}
       <div className="absolute -top-10 -left-10 w-48 h-48 bg-rose-500/30 blur-[40px] rounded-full pointer-events-none"></div>
@@ -1788,14 +1780,14 @@ const App = () => {
         </div>
       </div>
 
-      {/* --- ОБЕРТКА ДЛЯ АНИМАЦИИ ВЫЛЕТА СНИЗУ --- */}
-      <div className="animate-entrance w-full flex justify-center items-center relative z-10">
-        {/* КОНТЕЙНЕР ВИЗИТКИ (3D Сцена с ограничением высоты для мобилок) */}
-        <div 
-          ref={cardRef}
-          className="relative z-10 w-full aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float touch-none"
-          style={{ perspective: '1500px', maxWidth: 'min(22rem, 50vh)' }}
-          onClick={handleFlip}
+      {/* КОНТЕЙНЕР ВИЗИТКИ (3D Сцена с ограничением высоты для мобилок) */}
+      <div 
+        ref={cardRef}
+        className="relative z-10 w-full aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float touch-none"
+        style={{ perspective: '1500px', maxWidth: 'min(22rem, 50vh)' }}
+        onClick={handleFlip}
+        onMouseMove={handlePointerMove}
+        onMouseLeave={handlePointerLeave}
         onTouchMove={handlePointerMove}
         onTouchEnd={handlePointerLeave}
       >
@@ -1871,7 +1863,6 @@ const App = () => {
           </div>
         </div>
       </div>
-      </div> {/* <-- ЗАКРЫВАЮЩИЙ ТЕГ ОБЕРТКИ ВЫЛЕТА */}
 
       {/* КНОПКА ПОДЕЛИТЬСЯ (Уменьшена на мобилках, чтобы не залезать на визитку) */}
       <button
