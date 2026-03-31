@@ -387,6 +387,16 @@ const globalStyles = `
     stroke-dashoffset: 1000;
     animation: alfa-chart-draw 4s ease-out forwards infinite;
   }
+  
+  /* === АНИМАЦИЯ ВЫЛЕТА КАРТОЧКИ СНИЗУ ПРИ ЗАГРУЗКЕ === */
+  @keyframes slide-up-entrance {
+    0% { transform: translateY(100vh); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .animate-entrance {
+    opacity: 0; /* Скрыто в первую секунду */
+    animation: slide-up-entrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+  }
 `;
 
 // ==========================================
@@ -1780,14 +1790,14 @@ const App = () => {
         </div>
       </div>
 
-      {/* КОНТЕЙНЕР ВИЗИТКИ (3D Сцена с ограничением высоты для мобилок) */}
-      <div 
-        ref={cardRef}
-        className="relative z-10 w-full aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float touch-none"
-        style={{ perspective: '1500px', maxWidth: 'min(22rem, 50vh)' }}
-        onClick={handleFlip}
-        onMouseMove={handlePointerMove}
-        onMouseLeave={handlePointerLeave}
+      {/* --- ОБЕРТКА ДЛЯ АНИМАЦИИ ВЫЛЕТА СНИЗУ --- */}
+      <div className="animate-entrance w-full flex justify-center items-center relative z-10">
+        {/* КОНТЕЙНЕР ВИЗИТКИ (3D Сцена с ограничением высоты для мобилок) */}
+        <div 
+          ref={cardRef}
+          className="relative z-10 w-full aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float touch-none"
+          style={{ perspective: '1500px', maxWidth: 'min(22rem, 50vh)' }}
+          onClick={handleFlip}
         onTouchMove={handlePointerMove}
         onTouchEnd={handlePointerLeave}
       >
@@ -1863,6 +1873,7 @@ const App = () => {
           </div>
         </div>
       </div>
+      </div> {/* <-- ЗАКРЫВАЮЩИЙ ТЕГ ОБЕРТКИ ВЫЛЕТА */}
 
       {/* КНОПКА ПОДЕЛИТЬСЯ (Уменьшена на мобилках, чтобы не залезать на визитку) */}
       <button
