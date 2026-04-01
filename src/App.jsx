@@ -1392,11 +1392,11 @@ const StarterCard = () => (
       <div className="absolute top-0 right-10 w-px h-full bg-gradient-to-b from-transparent via-yellow-500/50 to-transparent transform rotate-12"></div>
       <div className="absolute top-0 left-20 w-px h-full bg-gradient-to-b from-transparent via-yellow-500/30 to-transparent transform -rotate-12"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Золотой огонь) */}
-      <BurnRevealImage src={CONTENT.starter.bgImage} className="opacity-60 mix-blend-luminosity sepia-[.5] hue-rotate-[-10deg] rounded-[2.5rem]" burnColor="gold" />
-      
       {/* ТЕМНЫЙ ПОЛУПРОЗРАЧНЫЙ ФОН ПОВЕРХ ФОТО (Снизу темнее, сверху прозрачный) */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-zinc-950/80 to-transparent pointer-events-none z-0 rounded-[2.5rem]"></div>
+
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Золотой огонь) ПЕРЕМЕЩЕНО НА ВЕРХНИЙ СЛОЙ */}
+      <BurnRevealImage src={CONTENT.starter.bgImage} className="opacity-60 mix-blend-luminosity sepia-[.5] hue-rotate-[-10deg] rounded-[2.5rem]" burnColor="gold" />
 
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex justify-between items-start">
