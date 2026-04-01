@@ -21,8 +21,8 @@ const InstagramIcon = ({ className }) => (
 // ==========================================
 const CONTENT = {
   esoteric: {
-    bgImage: '/new-nano/bg-esoteric.jpg', // Название файла в папке public
-    avatar: '/new-nano/avatar-esoteric.jpg', // Индивидуальное фото для эзотерика
+    bgImage: '/bg-esoteric.jpg', // Название файла в папке public
+    avatar: '/avatar-esoteric.jpg', // Индивидуальное фото для эзотерика
     badge: 'Таро & Астрология',
     name1: 'Алена',              // Первая строка имени
     name2: 'Светлая',                // Вторая строка имени
@@ -38,8 +38,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм?text=Привет!%20Хочу%20расклад'
   },
   psychologist: {
-    bgImage: '/new-nano/bg-psychologist.jpg',
-    avatar: '/new-nano/avatar-psychologist.jpg', // Индивидуальное фото для психолога
+    bgImage: '/bg-psychologist.jpg',
+    avatar: '/avatar-psychologist.jpg', // Индивидуальное фото для психолога
     badge: 'Терапия',
     name1: 'Алена',
     name2: 'СВЕТЛАЯ',
@@ -57,8 +57,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм?text=Здравствуйте!%20Хочу%20на%20сессию'
   },
   travel: {
-    bgImage: '/new-nano/bg-travel.jpg',
-    avatar: '/new-nano/avatar-travel.jpg', // Индивидуальное фото для турагента
+    bgImage: '/bg-travel.jpg',
+    avatar: '/avatar-travel.jpg', // Индивидуальное фото для турагента
     badge: 'VIP Tours',
     name1: 'МАКСИМ',
     name2: 'ВОЯЖ',
@@ -73,8 +73,8 @@ const CONTENT = {
     marquee: ['✈️ СЕЙШЕЛЫ', '⭐ МАЛЬДИВЫ', '🌴 БАЛИ', '🍍 ТАЙЛАНД', '🧿 ТУРЦИЯ'] // Текст бегущей строки
   },
   blogger: {
-    bgImage: '/new-nano/bg-blogger.jpg',
-    avatar: '/new-nano/avatar-blogger.jpg', // Индивидуальное фото для блогера
+    bgImage: '/bg-blogger.jpg',
+    avatar: '/avatar-blogger.jpg', // Индивидуальное фото для блогера
     badge: 'В эфире',
     name1: 'ALEX',
     name2: 'NEO',
@@ -91,8 +91,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм?text=Привет!%20По%20поводу%20рекламы'
   },
   fitness: {
-    bgImage: '/new-nano/bg-fitness.jpg',
-    avatar: '/new-nano/avatar-fitness.jpg', // Индивидуальное фото для тренера
+    bgImage: '/bg-fitness.jpg',
+    avatar: '/avatar-fitness.jpg', // Индивидуальное фото для тренера
     badge: 'Трансформация',
     name1: 'Алена',
     name2: 'Светлая',
@@ -111,8 +111,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм?text=Хочу%20тело%20мечты!'
   },
   broker: {
-    bgImage: '/new-nano/bg-broker.jpg',
-    bgBack: '/new-nano/bg-broker.jpg',
+    bgImage: '/bg-broker.jpg',
+    bgBack: '/bg-broker.jpg',
     avatar: '/avatar-broker.jpg', // Индивидуальное фото для брокера
     badge: 'Приватные ключи',
     name1: 'АРТУР',
@@ -129,8 +129,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм'
   },
   money: {
-    bgImage: '/new-nano/bg-money.jpg',
-    avatar: '/new-nano/avatar-money.jpg', // Индивидуальное фото для заработка
+    bgImage: '/bg-money.jpg',
+    avatar: '/avatar-money.jpg', // Индивидуальное фото для заработка
     badge: 'Умные Деньги',
     name1: 'МАКС',
     name2: 'ПРОФИТ',
@@ -149,7 +149,7 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм'
   },
   starter: {
-    bgImage: '/new-nano/bg-starter.jpg', // Загрузи сюда текстуру черного шелка или абстрактного золота
+    bgImage: '/bg-starter.jpg', // Загрузи сюда текстуру черного шелка или абстрактного золота
     badge: 'Digital Визитка',
     title1: 'НОВЫЙ УРОВЕНЬ',
     title2: 'ТВОЕГО БРЕНДА',
@@ -173,8 +173,8 @@ const CONTENT = {
     actionLink: 'https://t.me/elenlime?text=Привет!%20Хочу%20такую%20же%20визитку!'
   },
   nail: {
-    bgImage: '/new-nano/bg-nail.jpg',
-    avatar: '/new-nano/avatar-nail.jpg',
+    bgImage: '/bg-nail.jpg',
+    avatar: '/avatar-nail.jpg',
     badge: 'Nail Artist',
     name1: 'АЛИНА',
     name2: 'РОУЗ',
@@ -189,7 +189,7 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм'
   },
   alfa: {
-    bgImage: '/new-nano/bg-alfa.jpg',
+    bgImage: '/bg-alfa.jpg',
     avatar: '/avatar-alfa.jpg',
     badge: 'АГЕНТ ВЛИЯНИЯ',
     name1: 'ВИКТОР',
