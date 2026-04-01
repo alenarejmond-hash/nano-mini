@@ -1411,7 +1411,7 @@ const StarterCard = () => (
         <div className="flex-1"></div>
 
         <div className="flex flex-col items-center justify-center text-center mb-5">
-          <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-2 uppercase tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-yellow-100 to-yellow-500 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+          <h2 className="text-2xl sm:text-3xl leading-tight font-black mb-2 uppercase tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-yellow-100 to-yellow-500 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
             {CONTENT.starter.title1}
             <br />
             {CONTENT.starter.title2}
