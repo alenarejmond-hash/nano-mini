@@ -162,7 +162,7 @@ const CONTENT = {
     benefit2Title: 'Разовая оплата',
     benefit2Text: 'Без абонентской платы',
     benefit3Title: 'Личный домен',
-    benefit3Text: 'имя.домен.ru',
+    benefit3Text: 'имя.appsea.ru',
     benefit4Title: 'Без VPN',
     benefit4Text: 'Работает всегда',
     benefit5Title: 'Удобство',
