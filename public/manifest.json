@@ -1,6 +1,6 @@
 {
-  "name": "Моя Визитка",
-  "short_name": "Визитка",
+  "name": "Визитк",
+  "short_name": "Визитки",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
