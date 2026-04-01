@@ -21,8 +21,8 @@ const InstagramIcon = ({ className }) => (
 // ==========================================
 const CONTENT = {
   esoteric: {
-    bgImage: '/bg-esoteric.jpg', // Название файла в папке public
-    avatar: '/avatar-esoteric.jpg', // Индивидуальное фото для эзотерика
+    bgImage: '/new-nano/bg-esoteric.jpg', // Название файла в папке public
+    avatar: '/new-nano/avatar-esoteric.jpg', // Индивидуальное фото для эзотерика
     badge: 'Таро & Астрология',
     name1: 'Алена',              // Первая строка имени
     name2: 'Светлая',                // Вторая строка имени
@@ -38,8 +38,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм?text=Привет!%20Хочу%20расклад'
   },
   psychologist: {
-    bgImage: '/bg-psychologist.jpg',
-    avatar: '/avatar-psychologist.jpg', // Индивидуальное фото для психолога
+    bgImage: '/new-nano/bg-psychologist.jpg',
+    avatar: '/new-nano/avatar-psychologist.jpg', // Индивидуальное фото для психолога
     badge: 'Терапия',
     name1: 'Алена',
     name2: 'СВЕТЛАЯ',
@@ -57,8 +57,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм?text=Здравствуйте!%20Хочу%20на%20сессию'
   },
   travel: {
-    bgImage: '/bg-travel.jpg',
-    avatar: '/avatar-travel.jpg', // Индивидуальное фото для турагента
+    bgImage: '/new-nano/bg-travel.jpg',
+    avatar: '/new-nano/avatar-travel.jpg', // Индивидуальное фото для турагента
     badge: 'VIP Tours',
     name1: 'МАКСИМ',
     name2: 'ВОЯЖ',
@@ -73,8 +73,8 @@ const CONTENT = {
     marquee: ['✈️ СЕЙШЕЛЫ', '⭐ МАЛЬДИВЫ', '🌴 БАЛИ', '🍍 ТАЙЛАНД', '🧿 ТУРЦИЯ'] // Текст бегущей строки
   },
   blogger: {
-    bgImage: '/bg-blogger.jpg',
-    avatar: '/avatar-blogger.jpg', // Индивидуальное фото для блогера
+    bgImage: '/new-nano/bg-blogger.jpg',
+    avatar: '/new-nano/avatar-blogger.jpg', // Индивидуальное фото для блогера
     badge: 'В эфире',
     name1: 'ALEX',
     name2: 'NEO',
@@ -91,8 +91,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм?text=Привет!%20По%20поводу%20рекламы'
   },
   fitness: {
-    bgImage: '/bg-fitness.jpg',
-    avatar: '/avatar-fitness.jpg', // Индивидуальное фото для тренера
+    bgImage: '/new-nano/bg-fitness.jpg',
+    avatar: '/new-nano/avatar-fitness.jpg', // Индивидуальное фото для тренера
     badge: 'Трансформация',
     name1: 'Алена',
     name2: 'Светлая',
@@ -111,8 +111,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм?text=Хочу%20тело%20мечты!'
   },
   broker: {
-    bgImage: '/bg-broker.jpg',
-    bgBack: '/bg-broker.jpg',
+    bgImage: '/new-nano/bg-broker.jpg',
+    bgBack: '/new-nano/bg-broker.jpg',
     avatar: '/avatar-broker.jpg', // Индивидуальное фото для брокера
     badge: 'Приватные ключи',
     name1: 'АРТУР',
@@ -129,8 +129,8 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм'
   },
   money: {
-    bgImage: '/bg-money.jpg',
-    avatar: '/avatar-money.jpg', // Индивидуальное фото для заработка
+    bgImage: '/new-nano/bg-money.jpg',
+    avatar: '/new-nano/avatar-money.jpg', // Индивидуальное фото для заработка
     badge: 'Умные Деньги',
     name1: 'МАКС',
     name2: 'ПРОФИТ',
@@ -149,7 +149,7 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм'
   },
   starter: {
-    bgImage: '/bg-starter.jpg', // Загрузи сюда текстуру черного шелка или абстрактного золота
+    bgImage: '/new-nano/bg-starter.jpg', // Загрузи сюда текстуру черного шелка или абстрактного золота
     badge: 'Digital Визитка',
     title1: 'НОВЫЙ УРОВЕНЬ',
     title2: 'ТВОЕГО БРЕНДА',
@@ -173,8 +173,8 @@ const CONTENT = {
     actionLink: 'https://t.me/elenlime?text=Привет!%20Хочу%20такую%20же%20визитку!'
   },
   nail: {
-    bgImage: '/bg-nail.jpg',
-    avatar: '/avatar-nail.jpg',
+    bgImage: '/new-nano/bg-nail.jpg',
+    avatar: '/new-nano/avatar-nail.jpg',
     badge: 'Nail Artist',
     name1: 'АЛИНА',
     name2: 'РОУЗ',
@@ -189,7 +189,7 @@ const CONTENT = {
     actionLink: 'https://t.me/твой_юзернейм'
   },
   alfa: {
-    bgImage: '/bg-alfa.jpg',
+    bgImage: '/new-nano/bg-alfa.jpg',
     avatar: '/avatar-alfa.jpg',
     badge: 'АГЕНТ ВЛИЯНИЯ',
     name1: 'ВИКТОР',
@@ -212,9 +212,18 @@ const CONTENT = {
 
 // --- Глобальные стили для сложных анимаций (вставляем прямо в компонент) ---
 const globalStyles = `
+  :root {
+    --card-h: calc(min(22rem, 50vh) * 1.6);
+  }
+  @media (min-width: 640px) {
+    :root {
+      --card-h: calc(min(22rem, 50vh) * 1.5);
+    }
+  }
   body {
     background-color: #0a0a0a;
     overscroll-behavior: none;
+    overflow-x: hidden;
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
@@ -275,7 +284,6 @@ const globalStyles = `
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 0 6px rgba(255, 255, 255, 0.8), 0 0 12px rgba(255, 255, 255, 0.4);
     pointer-events: none;
-    /* Сначала мягкий взрыв (0.8s), затем ооочень медленный улет за экран (20-40s) */
     animation: 
       spark-explode 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards,
       spark-wander var(--wt) linear 0.8s forwards;
@@ -295,44 +303,38 @@ const globalStyles = `
   }
   
   .smooth-mask-wipe {
-    /* Делаем границу маски чуть более резкой для эффекта сгорания */
     -webkit-mask-image: linear-gradient(225deg, transparent 47%, rgba(0,0,0,0.6) 49%, black 51%);
     mask-image: linear-gradient(225deg, transparent 47%, rgba(0,0,0,0.6) 49%, black 51%);
     -webkit-mask-size: 300% 300%;
     mask-size: 300% 300%;
-    /* Скрываем изображение ПРЯМО НА СТАРТЕ */
     -webkit-mask-position: 100% 0%;
     mask-position: 100% 0%;
-    /* Чуть замедлил анимацию (до 3s), чтобы горение смотрелось эффектнее */
     animation: burn-mask-reveal 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     will-change: mask-position, -webkit-mask-position;
   }
   
   .burn-fire-edge {
-    /* Наслаиваем два градиента под чуть разными углами (224 и 226), 
-       чтобы создать легкую неровность горения без лагающих фильтров */
     background: 
       linear-gradient(224deg, 
         transparent 48.5%, 
-        rgba(20, 5, 0, 0.95) 49%,     /* Темный пепел/обугленный край */
-        rgba(220, 38, 38, 0.9) 49.5%, /* Красное тление */
-        rgba(250, 150, 0, 1) 50%,     /* Яркий огонь */
-        rgba(255, 220, 50, 0.8) 50.2%,/* Желтая вспышка */
+        rgba(20, 5, 0, 0.95) 49%, 
+        var(--burn-c1, rgba(220, 38, 38, 0.9)) 49.5%, 
+        var(--burn-c2, rgba(250, 150, 0, 1)) 50%, 
+        var(--burn-c3, rgba(255, 220, 50, 0.8)) 50.2%,
         transparent 51%
       ),
       linear-gradient(226deg, 
         transparent 48.5%, 
         rgba(20, 5, 0, 0.95) 49%, 
-        rgba(220, 38, 38, 0.9) 49.5%, 
-        rgba(250, 150, 0, 1) 50%, 
-        rgba(255, 220, 50, 0.8) 50.2%,
+        var(--burn-c1, rgba(220, 38, 38, 0.9)) 49.5%, 
+        var(--burn-c2, rgba(250, 150, 0, 1)) 50%, 
+        var(--burn-c3, rgba(255, 220, 50, 0.8)) 50.2%,
         transparent 51%
       );
     background-size: 300% 300%;
     background-position: 100% 0%;
-    mix-blend-mode: normal; /* Normal позволяет пеплу перекрывать картинку */
-    /* Легкое размытие и мощное свечение для пламени */
-    filter: drop-shadow(0 0 8px rgba(250, 100, 0, 0.8)) blur(0.5px);
+    mix-blend-mode: normal;
+    filter: drop-shadow(0 0 8px var(--burn-c2, rgba(250, 100, 0, 0.8))) blur(0.5px);
     animation: burn-fire-scan 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     will-change: background-position, opacity;
   }
@@ -387,21 +389,63 @@ const globalStyles = `
     stroke-dashoffset: 1000;
     animation: alfa-chart-draw 4s ease-out forwards infinite;
   }
+  
+  /* === АНИМАЦИИ ДЛЯ СВЕТОВОГО ШАРА (DOCK ПАНЕЛИ) === */
+  @keyframes scan-vertical {
+    0%, 10% { top: 5%; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    90%, 100% { top: 95%; opacity: 0; }
+  }
+  @keyframes scan-horizontal {
+    0%, 10% { left: 5%; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    90%, 100% { left: 95%; opacity: 0; }
+  }
+
+  /* === ПРЕМИУМ-БЛИК ДЛЯ СТАРТОВОЙ КАРТОЧКИ === */
+  @keyframes premium-sweep {
+    0% { transform: translateX(-100%) skewX(-20deg); }
+    50%, 100% { transform: translateX(150%) skewX(-20deg); }
+  }
 `;
 
 // ==========================================
-// 🪄 КОМПОНЕНТ ЭФФЕКТА СГОРАНИЯ (ОПТИМИЗИРОВАННЫЙ)
+// 🪄 КОМПОНЕНТ ЭФФЕКТА СГОРАНИЯ (УМНАЯ ЦВЕТОВАЯ ПОДСТРОЙКА)
 // ==========================================
-const BurnRevealImage = ({ src, className, style, imgClassName = "" }) => {
+const BurnRevealImage = ({ src, className, style, imgClassName = "", burnColor = "default" }) => {
+  // Цветовые темы огня (c1 - пепел/край, c2 - основной огонь, c3 - яркая вспышка)
+  const themes = {
+    default: { c1: 'rgba(220, 38, 38, 0.9)', c2: 'rgba(250, 150, 0, 1)', c3: 'rgba(255, 220, 50, 0.8)' },
+    teal: { c1: 'rgba(13, 148, 136, 0.9)', c2: 'rgba(45, 212, 191, 1)', c3: 'rgba(153, 246, 228, 0.8)' }, // Психолог
+    rose: { c1: 'rgba(159, 18, 57, 0.9)', c2: 'rgba(244, 63, 94, 1)', c3: 'rgba(253, 164, 175, 0.8)' }, // Маникюр
+    orange: { c1: 'rgba(194, 65, 12, 0.9)', c2: 'rgba(249, 115, 22, 1)', c3: 'rgba(253, 186, 116, 0.8)' }, // Турагент
+    purple: { c1: 'rgba(88, 28, 135, 0.9)', c2: 'rgba(168, 85, 247, 1)', c3: 'rgba(216, 180, 254, 0.8)' }, // Эзотерик
+    emerald: { c1: 'rgba(6, 78, 59, 0.9)', c2: 'rgba(16, 185, 129, 1)', c3: 'rgba(110, 231, 183, 0.8)' }, // Деньги
+    gold: { c1: 'rgba(146, 64, 14, 0.9)', c2: 'rgba(217, 119, 6, 1)', c3: 'rgba(252, 211, 77, 0.8)' }, // Старт / Брокер
+    pink: { c1: 'rgba(190, 24, 93, 0.9)', c2: 'rgba(236, 72, 153, 1)', c3: 'rgba(249, 168, 212, 0.8)' }, // Блогер
+    red: { c1: 'rgba(153, 27, 27, 0.9)', c2: 'rgba(220, 38, 38, 1)', c3: 'rgba(248, 113, 113, 0.8)' }, // Тренер / Альфа
+  };
+  
+  const t = themes[burnColor] || themes.default;
+
   return (
-    <div className={`absolute inset-0 pointer-events-none ${className}`} style={{ ...style, clipPath: 'inset(0 round 2.5rem)', WebkitClipPath: 'inset(0 round 2.5rem)' }}>
+    <div className={`absolute inset-0 pointer-events-none rounded-[2.5rem] ${className}`} style={{ ...style, clipPath: 'inset(0 round 2.5rem)', WebkitClipPath: 'inset(0 round 2.5rem)' }}>
       {/* 1. Слой самого фото (плавное проявление) */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center smooth-mask-wipe ${imgClassName}`}
+        className={`absolute inset-0 bg-cover bg-center smooth-mask-wipe rounded-[2.5rem] ${imgClassName}`}
         style={{ backgroundImage: `url(${src})` }}
       />
-      {/* 2. Эффект линии огня и тлеющего края */}
-      <div className="absolute inset-0 burn-fire-edge" />
+      {/* 2. Эффект линии огня и тлеющего края с кастомными цветами */}
+      <div 
+        className="absolute inset-0 burn-fire-edge rounded-[2.5rem]" 
+        style={{
+          '--burn-c1': t.c1,
+          '--burn-c2': t.c2,
+          '--burn-c3': t.c3,
+        }}
+      />
     </div>
   );
 };
@@ -412,196 +456,360 @@ const BurnRevealImage = ({ src, className, style, imgClassName = "" }) => {
 // ==========================================
 
 // 1. ЭЗОТЕРИК
-const EsotericCard = () => (
-  <>
-    {/* ЛИЦЕВАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(168,85,247,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-purple-600 to-amber-500 opacity-70 mix-blend-screen"></div>
-      
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.esoteric.bgImage} className="opacity-60 mix-blend-luminosity" />
-      
-      <div className="relative z-10 flex flex-col h-full justify-between">
-        <div className="flex justify-between items-start">
-          <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-purple-500/30 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-amber-300" />
-            <span className="text-xs font-bold tracking-wider uppercase text-purple-100">{CONTENT.esoteric.badge}</span>
-          </div>
-          <Moon className="w-8 h-8 text-amber-200/80 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]" />
-        </div>
+const EsotericCard = () => {
+  const [view, setView] = useState('tarot');
 
-        <div>
-          <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            {CONTENT.esoteric.name1}
-            <br />
-            {CONTENT.esoteric.name2}
-          </h2>
-          <div className="flex flex-wrap items-center gap-3 mt-2">
-            <p className="text-amber-300 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-purple-500 pl-3">
-              {CONTENT.esoteric.role}
-            </p>
-            <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-purple-500/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
-              <span className="text-[8px] font-bold uppercase tracking-wider text-amber-100">{CONTENT.esoteric.status}</span>
+  return (
+    <>
+      {/* ЛИЦЕВАЯ СТОРОНА */}
+      <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(168,85,247,0.6)] transition-shadow duration-700">
+        <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-purple-600 to-amber-500 opacity-70 mix-blend-screen"></div>
+        
+        {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Фиолетовый огонь) */}
+        <BurnRevealImage src={CONTENT.esoteric.bgImage} className="opacity-60 mix-blend-luminosity" burnColor="purple" />
+        
+        <div className="relative z-10 flex flex-col h-full justify-between">
+          <div className="flex justify-between items-start">
+            <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-purple-500/30 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-300" />
+              <span className="text-xs font-bold tracking-wider uppercase text-purple-100">{CONTENT.esoteric.badge}</span>
+            </div>
+            <Moon className="w-8 h-8 text-amber-200/80 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]" />
+          </div>
+
+          <div>
+            <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-black mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+              {CONTENT.esoteric.name1}
+              <br />
+              {CONTENT.esoteric.name2}
+            </h2>
+            <div className="flex flex-wrap items-center gap-3 mt-2">
+              <p className="text-amber-300 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-purple-500 pl-3">
+                {CONTENT.esoteric.role}
+              </p>
+              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-purple-500/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
+                <span className="text-[8px] font-bold uppercase tracking-wider text-amber-100">{CONTENT.esoteric.status}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Mandala / Aura Style) */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-[#050505] flex flex-col items-center p-6 text-white border border-purple-900/30" style={{ transform: 'rotateY(180deg)' }}>
-      
-      {/* ФОН МАНДАЛЫ (Медленные орбиты и Аура) */}
-      <div className="absolute -top-[20%] -left-[20%] w-[160%] aspect-square rounded-full border border-purple-500/30 border-dashed" style={{ animation: 'esoteric-slow-drift-1 90s linear infinite', transformOrigin: '45% 55%' }}></div>
-      <div className="absolute -bottom-[30%] -right-[30%] w-[140%] aspect-square rounded-full border-[1.5px] border-amber-500/30" style={{ animation: 'esoteric-slow-drift-2 100s linear infinite', transformOrigin: '55% 45%' }}></div>
-      <div className="absolute top-[20%] left-[10%] w-[80%] aspect-square rounded-full border-2 border-purple-500/40" style={{ animation: 'esoteric-slow-expand 30s ease-in-out infinite' }}></div>
-      
-      {/* Пульсирующая аура - усилили свечение */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square rounded-full bg-purple-900/40 blur-[50px] pointer-events-none"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] aspect-square rounded-full bg-amber-600/20 blur-[40px] animate-pulse pointer-events-none"></div>
-
-      <div className="relative z-10 flex flex-col items-center h-full w-full">
+      {/* ОБРАТНАЯ СТОРОНА (GlassOS / Vertical Left Dock) */}
+      <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(147,51,234,0.4)] overflow-hidden bg-[#050505] flex flex-row p-4 gap-4 text-white border border-purple-900/30" style={{ transform: 'rotateY(180deg)' }}>
         
-        {/* Аватар в светящемся кольце */}
-        <div className="relative mt-4 mb-3">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-500 to-amber-500 animate-[spin_4s_linear_infinite] blur-[6px] opacity-60"></div>
-          <div className="relative w-20 h-20 rounded-full p-[2px] bg-gradient-to-b from-purple-400 to-amber-400">
-            <img src={CONTENT.esoteric.avatar} alt={CONTENT.esoteric.name1} className="w-full h-full object-cover rounded-full border-2 border-[#050505]" />
+        {/* ФОН МАНДАЛЫ (Медленные орбиты и Аура) */}
+        <div className="absolute -top-[20%] -left-[20%] w-[160%] aspect-square rounded-full border border-purple-500/30 border-dashed pointer-events-none" style={{ animation: 'esoteric-slow-drift-1 90s linear infinite', transformOrigin: '45% 55%' }}></div>
+        <div className="absolute -bottom-[30%] -right-[30%] w-[140%] aspect-square rounded-full border-[1.5px] border-amber-500/30 pointer-events-none" style={{ animation: 'esoteric-slow-drift-2 100s linear infinite', transformOrigin: '55% 45%' }}></div>
+        <div className="absolute top-[20%] left-[10%] w-[80%] aspect-square rounded-full border-2 border-purple-500/40 pointer-events-none" style={{ animation: 'esoteric-slow-expand 30s ease-in-out infinite' }}></div>
+        
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square rounded-full bg-purple-900/40 blur-[50px] pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] aspect-square rounded-full bg-amber-600/20 blur-[40px] animate-pulse pointer-events-none"></div>
+
+        {/* === ЛЕВАЯ ПАНЕЛЬ (DOCK) === */}
+        <div 
+          className="relative z-50 flex flex-col items-center justify-between bg-[#050505]/60 backdrop-blur-xl py-4 px-2 rounded-[2rem] border border-purple-500/30 shadow-[0_10px_40px_rgba(147,51,234,0.4)] w-[3.5rem] shrink-0 no-tilt cursor-default"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Световой шар (Мягкий светящийся блик, бегающий сверху вниз) */}
+          <div className="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-amber-400/40 rounded-full blur-[6px] shadow-[0_0_15px_rgba(251,191,36,0.6)] pointer-events-none z-0" style={{ animation: 'scan-vertical 3s ease-in-out infinite' }}></div>
+
+          <div className="flex flex-col gap-2.5 w-full items-center relative z-10">
+            {[
+              { id: 'tarot', icon: Diamond },
+              { id: 'astro', icon: Moon },
+              { id: 'numero', icon: TrendingUp },
+              { id: 'personal', icon: UserCircle2 },
+              { id: 'group', icon: Globe },
+            ].map((item) => (
+              <button 
+                key={item.id}
+                onClick={() => setView(item.id)}
+                className={`relative p-2.5 rounded-full transition-all duration-300 flex items-center justify-center w-full ${view === item.id ? 'bg-gradient-to-br from-purple-500 to-amber-500 text-black shadow-[0_0_15px_rgba(251,191,36,0.6)] scale-110' : 'text-purple-400/70 hover:text-amber-300 hover:bg-purple-900/40'}`}
+              >
+                <item.icon className="w-4 h-4" />
+              </button>
+            ))}
+          </div>
+          
+          <div className="w-full flex flex-col items-center gap-2 relative z-10 mt-1">
+            <div className="w-5 h-[1px] bg-purple-500/40"></div>
+            <button 
+              onClick={() => setView('reviews')}
+              className={`p-2.5 w-full rounded-full transition-all duration-300 flex items-center justify-center ${view === 'reviews' ? 'bg-amber-500 text-black shadow-[0_0_15px_rgba(251,191,36,0.8)] scale-110' : 'text-amber-400/70 hover:text-amber-300 hover:bg-amber-900/30'}`}
+            >
+              <Star className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
-        {/* Имя и подзаголовок */}
-        <div className="text-center mb-6">
-          <h3 className="text-2xl font-serif font-bold text-amber-100 italic tracking-wide">{CONTENT.esoteric.username}</h3>
-          <p className="text-purple-400 text-[9px] mt-1.5 uppercase tracking-[0.3em] font-medium">{CONTENT.esoteric.subUsername}</p>
-        </div>
+        {/* === ПРАВАЯ ЧАСТЬ (КОНТЕНТ) === */}
+        <div className="relative z-10 flex-1 flex flex-col h-full overflow-hidden">
+          
+          <div className="relative flex-1 w-full overflow-hidden">
+            
+            {/* 1. ТАРО */}
+            <div className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out ${view === 'tarot' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}>
+              <div className="w-10 h-10 rounded-full bg-purple-900/40 border border-purple-500/30 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(147,51,234,0.2)]">
+                <Diamond className="w-5 h-5 text-amber-300" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-amber-100 italic tracking-wide mb-2">Карты Таро</h3>
+              <p className="font-serif text-[12px] text-purple-100/90 leading-relaxed bg-black/40 backdrop-blur-sm p-3.5 rounded-2xl border border-purple-500/20 shadow-inner">
+                Глубокие расклады на любовь, карьеру и судьбу. Карты подсвечивают скрытые мотивы, показывают последствия выбора и помогают найти самый верный путь к цели.
+              </p>
+            </div>
 
-        {/* Цитата (Мягкая и плавная) */}
-        <div className="flex-1 flex items-center justify-center w-full relative">
-          <Moon className="absolute top-0 right-4 w-16 h-16 text-amber-500/5 rotate-12" />
-          <p className="font-serif italic text-amber-100/80 text-sm text-center leading-loose relative z-10 px-4">
-            <span className="text-2xl absolute -top-3 -left-1 text-purple-500/40">"</span>
-            {CONTENT.esoteric.quote1}<br/>{CONTENT.esoteric.quote2}
-            <span className="text-2xl absolute -bottom-4 -right-1 text-purple-500/40">"</span>
-          </p>
-        </div>
+            {/* 2. АСТРОЛОГИЯ */}
+            <div className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out ${view === 'astro' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}>
+              <div className="w-10 h-10 rounded-full bg-purple-900/40 border border-purple-500/30 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(147,51,234,0.2)]">
+                <Moon className="w-5 h-5 text-amber-300" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-amber-100 italic tracking-wide mb-2">Астрология</h3>
+              <p className="font-serif text-[12px] text-purple-100/90 leading-relaxed bg-black/40 backdrop-blur-sm p-3.5 rounded-2xl border border-purple-500/20 shadow-inner">
+                Детальный разбор натальной карты. Узнай свои сильные стороны, скрытые таланты, кармические задачи и самые удачные периоды для важных жизненных шагов.
+              </p>
+            </div>
 
-        {/* Круглые социальные кнопки */}
-        <div className="flex gap-6 mt-6 mb-8">
-          <a href={CONTENT.esoteric.tgLink} className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-purple-500/30 flex items-center justify-center text-purple-400 hover:text-amber-300 hover:border-amber-400/50 transition-all shadow-[0_0_15px_rgba(147,51,234,0.15)] group">
-            <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
-          </a>
-          <a href={CONTENT.esoteric.instLink} className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-purple-500/30 flex items-center justify-center text-purple-400 hover:text-amber-300 hover:border-amber-400/50 transition-all shadow-[0_0_15px_rgba(147,51,234,0.15)] group">
-            <InstagramIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
-          </a>
-        </div>
+            {/* 3. НУМЕРОЛОГИЯ */}
+            <div className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out ${view === 'numero' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}>
+              <div className="w-10 h-10 rounded-full bg-purple-900/40 border border-purple-500/30 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(147,51,234,0.2)]">
+                <TrendingUp className="w-5 h-5 text-amber-300" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-amber-100 italic tracking-wide mb-2">Нумерология</h3>
+              <p className="font-serif text-[12px] text-purple-100/90 leading-relaxed bg-black/40 backdrop-blur-sm p-3.5 rounded-2xl border border-purple-500/20 shadow-inner">
+                Анализ Матрицы Судьбы. Расшифровка твоего уникального финансового кода и выявление энергетических блоков, которые мешают росту и изобилию.
+              </p>
+            </div>
 
-        {/* Элегантная кнопка действия */}
-        <a href={CONTENT.esoteric.actionLink} className="w-full bg-gradient-to-r from-purple-900/80 to-[#1a1025] backdrop-blur-md text-amber-100 font-serif italic text-base py-4 rounded-full flex items-center justify-center gap-3 hover:from-purple-800 hover:to-[#2a1a3a] transition-all shadow-[0_0_30px_rgba(147,51,234,0.3)] border border-purple-500/30 group">
-          <Sparkles className="w-4 h-4 text-amber-400 group-hover:animate-pulse" />
-          {CONTENT.esoteric.actionText}
-        </a>
+            {/* 4. ЛИЧНЫЕ ПРИЕМЫ */}
+            <div className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out ${view === 'personal' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}>
+              <div className="w-10 h-10 rounded-full bg-purple-900/40 border border-purple-500/30 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(147,51,234,0.2)]">
+                <UserCircle2 className="w-5 h-5 text-amber-300" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-amber-100 italic tracking-wide mb-2">Личный Прием</h3>
+              <p className="font-serif text-[12px] text-purple-100/90 leading-relaxed bg-black/40 backdrop-blur-sm p-3.5 rounded-2xl border border-purple-500/20 shadow-inner">
+                Индивидуальная сессия тет-а-тет. Полное погружение в твой запрос, бережная энергетическая чистка и постановка мощной защиты от негатива.
+              </p>
+            </div>
+
+            {/* 5. ГРУППОВЫЕ ПРИЕМЫ */}
+            <div className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out ${view === 'group' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}>
+              <div className="w-10 h-10 rounded-full bg-purple-900/40 border border-purple-500/30 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(147,51,234,0.2)]">
+                <Globe className="w-5 h-5 text-amber-300" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-amber-100 italic tracking-wide mb-2">Женские Круги</h3>
+              <p className="font-serif text-[12px] text-purple-100/90 leading-relaxed bg-black/40 backdrop-blur-sm p-3.5 rounded-2xl border border-purple-500/20 shadow-inner">
+                Групповые энергопрактики и медитации в поле единомышленников. Мощная синергия, взаимная поддержка и глубокое раскрытие внутренней женской силы.
+              </p>
+            </div>
+
+            {/* 6. ОТЗЫВЫ */}
+            <div className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out ${view === 'reviews' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}>
+              <div className="w-10 h-10 rounded-full bg-purple-900/40 border border-purple-500/30 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(147,51,234,0.2)]">
+                <Star className="w-5 h-5 text-amber-300" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-amber-100 italic tracking-wide mb-2">Отзывы</h3>
+              <div className="bg-black/40 backdrop-blur-sm p-3.5 rounded-2xl border border-purple-500/20 shadow-inner relative mt-1">
+                 <span className="absolute -top-3 left-2 text-4xl text-purple-500/40 font-serif">"</span>
+                 <p className="font-serif text-[11px] text-purple-100/90 leading-relaxed italic relative z-10 px-1 pt-1">
+                   Алена — настоящий проводник! После сессии жизнь изменилась на 180 градусов, ушли страхи и тревога. Благодарю за свет!
+                 </p>
+                 <p className="text-[9px] text-amber-400/80 uppercase tracking-widest font-bold text-right mt-3">— Марина, Москва</p>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Кнопка записи (Заблокирована от наклона) */}
+          <div 
+            className="mt-3 w-full no-tilt cursor-default"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <a href={CONTENT.esoteric.actionLink} className="w-full bg-gradient-to-r from-purple-900/80 to-[#1a1025] backdrop-blur-md text-amber-100 font-serif italic text-xs py-3.5 rounded-2xl flex items-center justify-center gap-2 hover:from-purple-800 hover:to-[#2a1a3a] transition-all shadow-[0_0_25px_rgba(147,51,234,0.4)] border border-purple-500/50 group active:scale-95">
+              <Sparkles className="w-4 h-4 text-amber-400 group-hover:animate-pulse" />
+              {CONTENT.esoteric.actionText}
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
+};
 
 // 2. ПСИХОЛОГ
-const PsychologistCard = () => (
-  <>
-    {/* ЛИЦЕВАЯ СТОРОНА */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(20,184,166,0.6)] transition-shadow duration-700">
-      <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 via-cyan-500 to-emerald-400 opacity-70 mix-blend-screen"></div>
-      
-      {/* Темный градиент перенесен ПОД фото, чтобы не перекрывать лазер */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/50 to-transparent"></div>
-      
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.psychologist.bgImage} className="opacity-50" />
-      
-      <div className="relative z-10 flex flex-col h-full justify-between">
-        <div className="flex justify-between items-start">
-          <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-teal-500/30 flex items-center gap-2">
-            <Heart className="w-4 h-4 text-rose-400" />
-            <span className="text-xs font-bold tracking-wider uppercase text-teal-100">{CONTENT.psychologist.badge}</span>
-          </div>
-          <Brain className="w-8 h-8 text-teal-200/80 drop-shadow-[0_0_10px_rgba(45,212,191,0.5)]" />
-        </div>
+const PsychologistCard = () => {
+  // Состояние для микро-навигации внутри карточки (GlassOS)
+  const [view, setView] = useState('profile'); // 'profile', 'services', 'reviews'
 
-        <div>
-          <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-medium mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-            {CONTENT.psychologist.name1}
-            <br />
-            {CONTENT.psychologist.name2}
-          </h2>
-          <div className="flex flex-wrap items-center gap-3 mt-2">
-            <p className="text-teal-300 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-emerald-500 pl-3">
-              {CONTENT.psychologist.role}
-            </p>
-            <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-teal-500/30">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-              </span>
-              <span className="text-[8px] font-bold uppercase tracking-wider text-emerald-100">{CONTENT.psychologist.status}</span>
+  return (
+    <>
+      {/* ЛИЦЕВАЯ СТОРОНА */}
+      <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(20,184,166,0.6)] transition-shadow duration-700">
+        <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 via-cyan-500 to-emerald-400 opacity-70 mix-blend-screen"></div>
+        
+        {/* Темный градиент перенесен ПОД фото, чтобы не перекрывать лазер */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-teal-950/50 to-transparent"></div>
+        
+        {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Изумрудный/Бирюзовый огонь) */}
+        <BurnRevealImage src={CONTENT.psychologist.bgImage} className="opacity-50" burnColor="teal" />
+        
+        <div className="relative z-10 flex flex-col h-full justify-between">
+          <div className="flex justify-between items-start">
+            <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-teal-500/30 flex items-center gap-2">
+              <Heart className="w-4 h-4 text-rose-400" />
+              <span className="text-xs font-bold tracking-wider uppercase text-teal-100">{CONTENT.psychologist.badge}</span>
+            </div>
+            <Brain className="w-8 h-8 text-teal-200/80 drop-shadow-[0_0_10px_rgba(45,212,191,0.5)]" />
+          </div>
+
+          <div>
+            <h2 className="text-3xl sm:text-4xl leading-tight font-serif font-medium mb-1 uppercase tracking-wide text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+              {CONTENT.psychologist.name1}
+              <br />
+              {CONTENT.psychologist.name2}
+            </h2>
+            <div className="flex flex-wrap items-center gap-3 mt-2">
+              <p className="text-teal-300 font-bold text-xs uppercase tracking-[0.2em] border-l-2 border-emerald-500 pl-3">
+                {CONTENT.psychologist.role}
+              </p>
+              <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-teal-500/30">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                </span>
+                <span className="text-[8px] font-bold uppercase tracking-wider text-emerald-100">{CONTENT.psychologist.status}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    {/* ОБРАТНАЯ СТОРОНА (Zen & Harmony Style) */}
-    <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-[#020806] flex flex-col p-6 text-white" style={{ transform: 'rotateY(180deg)' }}>
-      
-      {/* Мягкие перекрывающие формы (Blur эффекты) */}
-      <div className="absolute -top-10 -left-20 w-72 h-72 bg-teal-600/20 blur-[90px] rounded-full pointer-events-none mix-blend-screen"></div>
-      <div className="absolute top-1/2 -right-20 w-80 h-80 bg-emerald-700/15 blur-[100px] rounded-full pointer-events-none mix-blend-screen"></div>
-      <div className="absolute -bottom-20 left-10 w-64 h-64 bg-cyan-900/30 blur-[80px] rounded-full pointer-events-none mix-blend-screen"></div>
-
-      <div className="relative z-10 flex flex-col h-full w-full">
+      {/* ОБРАТНАЯ СТОРОНА (GlassOS / Interactive Micro-App) */}
+      <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(13,148,136,0.4)] overflow-hidden bg-[#020806] flex flex-col p-5 text-white" style={{ transform: 'rotateY(180deg)' }}>
         
-        {/* Главный акцент - Цитата */}
-        <div className="flex-1 flex flex-col justify-center items-center text-center mt-2">
-          <Brain className="w-8 h-8 text-teal-400/30 mb-5" />
-          <p className="font-serif text-teal-50 text-[1.15rem] leading-relaxed relative z-10 px-2 tracking-wide">
-             <span className="text-4xl absolute -top-4 -left-2 text-teal-500/20 font-serif">"</span>
-             {CONTENT.psychologist.quote1}<br/>{CONTENT.psychologist.quote2}
-             <span className="text-4xl absolute -bottom-5 -right-2 text-teal-500/20 font-serif">"</span>
-          </p>
+        {/* Мягкие перекрывающие формы (Blur эффекты) */}
+        <div className="absolute -top-10 -left-20 w-72 h-72 bg-teal-600/20 blur-[90px] rounded-full pointer-events-none mix-blend-screen"></div>
+        <div className="absolute top-1/2 -right-20 w-80 h-80 bg-emerald-700/15 blur-[100px] rounded-full pointer-events-none mix-blend-screen"></div>
+        <div className="absolute -bottom-20 left-10 w-64 h-64 bg-cyan-900/30 blur-[80px] rounded-full pointer-events-none mix-blend-screen"></div>
+
+        {/* === КОНТЕЙНЕР ДЛЯ ЭКРАНОВ === */}
+        {/* ИСПРАВЛЕНО: Убрана блокировка переворота и остановка 3D-наклона с основной области чтения */}
+        <div className="relative flex-1 w-full mb-14 overflow-hidden">
+          
+          {/* VIEW 1: ПРОФИЛЬ */}
+          <div className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${view === 'profile' ? 'opacity-100 translate-x-0' : view === 'services' || view === 'reviews' ? 'opacity-0 -translate-x-8 pointer-events-none' : 'opacity-0 translate-x-8 pointer-events-none'}`}>
+            <div className="w-16 h-16 rounded-full p-[2px] bg-gradient-to-b from-teal-400/40 to-emerald-600/10 mb-3 shadow-[0_0_25px_rgba(20,184,166,0.15)]">
+              <img src={CONTENT.psychologist.avatar} alt={CONTENT.psychologist.name1} className="w-full h-full object-cover rounded-full border-2 border-[#020806]" />
+            </div>
+            <h3 className="text-lg font-serif font-bold text-teal-50 tracking-wide">{CONTENT.psychologist.username}</h3>
+            <p className="text-teal-500/80 text-[9px] mt-1.5 uppercase tracking-[0.25em] font-medium mb-6">{CONTENT.psychologist.subUsername}</p>
+            
+            <p className="font-serif text-teal-50/90 text-[13px] text-center leading-relaxed italic px-4 mb-8">
+              "{CONTENT.psychologist.quote1} {CONTENT.psychologist.quote2}"
+            </p>
+
+            <div className="flex justify-center items-center gap-4 w-full px-2">
+              <div className="bg-teal-900/20 border border-teal-500/20 rounded-2xl p-3.5 flex-1 text-center shadow-inner">
+                <p className="text-teal-100 font-bold text-lg">{CONTENT.psychologist.stat1Value}</p>
+                <p className="text-[8px] text-teal-500/70 uppercase tracking-widest mt-1 font-bold">{CONTENT.psychologist.stat1Title}</p>
+              </div>
+              <div className="bg-teal-900/20 border border-teal-500/20 rounded-2xl p-3.5 flex-1 text-center shadow-inner">
+                <p className="text-teal-100 font-bold text-lg">{CONTENT.psychologist.stat2Value}</p>
+                <p className="text-[8px] text-teal-500/70 uppercase tracking-widest mt-1 font-bold">{CONTENT.psychologist.stat2Title}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* VIEW 2: УСЛУГИ */}
+          <div className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out px-1 ${view === 'services' ? 'opacity-100 translate-x-0' : view === 'profile' ? 'opacity-0 translate-x-8 pointer-events-none' : 'opacity-0 -translate-x-8 pointer-events-none'}`}>
+             <h4 className="text-teal-400 text-[10px] uppercase tracking-[0.2em] font-bold text-center mb-5">Форматы работы</h4>
+             <div className="flex flex-col gap-3">
+               <div className="bg-teal-900/20 backdrop-blur-sm border border-teal-500/20 rounded-2xl p-4 shadow-inner">
+                 <div className="flex justify-between items-center mb-2">
+                   <span className="font-serif text-teal-50 font-medium tracking-wide">Личная сессия</span>
+                   <span className="text-teal-300 font-bold text-sm bg-teal-950/50 px-2 py-0.5 rounded-md border border-teal-500/20">5 000 ₽</span>
+                 </div>
+                 <p className="text-[10px] text-teal-100/60 leading-relaxed font-light">60 минут глубокой индивидуальной работы онлайн или в безопасном пространстве кабинета.</p>
+               </div>
+               <div className="bg-teal-900/20 backdrop-blur-sm border border-teal-500/20 rounded-2xl p-4 shadow-inner">
+                 <div className="flex justify-between items-center mb-2">
+                   <span className="font-serif text-teal-50 font-medium tracking-wide">Парная терапия</span>
+                   <span className="text-teal-300 font-bold text-sm bg-teal-950/50 px-2 py-0.5 rounded-md border border-teal-500/20">8 000 ₽</span>
+                 </div>
+                 <p className="text-[10px] text-teal-100/60 leading-relaxed font-light">90 минут для пар. Учимся слышать друг друга, находить компромиссы и решать конфликты экологично.</p>
+               </div>
+             </div>
+          </div>
+
+          {/* VIEW 3: ОТЗЫВЫ */}
+          <div className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-in-out px-1 ${view === 'reviews' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'}`}>
+             <h4 className="text-teal-400 text-[10px] uppercase tracking-[0.2em] font-bold text-center mb-5">Отзывы клиентов</h4>
+             <div className="flex flex-col gap-3">
+               <div className="bg-teal-900/20 backdrop-blur-sm border border-teal-500/20 rounded-2xl p-4 relative shadow-inner">
+                 <span className="absolute -top-1 left-2 text-3xl text-teal-500/30 font-serif">"</span>
+                 <p className="text-[11px] text-teal-50/90 leading-relaxed font-light italic relative z-10 px-2 pt-1">Алена помогла мне выбраться из глубокого выгорания. Всего за пару месяцев я снова начал спать и радоваться простым вещам.</p>
+                 <p className="text-[8px] text-teal-400/80 uppercase tracking-widest font-bold text-right mt-3">— Михаил</p>
+               </div>
+               <div className="bg-teal-900/20 backdrop-blur-sm border border-teal-500/20 rounded-2xl p-4 relative shadow-inner">
+                 <span className="absolute -top-1 left-2 text-3xl text-teal-500/30 font-serif">"</span>
+                 <p className="text-[11px] text-teal-50/90 leading-relaxed font-light italic relative z-10 px-2 pt-1">Очень бережный специалист. На сессиях всегда чувствую себя в безопасности. Спасибо за то, что научили меня отстаивать свои границы.</p>
+                 <p className="text-[8px] text-teal-400/80 uppercase tracking-widest font-bold text-right mt-3">— Анна</p>
+               </div>
+             </div>
+          </div>
+
         </div>
 
-        {/* Инфо о психологе (мягкий блок без границ) */}
-        <div className="flex flex-col items-center mt-4 mb-5">
-          <div className="w-16 h-16 rounded-full p-[2px] bg-gradient-to-b from-teal-400/40 to-emerald-600/10 mb-3 shadow-[0_0_25px_rgba(20,184,166,0.15)]">
-            <img src={CONTENT.psychologist.avatar} alt={CONTENT.psychologist.name1} className="w-full h-full object-cover rounded-full border-2 border-[#020806]" />
-          </div>
-          <h3 className="text-lg font-serif font-bold text-teal-50 tracking-wide">{CONTENT.psychologist.username}</h3>
-          <p className="text-teal-500/80 text-[9px] mt-1.5 uppercase tracking-[0.25em] font-medium">{CONTENT.psychologist.subUsername}</p>
+        {/* === ПЛАВАЮЩИЙ DOCK (GlassOS Navigation) === */}
+        <div 
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-[#020806]/60 backdrop-blur-xl p-1.5 rounded-full border border-teal-500/30 shadow-[0_10px_40px_rgba(20,184,166,0.3)] z-50 no-tilt cursor-default"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Световой шар (Мягкий светящийся блик, бегающий слева направо) */}
+          <div className="absolute top-1/2 -translate-y-1/2 w-6 h-6 bg-teal-400/40 rounded-full blur-[6px] shadow-[0_0_15px_rgba(45,212,191,0.6)] pointer-events-none z-0" style={{ animation: 'scan-horizontal 3s ease-in-out infinite' }}></div>
+
+           {/* Кнопка Профиль */}
+           <button 
+             onClick={(e) => { e.stopPropagation(); setView('profile'); }} 
+             className={`relative z-10 p-2.5 rounded-full transition-all duration-300 flex items-center justify-center ${view === 'profile' ? 'bg-teal-500 text-black shadow-[0_0_15px_rgba(20,184,166,0.5)] scale-105' : 'text-teal-400/70 hover:text-teal-300 hover:bg-teal-900/50'}`}
+           >
+             <UserCircle2 className="w-4 h-4" />
+           </button>
+           
+           {/* Кнопка Услуги */}
+           <button 
+             onClick={(e) => { e.stopPropagation(); setView('services'); }} 
+             className={`relative z-10 p-2.5 rounded-full transition-all duration-300 flex items-center justify-center ${view === 'services' ? 'bg-teal-500 text-black shadow-[0_0_15px_rgba(20,184,166,0.5)] scale-105' : 'text-teal-400/70 hover:text-teal-300 hover:bg-teal-900/50'}`}
+           >
+             <Brain className="w-4 h-4" />
+           </button>
+           
+           {/* Кнопка Отзывы */}
+           <button 
+             onClick={(e) => { e.stopPropagation(); setView('reviews'); }} 
+             className={`relative z-10 p-2.5 rounded-full transition-all duration-300 flex items-center justify-center ${view === 'reviews' ? 'bg-teal-500 text-black shadow-[0_0_15px_rgba(20,184,166,0.5)] scale-105' : 'text-teal-400/70 hover:text-teal-300 hover:bg-teal-900/50'}`}
+           >
+             <Star className="w-4 h-4" />
+           </button>
+           
+           {/* Разделитель */}
+           <div className="w-[1px] h-6 bg-teal-500/30 mx-1 relative z-10"></div>
+           
+           {/* Кнопка Действия (Всегда на виду) */}
+           <a 
+             href={CONTENT.psychologist.actionLink} 
+             onClick={e => e.stopPropagation()} 
+             className="relative z-10 px-4 py-2.5 bg-gradient-to-r from-teal-500 to-emerald-400 text-black font-bold uppercase tracking-widest text-[9px] rounded-full flex items-center gap-1.5 hover:scale-105 hover:shadow-[0_0_20px_rgba(20,184,166,0.6)] transition-all active:scale-95"
+           >
+             <Heart className="w-3 h-3 text-rose-600" /> Запись
+           </a>
         </div>
 
-        {/* Статистика (нежные текстовые блоки) */}
-        <div className="flex justify-center items-center gap-6 mb-8">
-          <div className="flex flex-col items-center">
-            <p className="text-[9px] text-teal-500/60 uppercase font-bold tracking-widest mb-1">{CONTENT.psychologist.stat1Title}</p>
-            <p className="font-serif font-bold text-base text-teal-100">{CONTENT.psychologist.stat1Value}</p>
-          </div>
-          <div className="w-px h-8 bg-teal-500/20 rounded-full"></div>
-          <div className="flex flex-col items-center">
-             <p className="text-[9px] text-teal-500/60 uppercase font-bold tracking-widest mb-1">{CONTENT.psychologist.stat2Title}</p>
-            <p className="font-serif font-bold text-base text-teal-100">{CONTENT.psychologist.stat2Value}</p>
-          </div>
-        </div>
-
-        {/* Контакты аккуратно внизу */}
-        <a href={CONTENT.psychologist.actionLink} className="w-full bg-teal-900/30 backdrop-blur-md text-teal-50 font-serif py-4 rounded-full flex items-center justify-center gap-3 hover:bg-teal-800/40 transition-all shadow-[0_4px_20px_rgba(20,184,166,0.1)] border border-teal-500/20 group">
-          <Heart className="w-4 h-4 text-rose-400/80 group-hover:scale-110 transition-transform" />
-          <span className="tracking-wide">{CONTENT.psychologist.actionText}</span>
-        </a>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
+};
 
 // 3. ТУРАГЕНТ
 const TravelCard = () => (
@@ -610,8 +818,8 @@ const TravelCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(244,63,94,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-orange-500 via-rose-500 to-indigo-600 opacity-70 mix-blend-screen"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.travel.bgImage} className="opacity-50" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Оранжевый/Красный огонь) */}
+      <BurnRevealImage src={CONTENT.travel.bgImage} className="opacity-50" burnColor="orange" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -752,8 +960,8 @@ const BloggerCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(236,72,153,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(6,182,212,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 via-purple-500 to-pink-500 opacity-80 mix-blend-screen"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.blogger.bgImage} className="opacity-60 mix-blend-luminosity" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Розовый/Неоновый огонь) */}
+      <BurnRevealImage src={CONTENT.blogger.bgImage} className="opacity-60 mix-blend-luminosity" burnColor="pink" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -858,8 +1066,8 @@ const FitnessCard = () => (
       {/* Темный градиент перенесен ПОД картинку, чтобы не перекрывать лазер */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/50 to-transparent"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.fitness.bgImage} className="opacity-50" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Ярко-красный огонь) */}
+      <BurnRevealImage src={CONTENT.fitness.bgImage} className="opacity-50" burnColor="red" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -976,8 +1184,8 @@ const RealEstateCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(217,119,6,0.3)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(217,119,6,0.5)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-bl from-zinc-800 via-black to-amber-900/50 opacity-80 mix-blend-screen"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.broker.bgImage} className="opacity-50 mix-blend-luminosity" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Золотой/Бронзовый огонь) */}
+      <BurnRevealImage src={CONTENT.broker.bgImage} className="opacity-50 mix-blend-luminosity" burnColor="gold" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -994,7 +1202,6 @@ const RealEstateCard = () => (
             <br />
             {CONTENT.broker.name2}
           </h2>
-          {/* Убрали прозрачность, сделали текст ярче (amber-300) и добавили легкую тень, чтобы не терялся */}
           <p className="text-amber-300 font-serif font-medium text-[11px] uppercase tracking-[0.3em] mt-3 drop-shadow-md bg-black/20 w-fit mx-auto px-3 py-1 rounded-full border border-amber-600/20">
             {CONTENT.broker.role}
           </p>
@@ -1060,8 +1267,8 @@ const MoneyCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(16,185,129,0.4)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(5,150,105,0.6)] transition-shadow duration-700">
       <div className="absolute inset-0 bg-gradient-to-tr from-emerald-900 via-zinc-950 to-green-900 opacity-90 mix-blend-screen"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.money.bgImage} className="opacity-40 mix-blend-luminosity" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Изумрудный огонь) */}
+      <BurnRevealImage src={CONTENT.money.bgImage} className="opacity-40 mix-blend-luminosity" burnColor="emerald" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1179,16 +1386,19 @@ const StarterCard = () => (
   <>
     {/* ЛИЦЕВАЯ СТОРОНА */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(234,179,8,0.2)] overflow-hidden bg-black text-white flex flex-col p-6 group-hover:shadow-[0_20px_80px_rgba(234,179,8,0.4)] transition-shadow duration-700 border border-yellow-500/20">
-      <div className="absolute inset-0 bg-gradient-to-tr from-black via-zinc-900 to-yellow-900/30 opacity-90 mix-blend-screen"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-black via-zinc-900 to-yellow-900/30 opacity-90 mix-blend-screen rounded-[2.5rem]"></div>
       
       {/* Имитация золотых нитей */}
       <div className="absolute top-0 right-10 w-px h-full bg-gradient-to-b from-transparent via-yellow-500/50 to-transparent transform rotate-12"></div>
       <div className="absolute top-0 left-20 w-px h-full bg-gradient-to-b from-transparent via-yellow-500/30 to-transparent transform -rotate-12"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.starter.bgImage} className="opacity-60 mix-blend-luminosity sepia-[.5] hue-rotate-[-10deg]" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Золотой огонь) */}
+      <BurnRevealImage src={CONTENT.starter.bgImage} className="opacity-60 mix-blend-luminosity sepia-[.5] hue-rotate-[-10deg] rounded-[2.5rem]" burnColor="gold" />
       
-      <div className="relative z-10 flex flex-col h-full justify-between">
+      {/* ТЕМНЫЙ ПОЛУПРОЗРАЧНЫЙ ФОН ПОВЕРХ ФОТО (Снизу темнее, сверху прозрачный) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-zinc-950/80 to-transparent pointer-events-none z-0 rounded-[2.5rem]"></div>
+
+      <div className="relative z-10 flex flex-col h-full">
         <div className="flex justify-between items-start">
           <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-yellow-500/30 flex items-center gap-2 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
             <Crown className="w-4 h-4 text-yellow-400" />
@@ -1197,7 +1407,10 @@ const StarterCard = () => (
           <Sparkles className="w-8 h-8 text-yellow-400 drop-shadow-[0_0_15px_rgba(234,179,8,0.8)] animate-pulse" />
         </div>
 
-        <div className="flex flex-col items-center justify-center text-center mt-4">
+        {/* Пустое пространство, чтобы сдвинуть текст вниз под фото */}
+        <div className="flex-1"></div>
+
+        <div className="flex flex-col items-center justify-center text-center mb-5">
           <h2 className="text-3xl sm:text-4xl leading-tight font-black mb-2 uppercase tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-yellow-100 to-yellow-500 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
             {CONTENT.starter.title1}
             <br />
@@ -1208,7 +1421,7 @@ const StarterCard = () => (
           </p>
         </div>
         
-        <div className="flex flex-col gap-3 mt-auto w-full">
+        <div className="flex flex-col gap-3 w-full">
           <div className="bg-black/60 backdrop-blur-md p-3 rounded-2xl border border-yellow-500/30 flex items-center justify-center gap-3 shadow-[0_0_15px_rgba(234,179,8,0.2)] mb-1">
              <MousePointerClick className="w-5 h-5 text-yellow-500 animate-pulse" />
              <span className="text-[11px] font-bold uppercase tracking-wider text-yellow-100">{CONTENT.starter.instruction1}</span>
@@ -1225,6 +1438,15 @@ const StarterCard = () => (
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(234,179,8,0.2)] overflow-hidden bg-zinc-950 flex flex-col p-5 text-white border border-yellow-500/20" style={{ transform: 'rotateY(180deg)' }}>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-yellow-500/10 blur-[80px] rounded-full pointer-events-none"></div>
       
+      {/* ВАУ-ЭФФЕКТ: Вращающиеся огромные золотые орбиты на фоне */}
+      <div className="absolute -top-[50%] -left-[50%] w-[200%] aspect-square rounded-full border border-yellow-500/10 border-dashed pointer-events-none" style={{ animation: 'esoteric-slow-drift-1 60s linear infinite', transformOrigin: '50% 50%' }}></div>
+      <div className="absolute -top-[30%] -right-[30%] w-[160%] aspect-square rounded-full border-[1px] border-yellow-500/20 pointer-events-none" style={{ animation: 'esoteric-slow-drift-2 40s linear infinite', transformOrigin: '40% 60%' }}></div>
+      
+      {/* ВАУ-ЭФФЕКТ: Пробегающий премиальный световой блик через всю карточку */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[2.5rem] z-0">
+         <div className="absolute top-0 bottom-0 w-[200%] bg-gradient-to-r from-transparent via-yellow-400/10 to-transparent pointer-events-none" style={{ animation: 'premium-sweep 5s ease-in-out infinite' }}></div>
+      </div>
+
       <div className="relative z-10 flex flex-col h-full gap-4">
         <div className="text-center pt-2">
           <h3 className="text-xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-500 text-transparent bg-clip-text tracking-wide uppercase">{CONTENT.starter.backTitle}</h3>
@@ -1270,7 +1492,7 @@ const StarterCard = () => (
           </div>
         </div>
 
-        <a href={CONTENT.starter.actionLink} className="w-full bg-gradient-to-r from-yellow-600 to-yellow-400 hover:from-yellow-500 hover:to-yellow-300 text-zinc-950 font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+        <a href={CONTENT.starter.actionLink} className="w-full bg-gradient-to-r from-yellow-600 to-yellow-400 hover:from-yellow-500 hover:to-yellow-300 text-zinc-950 font-black uppercase tracking-widest py-4 rounded-[2rem] flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(234,179,8,0.4)] relative z-20">
           {CONTENT.starter.actionText}
         </a>
       </div>
@@ -1288,8 +1510,8 @@ const NailArtistCard = () => (
       {/* Темный градиент для контраста лазера (чтобы он был тонким, как на других) */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-rose-950/50 to-transparent"></div>
       
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Убран тяжелый mix-blend-luminosity для плавной анимации на мобилках) */}
-      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-40 grayscale" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Розовый огонь) */}
+      <BurnRevealImage src={CONTENT.nail.bgImage} className="opacity-40 grayscale" burnColor="rose" />
       
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1307,7 +1529,6 @@ const NailArtistCard = () => (
             {CONTENT.nail.name2}
           </h2>
           <div className="flex flex-col items-center gap-2 mt-3">
-            {/* ОПТИМИЗАЦИЯ: убрали backdrop-blur-sm, который накладывался на сгорание и убивал FPS. Заменили на bg-black/40 */}
             <p className="text-pink-200 font-serif font-medium text-[10px] uppercase tracking-[0.3em] bg-black/40 px-4 py-1.5 rounded-full border border-pink-300/30">
               {CONTENT.nail.role}
             </p>
@@ -1321,10 +1542,9 @@ const NailArtistCard = () => (
     </div>
 
     {/* ОБРАТНАЯ СТОРОНА (Dark Liquid Glass / Приглушенный Глянец) */}
-    {/* ОПТИМИЗАЦИЯ: убрали класс animate-pearl, который заставлял телефон бесконечно перерисовывать фон */}
     <div className="absolute inset-0 w-full h-full card-backface-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(244,114,182,0.3)] overflow-hidden flex flex-col p-6 text-white border border-rose-500/20 bg-gradient-to-br from-[#1c0f14] via-[#2a131d] to-[#120a0d]" style={{ transform: 'rotateY(180deg)' }}>
       
-      {/* Блики глянца (Убран тяжелый mix-blend-screen для устранения лагов) */}
+      {/* Блики глянца */}
       <div className="absolute -top-10 -left-10 w-48 h-48 bg-rose-500/30 blur-[40px] rounded-full pointer-events-none"></div>
       <div className="absolute top-1/2 -right-12 w-40 h-40 bg-pink-600/30 blur-[50px] rounded-full pointer-events-none"></div>
       <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-56 h-56 bg-rose-400/20 blur-[40px] rounded-full pointer-events-none"></div>
@@ -1382,8 +1602,8 @@ const AlfaCard = () => (
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-600/30 blur-[80px] rounded-full pointer-events-none"></div>
       <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-red-800/40 blur-[90px] rounded-full pointer-events-none"></div>
 
-      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ */}
-      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60 mix-blend-luminosity" />
+      {/* ЗАМЕНА СТАТИЧНОГО ФОНА НА СГОРАЮЩИЙ (Красный огонь) */}
+      <BurnRevealImage src={CONTENT.alfa.bgImage} className="opacity-60 mix-blend-luminosity" burnColor="red" />
 
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div className="flex justify-between items-start">
@@ -1538,6 +1758,13 @@ const App = () => {
     // Блокируем наклон, если карточка прямо сейчас переворачивается
     if (isFlippingRef.current || !cardRef.current) return;
     
+    // Исключение для интерактивных зон (чтобы удобно было читать и нажимать)
+    if (e.target.closest('.no-tilt')) {
+      setRotate({ x: 0, y: 0 });
+      setGlare(prev => ({ ...prev, opacity: 0 }));
+      return;
+    }
+    
     const rect = cardRef.current.getBoundingClientRect();
     
     // Поддержка как мыши, так и тач-событий
@@ -1663,7 +1890,7 @@ const App = () => {
       'rgba(225,29,72,0.6)',  // 5: Тренер
       'rgba(244,114,182,0.6)', // 6: Маникюр
       'rgba(220,38,38,0.6)',  // 7: Альфа
-      'rgba(29,78,216,0.6)',  // 8: Брокер
+      'rgba(217,119,6,0.6)',  // 8: Брокер
       'rgba(16,185,129,0.6)'  // 9: Заработок
     ];
     return colors[activeTab] || colors[0];
@@ -1740,7 +1967,7 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center p-4 sm:p-8 font-sans overflow-hidden select-none">
+    <div className="min-h-[100dvh] bg-neutral-950 flex flex-col font-sans select-none transition-all duration-500 relative overflow-hidden justify-center items-center p-4 sm:p-8">
       {/* Вставляем глобальные стили */}
       <style>{globalStyles}</style>
 
@@ -1782,84 +2009,88 @@ const App = () => {
 
       {/* КОНТЕЙНЕР ВИЗИТКИ (3D Сцена с ограничением высоты для мобилок) */}
       <div 
-        ref={cardRef}
-        className="relative z-10 w-full aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float touch-none"
-        style={{ perspective: '1500px', maxWidth: 'min(22rem, 50vh)' }}
-        onClick={handleFlip}
-        onMouseMove={handlePointerMove}
-        onMouseLeave={handlePointerLeave}
-        onTouchMove={handlePointerMove}
-        onTouchEnd={handlePointerLeave}
+        className="w-full flex justify-center relative z-40 items-center mt-12 sm:mt-16"
       >
-        {/* Искры (Magic Dust) */}
-        {sparks.map(spark => (
-          <div
-            key={spark.id}
-            className="spark-particle z-0"
-            style={{
-              '--tx': spark.tx,
-              '--ty': spark.ty,
-              '--wx1': spark.wx1,
-              '--wy1': spark.wy1,
-              '--wx2': spark.wx2,
-              '--wy2': spark.wy2,
-              '--wx3': spark.wx3,
-              '--wy3': spark.wy3,
-              '--wt': spark.wt,
-              width: spark.size,
-              height: spark.size,
-              left: '50%',
-              top: '50%',
-              marginTop: '-' + (parseFloat(spark.size) / 2) + 'px',
-              marginLeft: '-' + (parseFloat(spark.size) / 2) + 'px'
-            }}
-          />
-        ))}
-
-        {/* Обертка для магнитного 3D наклона (следит за мышью/пальцем) */}
-        <div
-          className="w-full h-full card-preserve-3d transition-transform duration-100 ease-out z-10 relative"
-          style={{ transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)` }}
+        <div 
+          ref={cardRef}
+          className="relative z-10 w-full aspect-[1/1.6] sm:aspect-[1/1.5] cursor-pointer group animate-float touch-none"
+          style={{ perspective: '1500px', maxWidth: 'min(22rem, 85vw, 55vh)' }}
+          onClick={handleFlip}
+          onMouseMove={handlePointerMove}
+          onMouseLeave={handlePointerLeave}
+          onTouchMove={handlePointerMove}
+          onTouchEnd={handlePointerLeave}
         >
-          {/* Сама визитка с анимацией вращения (переворот на 180) */}
-          <div 
-            className="relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.4,0.2,0.2,1)] card-preserve-3d"
-            style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+          {/* Искры (Magic Dust) */}
+          {sparks.map(spark => (
+            <div
+              key={spark.id}
+              className="spark-particle"
+              style={{
+                '--tx': spark.tx,
+                '--ty': spark.ty,
+                '--wx1': spark.wx1,
+                '--wy1': spark.wy1,
+                '--wx2': spark.wx2,
+                '--wy2': spark.wy2,
+                '--wx3': spark.wx3,
+                '--wy3': spark.wy3,
+                '--wt': spark.wt,
+                width: spark.size,
+                height: spark.size,
+                left: '50%',
+                top: '50%',
+                marginTop: '-' + (parseFloat(spark.size) / 2) + 'px',
+                marginLeft: '-' + (parseFloat(spark.size) / 2) + 'px'
+              }}
+            />
+          ))}
+
+          {/* Обертка для магнитного 3D наклона (следит за мышью/пальцем) */}
+          <div
+            className="w-full h-full card-preserve-3d transition-transform duration-100 ease-out z-10 relative"
+            style={{ transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)` }}
           >
-            {/* Дополнительное мощное свечение для мобилок */}
+            {/* Сама визитка с анимацией вращения (переворот на 180) */}
             <div 
-              className="absolute inset-0 rounded-[2.5rem] pointer-events-none sm:hidden card-backface-hidden" 
-              style={{ boxShadow: `0 0 60px ${getGlowColor()}` }} 
-            />
-            <div 
-              className="absolute inset-0 rounded-[2.5rem] pointer-events-none sm:hidden card-backface-hidden" 
-              style={{ transform: 'rotateY(180deg)', boxShadow: `0 0 60px ${getGlowColor()}` }} 
-            />
+              className="relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.4,0.2,0.2,1)] card-preserve-3d"
+              style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+            >
+              {/* Дополнительное мощное свечение для мобилок */}
+              <div 
+                className="absolute inset-0 rounded-[2.5rem] pointer-events-none sm:hidden card-backface-hidden" 
+                style={{ boxShadow: `0 0 60px ${getGlowColor()}` }} 
+              />
+              <div 
+                className="absolute inset-0 rounded-[2.5rem] pointer-events-none sm:hidden card-backface-hidden" 
+                style={{ transform: 'rotateY(180deg)', boxShadow: `0 0 60px ${getGlowColor()}` }} 
+              />
 
-            {renderActiveCard()}
+              {renderActiveCard()}
 
-            {/* Бегающий блик (Лицевая сторона) */}
-            <div 
-              className="absolute inset-0 w-full h-full rounded-[2.5rem] pointer-events-none transition-opacity duration-300 card-backface-hidden"
-              style={{
-                background: `radial-gradient(farthest-corner circle at ${glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 80%)`,
-                opacity: glare.opacity,
-                mixBlendMode: 'overlay',
-                zIndex: 50,
-              }}
-            />
+              {/* Бегающий блик (Лицевая сторона) */}
+              <div 
+                className="absolute inset-0 w-full h-full rounded-[2.5rem] pointer-events-none transition-opacity duration-300 card-backface-hidden"
+                style={{
+                  background: `radial-gradient(farthest-corner circle at ${glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 80%)`,
+                  opacity: glare.opacity,
+                  mixBlendMode: 'overlay',
+                  zIndex: 50,
+                }}
+              />
 
-            {/* Бегающий блик (Обратная сторона) */}
-            <div 
-              className="absolute inset-0 w-full h-full rounded-[2.5rem] pointer-events-none transition-opacity duration-300 card-backface-hidden"
-              style={{
-                transform: 'rotateY(180deg) translateZ(0)',
-                background: `radial-gradient(farthest-corner circle at ${100 - glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 80%)`,
-                opacity: glare.opacity,
-                mixBlendMode: 'overlay',
-                zIndex: 50,
-              }}
-            />
+              {/* Бегающий блик (Обратная сторона) */}
+              <div 
+                className="absolute inset-0 w-full h-full rounded-[2.5rem] pointer-events-none transition-opacity duration-300 card-backface-hidden"
+                style={{
+                  transform: 'rotateY(180deg) translateZ(0)',
+                  background: `radial-gradient(farthest-corner circle at ${100 - glare.x}% ${glare.y}%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 80%)`,
+                  opacity: glare.opacity,
+                  mixBlendMode: 'overlay',
+                  zIndex: 50,
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -1870,7 +2101,7 @@ const App = () => {
           if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(15);
           setShowShare(true);
         }}
-        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 p-2.5 sm:p-3.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white/40 hover:text-white/90 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 group touch-manipulation"
+        className="fixed bottom-10 right-6 sm:bottom-12 sm:right-12 z-50 p-2.5 sm:p-3.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white/40 hover:text-white/90 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 group touch-manipulation"
         aria-label="Поделиться"
       >
         <QrCode className="w-4 h-4 sm:w-5 sm:h-5 sm:group-hover:scale-110 transition-transform" />
